@@ -25,6 +25,126 @@
       "ergo": "Mme […] a bénéficié d'un accompagnement de l'ESM à la suite d'une orientation de l'EMVMA et d'une prescription médicale du Dr […], son médecin traitant. L'objet de la demande était de supprimer l'usage de sa voiture.\nMme […] fait face aujourd'hui a des troubles mnésiques en mémoire immédiate sans incidence majeure sur son autonomie au quotidien. Lors de l'évaluation initiale, il est repéré que Mme conserve de bonnes capacités de marche notamment pour assurer ses courses ou se rendre à des activités de loisirs et continue de conduire ponctuellement pour se rendre chez son médecin traitant.\nLe suivi de l'ESM fut axé sur une sensibilisation à l'arrêt de la conduite automobile en remplaçant les trajets par des solutions alternatives et sur une observation écologique des déplacements vers le centre commercial . L'évaluation des sorties extérieures par une mise en situation écologique vers le centre commercial où elle se rend très fréquemment a permis d'objectiver que ses déplacements sont réalisées de manière sécuritaire. Toutefois, le risque d’aggravation des troubles cognitifs et les dangers potentiels liés au trajet nécessiteront une évaluation régulière, afin de s'assurer que le déplacement puisse continuer à s’effectuer en toute sécurité à moyen terme.\"\nL'objectif principal d'envisager des solutions alternatives à l'usage de la voiture et acter l'arrêt de la conduite est aujourd'hui atteint. Lors de la synthèse réalisée en présence de Mme et sa fille, il a été décidé de  l'arrêt de l'usage de la voiture avec la mise en place du dispositif Sortirplus pour assurer les déplacements vers son médecin traitant. Cette décision reste à soutenir par l'entourage de Mme car Mme reste ambivalente face à l'arrêt de la voiture notamment si un besoin urgent se faisait sentir. Les enfants envisage de récupérer le véhicule pour éviter toute prise de risque inutile.\nune fiche séquentielle pour faciliter l'usage du dispositif sortirPlus a été mise en place par l'ESM avec rappel de l'arrêt de la voiture.\nUn appel de suivi est prévu à 3 et 6 mois permettra d'évaluer si l'atteinte des objectifs perdurent et si de nouvelles orientations sont à prévoir."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 3,
+          "marche": 6,
+          "accompagne": 4,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 2,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1,
+          "demarches": 1,
+          "autres": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "marche"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "marche"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 1,
+          "marche": 6,
+          "accompagne": 4,
+          "alternatif": 1,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 2,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1,
+          "demarches": 1,
+          "autres": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "marche"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "marche"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 10.0,
@@ -70,6 +190,158 @@
       "ergo": "Mme […] a bénéficié d'un suivi individuel par l'ESM à la suite de sa participation aux ateliers collectifs et son souhait de s'interroger sur ses problématiques de mobilité.\nMme […] fait face aujourd'hui à des soucis de santé entrainant des troubles de l'équilibre et des chutes à répétition qu'elle a appris à gérer. Peu après le début du suivi, Madame […] a fait une chute fin Juin, avec une fracture du poignet la contraignant à stopper la conduite automobile pendant 2 mois. Des prises de risque, lors de la marche, réalisée sans aide technique sont observées. Cette chute a renforcé son inquiétude face à la possibilité de tomber (Score FES-I avant-après en hausse) mais éveillée sa vigilance sur les situations à risque.\nMme occupe une grand maison située sur un vaste jardin au sein d'un lieu-dit excentré des commerces et commodités. Malgré l'isolement géographique, Mme manifeste son souhait de rester à domicile le plus longtemps possible notamment par rapport à sa passion du jardinage.\nMme […] présente une  dépendance à la conduite automobile pour assurer ses activités instrumentales et occupationnelles. \nDurant sa période de convalescence, Madame a pu percevoir cette dépendance et a su mettre en place des relais de covoiturage avec son fils et ses voisins, solution de covoiturage dont Mme souligne son social.\nL'accompagnement du conseiller mobilité a permis une découverte des solutions alternatives avec la mise en place d'un service de transport à la demande puis une mise en pratique sur l'utilisation d'assistances à la conduite (GPS) sécurisant ses trajets. Ces solutions sont aujourd'hui rassurantes pour Mme qui se sent mieux parer pour l'avenir.\nLors du bilan final, Madame a pu signifier sa reprise progressive de la conduite automobile pour retrouver son autonomie de déplacement pour se rendre à ses activités extérieures. Néanmoins, Mme envisage de réduire ses sorties en voiture en optimisant les raisons de ses déplacements.\nMme conserve une bonne autonomie dans ses choix de déplacements mais une vigilance reste signifiée à Mme sur les prises de risque dans ses déplacements dans son jardin où l'utilisation d'une aide technique reste aléatoire. \nDes préconisations ont été formulés pour sécuriser l'accès à sa douche (non suivies par Mme pour le moment) afin de permettre à Mme de rester dans sa maison comme elle le souhaite à long terme. Ce maintien à domicile sera facilité si Mme envisage un remplacement progressif de certains modes de déplacements (conduite, marche sans aide technique) à moyen terme.\nUn appel de suivi est prévu à 3 et 6 mois."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 11,
+          "marche": 2,
+          "accompagne": 1,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 5,
+          "social": 1,
+          "demarches": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "auto"
+          ],
+          [
+            "autres",
+            "auto"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 10,
+          "marche": 2,
+          "accompagne": 2,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 5,
+          "social": 1,
+          "demarches": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "auto"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 4.4,
@@ -115,6 +387,110 @@
       "ergo": null
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 2,
+          "accompagne": 6,
+          "alternatif": 1,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "domicile"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 6,
+          "alternatif": 0,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "domicile"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -160,6 +536,122 @@
       "ergo": "Mme […] […], âgée de 73ans a bénéficié d'un accompagnement individuel après sa participation à un atelier collectif à Blois.\nAprès un bilan ergothérapique initial, Mme a bénéficié d'une séance avec le conseiller mobilité où elle a fait le point sur ses modes de déplacement. \nMme se sent mieux armée si un arrêt de la conduite automobile est envisagé. Elle a réduit ses déplacements en voiture car les transferts au sein de celle-ci reste difficile malgré l'essai d'aides techniques.\nMme a montré des capacités suffisantes pour mettre en place et assimiler de nouvelles solutions comme la livraison des courses ou d'utiliser la navette mise en place par la commune une fois toutes les deux semaines. \nNous l'avons accompagné pour sa demande d'APA qu'elle va formuler prochainement afin de solliciter des accompagnements pour ses RDV extérieurs, les grandes courses et une aide ponctuelle à la toilette. \nMme […] a su mettre en place de manière autonome des solutions compensatrices comme de limiter ses activités de loisirs extérieures en les remplaçant par des activités au sein de la résidence ne nécessitant pas de trajets en voiture. Mme a connaissance du fonctionnement des transports à la demande avec les services d'aides à domicile ou Sortirplus.\nMme s'est montrée à l'aise avec les outils numériques et sait les utiliser en fonction de ses besoins. \nMme conserve une bonne autonomie dans ses choix de déplacements et a su les adapter depuis son arrivée Mi-mai au sein de la résidence.\nUn appel de suivi est prévu à 3 et 6 mois."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 7,
+          "marche": 3,
+          "accompagne": 1,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 1,
+          "loisirs": 4,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 5,
+          "marche": 5,
+          "accompagne": 2,
+          "alternatif": 0,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "domicile"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -205,6 +697,114 @@
       "ergo": "Mme […] […], âgée de 89ans a bénéficié d'un accompagnement individuel après sa participation aux ateliers collectifs à Blois.\nAprès un bilan ergothérapique initial, Mme a bénéficié d'une séance avec le conseiller mobilité où elle a fait le point sur ses modes de déplacement et découvert ou redécouvert des solutions alternatives. \nMalgré ses découvertes, Mme […] s'est montrée réfractaire pour envisager et tester de nouveaux modes de déplacement. (Refus essai bus, trajet avec SAD ou accompagné par Uniscités)\nElle a préféré suspendre dans un 1er temps le suivi car non disponible durant l'été. Après une reprise de contact en Septembre, elle a accepté d'effectuer un bilan final notamment après des difficultés pour assurer certaines tâches et sorties durant l'été.\nLa dépendance à son amie pour les déplacements véhiculés, signifiée par Mme lors du bilan initial, s'est avérée une réalité quand son amie n'était pas disponible durant l'été et où le service Sortirplus ne pouvait être un relais. Malgré cette prise de conscience, Mme ne souhaite pas envisager de nouveaux modes de déplacements pour des raisons financières (service SAD) et une certaine résistance aux changements dans ses habitudes de vie.\nNéanmoins, lors de l'absence de son amie, Mme s'est montrée autonome pour utiliser les services de transport proposés par la résidence mais elle reste insatisfaite par rapport à ce mode car contraint par les horaires et sans aide humaine durant la réalisation des courses.\nMme souhaiterait bénéficier de services de déplacements accompagnés par un tiers mais sans en ressentir de contraintes. Elle a bien repéré les services existants et saura y faire appel quand ses solutions internes ne seront pas possibles. Pour sécuriser ses déplacements extérieurs, l'essai et l'acquisition d'une canne ergonomique s'est avérée concluante.\nPour le moment, Mme n'est pas éligible à l'APA.\nUn appel de suivi est prévu à 3 et 6 mois."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 3,
+          "accompagne": 6,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 3,
+          "accompagne": 6,
+          "alternatif": 5,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -250,6 +850,107 @@
       "ergo": "Accompagnement très complet tant sur les aides techniques que sur la confiance sur les transports en commun que sur la mobilité en général. Est très contente ça l'a libérée! Est beaucoup moins angoisée sur les déplacements à venir"
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 3,
+          "marche": 3,
+          "accompagne": 3,
+          "alternatif": 3,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "social",
+            "alternatif"
+          ],
+          [
+            "demarches",
+            "marche"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 3,
+          "marche": 1,
+          "accompagne": 1,
+          "alternatif": 5,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 1,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -295,6 +996,108 @@
       "ergo": "L'objectif principal de l'accompagnement était de rassurer madame sur sa connaissance de l'environnement autour de son domicile afin de l'inciter à sortir seule de temps en temps pour réaliser des petites courses. Cet objectif a pu être partiellement atteint, en effet Mme […] a été en capacité systématiquement de nous guider vers le Carrefour à côté de son domicile. Afin de la rassurer nous avons créé en collaboration des \"fiches mémo trajet\" composée de photos avec des repères identifiés par elle-même et d'explications simplifiées. Cela peut la rassurer et l'aider à se souvenir de la destination choisie pour sa sortie. En revanche, la présence d'autres personnes autour d'elle l'inquiète et madame est toujours réticente à sortir seule pour cette raison. \nSon époux, qui est son aidant principal, a pu également être impliqué dans ce processus. Nous avons pu voir les fiches ensemble et leur intérêt lui a été expliqué. Une application de géolocalisation a également été installée sur le téléphone de madame, qui a donné son consentement, pour que son mari puisse la localisée si besoin. Mme […] était d'accord avec cette démarche et cela a pu la rassurer si jamais elle était de nouveau désorientée à distance de son domicile. Sa fille a également installé l'application.\nMme […] limitera toujours ses déplacements seule hors du domicile, mais ensemble nous avons pu voir quand même qu'elle était en capacité de s'orienter dans un environnement familier. Elle a pu également mettre en avant les bienfaits des sorties extérieures et continuera de les faire avec sa fille ou sa petite-fille ainsi qu'avec son époux."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 5,
+          "accompagne": 3,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 2,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "marche"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 5,
+          "accompagne": 3,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 2,
+          "sante": 2,
+          "loisirs": 2,
+          "social": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "marche"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -340,6 +1143,130 @@
       "ergo": "Mme […], âgée de 89ans a bénéficié d'un accompagnement individuel après sa participation aux ateliers collectifs à Blois.\nAprès un bilan ergothérapique initial, Mme a bénéficié d'une séance avec le conseiller mobilité où elle a fait le point sur ses modes de déplacement actuels et découvert des solutions alternatives. \nMme […] est globalement satisfaite de ses modes de déplacement et a refusé de tester de nouveaux modes de déplacement comme un scooter électrique ou un trajet en bus. Ce refus a été motivé par ses enfants qui ne sont pas d'accord avec l'utilisation d'un scooter électrique.\nMme […] se dit autonome pour choisir ses modes de déplacement et sait faire appel à ses enfants si elle en ressent le besoin notamment pour ses RDV extérieurs et les grandes courses. Elle utilise fréquemment les services de la résidence. Elle aimerait dans un futur proche participer aux sorties organisées par la résidence. \nElle refuse d'envisager d'autres solutions pour le moment et ne se sent pas si dépendante d'autrui (enfants, nièce)\nMme […] a pu avoir eu une réflexion sur ses déplacements actuelles et à venir si situation de santé se dégradait. Mme se sent tout de même plus armée pour solliciter si besoin d'autres services comme les services d'aide à domicile ou uniscités.\nPour le moment, Mme n'est pas éligible à l'APA.\nUn appel de suivi est prévu à 3 et 6 mois."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 4,
+          "accompagne": 3,
+          "alternatif": 4,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 4,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "domicile"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 4,
+          "accompagne": 3,
+          "alternatif": 4,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 4,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "domicile"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "accompagne"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -385,6 +1312,104 @@
       "ergo": "Mme L a été repérée lors du banquet des seniors et a bénéficié d’un premier bilan ESM à la mi-novembre. À ce moment-là, plusieurs difficultés étaient identifiées : arrêt récent de la conduite, isolement avec peu de sorties à l’extérieur, sentiment dépressif et insatisfaction marquée concernant ses déplacements. Mme L exprimait également un refus d’utiliser un déambulateur. L’évaluation FES-I montrait une forte appréhension lors de la marche dans le quartier (score de 4).\n\nLa période des fêtes de fin d’année a constitué un moment de fragilisation du projet d’accompagnement. Suite à des échanges avec son fils, Mme L a envisagé d’interrompre le suivi, estimant ne pas devoir mobiliser les dispositifs de l’Assurance maladie. Un temps d’échange informel a néanmoins permis de maintenir le lien et de réengager Mme L dans l’accompagnement.\n\nDeux visites supplémentaires ont ensuite été consacrées à l’expérimentation d’un déambulateur : essais à domicile, prêt d’un modèle plus léger et temps d’écoute visant à lever les appréhensions liées à l’aide technique. L’accompagnement s’est appuyé principalement sur une approche progressive, basée sur la confiance, l’écoute et la valorisation des capacités de Mme L.\n\nLors du bilan récent, une évolution très positive a été observée. Mme L indique désormais sortir seule chaque jour pour se promener et profiter de l’extérieur. L’évaluation FES-I pour l’item « se promener dans le quartier » est passée de 4 à 1, témoignant d’un niveau d’appréhension nettement réduit et d’une amélioration du sentiment d’aisance dans ses déplacements.\n\nLa prochaine étape de l’accompagnement vise à soutenir l’accès aux transports en commun, notamment via l’utilisation du dispositif « guide Fil Bleu » afin de favoriser des déplacements accompagnés en bus et tram et poursuivre le développement de son autonomie."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 2,
+          "accompagne": 4,
+          "alternatif": 3,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 3,
+          "loisirs": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 3,
+          "accompagne": 3,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 3
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -430,6 +1455,124 @@
       "ergo": "Après un bilan initial réalisé le 13 mai 2025, Mme a bénéficié d'une séance avec le conseiller Mobilité fin juin. Son adhésion est resté fragile avec deux annulations de RDV. Lors du bilan final, Mme a pu signifier son souhait de ne pas poursuivre le suivi dans un premier temps car elle se sentait trop dans l'anticipation et illégitime pour bénéficier de notre accompagnement. Néanmoins, grâce à des contacts téléphonique réguliers, Mme a accepté de réaliser un bilan final. \nLors de celui-ci, Mme a fait part d'une chute au début de l'été dans son appartement qui a accentué ses dorsalgies et cervicalgies avec une incidence majeure sur le maintien et la fréquence de ses activités de loisirs et déplacements extérieurs.\nMme a stoppé ou réduit ses activités de loisirs et envisage l'introduction d'une aide-ménagère.\nMme […] est autonome dans le choix de ses modes déplacement. Elle a bien assimilé les solutions alternatives à la conduite mais ne ressent pas le besoin de les mettre en place pour le moment. Mme reste dans l'espoir de retrouver ses capacités de marche et mobilité pour reprendre ses activités de loisirs.\nElle a changé son véhicule en choisissant un modèle plus adapté à ses besoins.\nLors du bilan final, des aides techniques (chaise haute de cuisine, bâtons de marche) lui ont été présentés. Elle envisage de réaliser elle même des essais.\nMme souhaite être recontactée et rester en lien avec l'ESM si des besoins se font sentir à l'avenir. \n2 appels de suivi sont programmés en ce sens à 3 mois et 6 mois."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 4,
+          "marche": 5,
+          "accompagne": 0,
+          "alternatif": 4,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 4,
+          "marche": 5,
+          "accompagne": 0,
+          "alternatif": 3,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 10.0,
@@ -475,6 +1618,140 @@
       "ergo": "Il s’agit d’une dame présentant des séquelles d’hémiplégie, mais restant très active et investie dans de nombreuses activités. Ayant arrêté la conduite automobile, elle a dû réorganiser ses déplacements. Certaines activités peuvent être réalisées à pied, mais d’autres nécessitaient auparavant l’aide d’un proche pour être transportée, ce qui la plaçait dans une situation de dépendance.\n\nL’accompagnement lors de l’apprentissage des déplacements en bus a constitué une étape déterminante pour elle. Cette expérience l’a fortement rassurée et lui a permis de prendre conscience de ses capacités. Elle a ainsi pu se rendre seule à ses activités, sans dépendre systématiquement des autres. Elle exprime une grande fierté d’avoir réussi à prendre le bus de manière autonome et souligne que cela lui a redonné confiance en elle.\n\nElle explique également que le fait de pouvoir parler de ses difficultés a été très libérateur, car elle n’en avait jamais réellement discuté auparavant. Cette verbalisation lui a permis de mieux accepter ses limites tout en trouvant des solutions concrètes pour préserver son autonomie et maintenir ses activités, ce qui la rend très satisfaite.\n\nPar ailleurs, de nombreux conseils lui ont été transmis concernant les solutions de mobilité existantes. Elle utilise désormais l’application Fil Bleu et a été informée d’autres dispositifs tels que le guide Fil Bleu, la réservation de bus et le covoiturage. Même si elle ne les a pas encore utilisés, elle a pris note de toutes ces informations afin de pouvoir les mobiliser en cas de besoin."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 7,
+          "accompagne": 5,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1,
+          "autres": 3
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "social",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "marche"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 8,
+          "accompagne": 2,
+          "alternatif": 4,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 4,
+          "social": 1,
+          "autres": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "accompagne"
+          ],
+          [
+            "autres",
+            "alternatif"
+          ],
+          [
+            "autres",
+            "marche"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -520,6 +1797,81 @@
       "ergo": "Cet accompagnement l'a amené à réfléchir sur ses besoins futurs. Malgré une présentation des alternatives à la conduite, elles n'ont pas été adaptées à ces besoins et envies. Nous avons travaillé sur la dernière séance sur le lieu le plus approprié pour un déménagement."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 8,
+          "marche": 3,
+          "accompagne": 0,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "auto"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 0,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {},
+        "pairs": []
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -565,6 +1917,140 @@
       "ergo": "A la suite d'une orientation de Mme […],  Evaluatrice autonomie MSA Services Berry Touraine, Mme […] a bénéficié d'un accompagnement par l'ESM. L'objet de la demande était d'évaluer une éventuelle reprise du vélo.\nL'évaluation initiale a démontré une indépendance et une autonomie pour assurer ses activités quotidiennes mais une forte dépendance à la voiture pour ses déplacements et activités extérieures.\n\nL’accompagnement par l’ESM a permis : \n- une prise de conscience de l’impossibilité de reprendre le vélo avec son propre vélo, en raison d’un risque de chute trop élevé (confirmé lors d’une mise en situation). L'acceptation de cette impossibilité reste en cours pour Mme qui n'est pas encore prête à faire l'essai d'un tricycle plus adapté à ses capacités.\n- La découverte des solutions alternatives disponibles sur son territoire avec le conseiller mobilité. Mme […] connaît désormais les options disponibles sur son territoire, mais peine à se projeter dans un scénario d’arrêt de la conduite.\n\nLe ressenti de Mme est positif vis-à-vis de l'accompagnement, malgré une résistance au changement et le maintien, pour l’instant, de ses habitudes de déplacement.\nMme […] reconnait sa forte dépendance à la voiture mais est aujourd'hui ouverte à des solutions alternatives si l’arrêt de la conduite devenait nécessaire.\n\nUn appel de suivi est prévu à 3 et 6 mois permettra d'évaluer si l'atteinte des objectifs perdurent et si de nouvelles orientations sont à prévoir."
     },
     "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 8,
+          "marche": 3,
+          "accompagne": 1,
+          "alternatif": 1,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 4,
+          "demarches": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "auto"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 8,
+          "marche": 3,
+          "accompagne": 1,
+          "alternatif": 1,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 4,
+          "demarches": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "auto"
+          ],
+          [
+            "autres",
+            "accompagne"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -610,6 +2096,106 @@
       "ergo": "M. […] a bénéficié d'un accompagnement de l'ESM à la suite d'une orientation de l'EMVMA et d'une prescription médicale du Dr […] et de son médecin traitant. L'objet de la demande était d'accompagner M. […] vers un arrêt de la conduite automobile.  \nLors de l'évaluation initiale le 16 Mars 2026, il fut repérer des troubles de la marche et de l'équilibre chez M. […] en lien avec une hospitalisation et une chute récente. Il vit avec son épouse, elle-même sujette à des troubles de la marche et de l'équilibre et dépendante de son mari pour ses déplacements extérieurs (à pied ou en voiture)\nLe suivi de l'ESM fut axé sur une sensibilisation à l'arrêt de la conduite automobile en proposant au couple de découvrir et tester des solutions alternatives. Le conseiller mobilité à présenter les solutions alternatives mais le couple a refusé d'effectuer un essai en condition réelle comme un trajet en bus.\nLors du bilan final, j'ai observé chez M. […] une reprise de confiance dans ses déplacements pédestres et dans la reprise progressive de la conduite automobile comme avant son hospitalisation. Le moral est plus positif car des relais se sont mis en place avec ses enfants et des réseaux de soins pour maintenir les vacances d'été au sein de leur maison secondaire, moment important pour le couple.\nM. […] continue de marcher quotidiennement en sollicitant son épouse. Les modes de déplacement ont peu évolué, mais des relais familiaux se sont organisés pour assurer les rendez-vous avec les spécialistes et accompagner le couple dans leur maison secondaire cet été.\nConcernant la conduite automobile, M. […] souhaite la maintenir pour le moment en adaptant ses sorties au moment de la journée où la circulation est moins intense. Ses enfants restent en veille et en appui sur ce sujet. Le couple a pu découvrir des solutions alternatives ce qui leur offre plus de sérénité en cas d’arrêt de la conduite dans les mois à venir et pour gérer des déplacements plus anxiogènes (accès centre-ville, déplacements éloignés).\nUn appel de suivi est prévu à 3 et 6 mois permettra d'évaluer si l'atteinte des objectifs perdurent et si de nouvelles orientations sont à prévoir."
     },
     "sexe": "H",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 1,
+          "marche": 3,
+          "accompagne": 4,
+          "alternatif": 1,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 3,
+          "accompagne": 5,
+          "alternatif": 1,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      }
+    },
     "ressentis": {
       "aise": {
         "avant": 6.7,

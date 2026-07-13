@@ -187,7 +187,7 @@ select{font-family:var(--sans)}
       </button>
       <button class="nav-item" data-page="deplacements" onclick="go('deplacements')">
         <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        Déplacements &amp; objectifs
+        Déplacements
       </button>
       <button class="nav-item" data-page="ressentis" onclick="go('ressentis')">
         <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 20 8.5 17 18 7 18 4 8.5"/></svg>
@@ -267,6 +267,17 @@ select{font-family:var(--sans)}
           <div class="card-note" id="note-res"></div>
         </div>
       </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="block-title">Atteinte des objectifs personnalisés</div>
+        <div class="obj-bar" id="obj-bar"></div>
+        <div class="legend">
+          <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Atteints</span>
+          <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Partiellement</span>
+          <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Non atteints</span>
+        </div>
+        <div class="card-note" id="obj-note"></div>
+      </div>
     </div>
 
     <!-- ══ FES-I ══ -->
@@ -322,25 +333,42 @@ select{font-family:var(--sans)}
       <div class="callout" id="fesi-note" style="margin-top:16px"></div>
     </div>
 
-    <!-- ══ DÉPLACEMENTS & OBJECTIFS ══ -->
+    <!-- ══ DÉPLACEMENTS ══ -->
     <div id="p-deplacements" class="page">
-      <div class="section-title">Déplacements &amp; objectifs</div>
-      <p class="section-sub">Évolution des modes de déplacement entre le début et la fin du suivi, et atteinte des objectifs personnalisés fixés avec chaque bénéficiaire.</p>
-      <div class="grid g2" style="margin-top:20px">
-        <div class="card">
-          <div class="block-title">Atteinte des objectifs</div>
-          <div class="obj-bar" id="obj-bar"></div>
-          <div class="legend">
-            <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Atteints</span>
-            <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Partiellement</span>
-            <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Non atteints</span>
+      <div class="section-title">Déplacements</div>
+      <p class="section-sub">Comment les personnes se déplacent, et comment leurs modes évoluent au fil de l'accompagnement — l'enjeu étant de <b>reporter la conduite en solo</b> vers des solutions plus sûres et durables.</p>
+
+      <div class="tabs" style="margin:16px 0 18px" role="group" aria-label="Choisir la vue">
+        <button class="tab on" data-view="overview" onclick="setDeplView('overview')">Vue d'ensemble</button>
+        <button class="tab" data-view="detail" onclick="setDeplView('detail')">Vue détaillée</button>
+      </div>
+
+      <div id="depl-view-overview">
+        <div class="grid gauto" id="depl-kpis" style="margin-bottom:16px"></div>
+        <div class="grid g2">
+          <div class="card">
+            <div class="block-title">Report modal — vers quoi on se déplace (avant → après)</div>
+            <div class="chart-box" style="height:300px"><canvas id="depl-modes"></canvas></div>
+            <div class="card-note" id="depl-modes-note"></div>
           </div>
-          <div class="card-note" id="obj-note"></div>
+          <div class="card">
+            <div class="block-title">Ce qui augmente / diminue</div>
+            <div class="chart-box" style="height:300px"><canvas id="depl-delta"></canvas></div>
+            <div class="card-note">Variation du nombre de trajets par type de mode entre le début et la fin du suivi.</div>
+          </div>
         </div>
-        <div class="card">
-          <div class="block-title">Évolution des déplacements (report modal)</div>
-          <div class="modal-grid" id="modal"></div>
-          <div class="card-note">« Conduite en solo » : trajets réalisés seul·e au volant. « Modes alternatifs » : transports, marche avec aide, covoiturage, navette, livraison…</div>
+        <div class="card" style="margin-top:16px">
+          <div class="block-title">Types de sorties &amp; mode utilisé (au début du suivi)</div>
+          <div class="chart-box" style="height:280px"><canvas id="depl-sorties"></canvas></div>
+          <div class="card-note">Pour chaque motif de sortie, la répartition des modes de déplacement. Révèle par ex. les sorties les plus dépendantes de la voiture.</div>
+        </div>
+      </div>
+
+      <div id="depl-view-detail" style="display:none">
+        <div class="card" style="overflow-x:auto">
+          <div class="block-title">Analyse par bénéficiaire — évolution de la conduite en solo</div>
+          <table class="ress-table" id="depl-table"></table>
+          <div class="card-note">« Trajets » = motifs de sortie renseignés. « Conduite solo » = part de ces trajets réalisés seul·e au volant. « Modes alt. » = nombre de trajets en transports/alternatives après.</div>
         </div>
       </div>
     </div>
@@ -407,7 +435,7 @@ const C = {sage:'#3D7A6A',sageL:'#7FB5A5',coral:'#D4714A',coralL:'#F2C4A8',
            gold:'#B8903A',plum:'#7A5C8A',light:'#9AADA6',charcoal:'#2A312E',
            mid:'#5A6560',cream2:'#F0EAE0',rose:'#C25B6E'};
 const PAGE_TITLES = {profil:'Profil des bénéficiaires',fesi:'Peur de chuter (FES-I)',
-                     deplacements:'Déplacements & objectifs',ressentis:'Ressentis',paroles:'Paroles recueillies'};
+                     deplacements:'Déplacements',ressentis:'Ressentis',paroles:'Paroles recueillies'};
 
 const depName = d => d==='NR' ? 'Non renseigné' : 'Dép. '+d;
 const subset = () => currentDep==='all' ? DATA : DATA.filter(d=>d.departement===currentDep);
@@ -563,6 +591,22 @@ function renderProfil(rows){
   const rlabels = [...rm.keys()].sort((a,b)=>rm.get(b)-rm.get(a));
   barChart('pf-res', rlabels, rlabels.map(l=>rm.get(l)), C.plum, true);
   document.getElementById('note-res').innerHTML = missingNote(rows,'type_res','logement');
+
+  renderObjectifs(rows);
+}
+
+function renderObjectifs(rows){
+  const a=rows.reduce((s,r)=>s+r.objectifs.atteint,0);
+  const p=rows.reduce((s,r)=>s+r.objectifs.partiel,0);
+  const n=rows.reduce((s,r)=>s+r.objectifs.non,0);
+  const tot=a+p+n;
+  const seg=(v,c)=> v? `<div class="obj-seg ${c}" style="flex:${v}" title="${v}">${v}</div>`:'';
+  document.getElementById('obj-bar').innerHTML = tot ? seg(a,'a')+seg(p,'p')+seg(n,'n')
+    : '<div class="obj-seg n" style="flex:1">Aucun objectif renseigné</div>';
+  const okp = tot?Math.round(100*(a+p)/tot):0;
+  document.getElementById('obj-note').innerHTML = tot
+    ? `<b>${a}</b> atteints · <b>${p}</b> partiels · <b>${n}</b> non atteints — soit <b>${okp}%</b> d'objectifs atteints ou partiellement atteints sur ${tot}.`
+    : '—';
 }
 
 /* ============ FES-I ============ */
@@ -670,34 +714,94 @@ function renderFesiOverview(valid, agg){
   });
 }
 
-/* ============ DÉPLACEMENTS & OBJECTIFS ============ */
-function renderDeplacements(rows){
-  const a=rows.reduce((s,r)=>s+r.objectifs.atteint,0);
-  const p=rows.reduce((s,r)=>s+r.objectifs.partiel,0);
-  const n=rows.reduce((s,r)=>s+r.objectifs.non,0);
-  const tot=a+p+n;
-  const seg=(v,c)=> v? `<div class="obj-seg ${c}" style="flex:${v}" title="${v}">${v}</div>`:'';
-  document.getElementById('obj-bar').innerHTML = tot ? seg(a,'a')+seg(p,'p')+seg(n,'n')
-    : '<div class="obj-seg n" style="flex:1">Aucun objectif renseigné</div>';
-  const okp = tot?Math.round(100*(a+p)/tot):0;
-  document.getElementById('obj-note').innerHTML = tot
-    ? `<b>${a}</b> atteints · <b>${p}</b> partiels · <b>${n}</b> non atteints — soit <b>${okp}%</b> d'objectifs atteints ou partiellement atteints sur ${tot}.`
-    : '—';
+/* ============ DÉPLACEMENTS ============ */
+const MODE_CATS=[['auto','Conduite autonome',C.rose],['marche','Marche',C.sage],
+  ['accompagne','Accompagné (proche)',C.gold],['alternatif','Transports / alternatives',C.sageL],
+  ['domicile','Livraison / à domicile',C.plum]];
+const TRIP_CATS=[['courses','Courses & achats'],['sante','Santé (RDV)'],['loisirs','Loisirs & promenades'],
+  ['social','Famille / amis'],['demarches','Démarches'],['autres','Autres']];
+let currentDeplView='overview';
 
-  const sumA=k=>rows.reduce((s,r)=>s+(r[k]||0),0);
-  const csA=sumA('conduite_seule_avant'), csP=sumA('conduite_seule_apres');
-  const alA=sumA('alternatives_avant'), alP=sumA('alternatives_apres');
-  const block=(title,before,after,goodIfDown)=>{
-    const diff=after-before;
-    const good = goodIfDown? diff<=0 : diff>=0;
-    const tcls = diff===0?'':(good?'good':'bad');
-    const tlabel = diff===0?'stable':(diff>0?`+${diff}`:`${diff}`);
-    return `<div class="mstat"><h4>${title}</h4>
-      <div class="mrow"><span class="ba">${before}</span><span class="arrow">→</span><span class="ba">${after}</span>
-        <span class="trend ${tcls}">${tlabel}</span></div></div>`;
-  };
-  document.getElementById('modal').innerHTML =
-    block('Conduite en solo', csA, csP, true) + block('Modes alternatifs', alA, alP, false);
+function setDeplView(v){
+  currentDeplView=v;
+  document.getElementById('depl-view-overview').style.display=v==='overview'?'':'none';
+  document.getElementById('depl-view-detail').style.display=v==='detail'?'':'none';
+  document.querySelectorAll('#p-deplacements .tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+  renderDeplacements(subset());
+}
+function renderDeplacements(rows){
+  if(currentDeplView==='overview') renderDeplOverview(rows);
+  else renderDeplDetail(rows);
+}
+function modeTotals(rows,when){
+  const o={}; MODE_CATS.forEach(([k])=>o[k]=0);
+  rows.forEach(r=>MODE_CATS.forEach(([k])=>o[k]+=r.deplacements[when].modes[k]||0));
+  return o;
+}
+function renderDeplOverview(rows){
+  const av=modeTotals(rows,'avant'), ap=modeTotals(rows,'apres');
+  const totAv=Object.values(av).reduce((x,y)=>x+y,0)||1, totAp=Object.values(ap).reduce((x,y)=>x+y,0)||1;
+  const soloAvPct=Math.round(100*av.auto/totAv), soloApPct=Math.round(100*ap.auto/totAp);
+
+  const kpis=[
+    {l:'Trajets analysés', v:totAp, s:'motifs de sortie renseignés', c:C.sage},
+    {l:'Conduite solo — avant', v:soloAvPct+'%', s:'des trajets', c:C.rose},
+    {l:'Conduite solo — après', v:soloApPct+'%', s:(soloApPct<soloAvPct?'en baisse ▼':'stable'), c:C.sage},
+    {l:'Alternatives — après', v:ap.alternatif, s:'transports, TAD, covoit…', c:C.gold},
+  ];
+  document.getElementById('depl-kpis').innerHTML=kpis.map(k=>`
+    <div class="kpi"><div class="kpi-accent" style="background:${k.c}"></div>
+      <div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`).join('');
+
+  // Report modal avant/après (part %)
+  mkChart('depl-modes',{type:'bar',
+    data:{labels:MODE_CATS.map(m=>m[1]),datasets:[
+      {label:'Avant',data:MODE_CATS.map(([k])=>Math.round(100*av[k]/totAv)),backgroundColor:C.light,borderRadius:5,maxBarThickness:20},
+      {label:'Après',data:MODE_CATS.map(([k])=>Math.round(100*ap[k]/totAp)),backgroundColor:C.sage,borderRadius:5,maxBarThickness:20}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:10,padding:12}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label} : ${c.raw}%`}}},
+      scales:{x:{min:0,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+  });
+  document.getElementById('depl-modes-note').innerHTML=
+    `La conduite autonome passe de <b>${soloAvPct}%</b> à <b>${soloApPct}%</b> des trajets ; les alternatives progressent.`;
+
+  // Ce qui augmente / diminue
+  const deltas=MODE_CATS.map(([k])=>ap[k]-av[k]);
+  const maxAbs=Math.max(3,...deltas.map(Math.abs))+1;
+  mkChart('depl-delta',{type:'bar',
+    data:{labels:MODE_CATS.map(m=>m[1]),datasets:[{data:deltas,
+      backgroundColor:MODE_CATS.map(([k],i)=>{const d=deltas[i]; if(d===0)return C.gold; const good=(k==='auto')?d<0:d>0; return good?C.sage:C.rose;}),
+      borderRadius:5,maxBarThickness:20}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw} trajet(s)`}}},
+      scales:{x:{min:-maxAbs,max:maxAbs,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>v>0?'+'+v:v}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+  });
+
+  // Types de sorties × mode (avant)
+  const matrix={}; TRIP_CATS.forEach(([t])=>matrix[t]=Object.fromEntries(MODE_CATS.map(([k])=>[k,0])));
+  rows.forEach(r=>r.deplacements.avant.pairs.forEach(([t,m])=>{ if(matrix[t]&&matrix[t][m]!==undefined) matrix[t][m]++; }));
+  const tKeys=TRIP_CATS.filter(([t])=>Object.values(matrix[t]).some(v=>v>0));
+  mkChart('depl-sorties',{type:'bar',
+    data:{labels:tKeys.map(t=>t[1]),datasets:MODE_CATS.map(([k,lab,col])=>({label:lab,
+      data:tKeys.map(([t])=>matrix[t][k]),backgroundColor:col,stack:'s',borderRadius:3,maxBarThickness:34}))},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:9,padding:10,font:{size:10}}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label} : ${c.raw}`}}},
+      scales:{x:{stacked:true,grid:{color:C.cream2},border:{display:false},ticks:{precision:0}},y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+  });
+}
+function renderDeplDetail(rows){
+  const head=`<tr><th>Bénéf.</th><th>Trajets</th><th>Conduite solo avant → après</th><th>Alternatives (après)</th></tr>`;
+  const body=rows.map(r=>{
+    const av=r.deplacements.avant, ap=r.deplacements.apres;
+    const totAv=Object.values(av.modes).reduce((x,y)=>x+y,0), totAp=Object.values(ap.modes).reduce((x,y)=>x+y,0);
+    const pAv=totAv?Math.round(100*av.modes.auto/totAv):null, pAp=totAp?Math.round(100*ap.modes.auto/totAp):null;
+    const cls=(pAv!=null&&pAp!=null)?(pAp<pAv?'up':(pAp>pAv?'down':'')):'';
+    const solo=(pAv!=null&&pAp!=null)?`${pAv}% → ${pAp}%`:'—';
+    return `<tr><td><b>N°${r.id}</b></td><td>${av.pairs.length||'—'}</td><td class="${cls}">${solo}</td><td>${ap.modes.alternatif||'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('depl-table').innerHTML=head+body;
 }
 
 /* ============ PAROLES ============ */

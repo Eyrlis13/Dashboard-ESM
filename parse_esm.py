@@ -267,6 +267,50 @@ def load_manual_ressentis():
             if cle: man[cle]={k:v for k,v in row.items() if k!='cle'}
     return man
 
+# ---- Déplacements détaillés : modes + types de sorties (grille "Modes de déplacements") ----
+MODE_CATS=['auto','marche','accompagne','alternatif','domicile']
+def mode_cat(v):
+    if not v: return None
+    n=norm(v)
+    if 'conduit seul' in n or 'conduite seul' in n: return 'auto'
+    if 'marche' in n: return 'marche'
+    if 'proche' in n or 'covoiturage' in n: return 'accompagne'
+    if 'livraison' in n or 'domicile' in n: return 'domicile'
+    if any(k in n for k in ['transport','commun','demande','taxi','vtc','vsl','ambulance',
+                            'bus','tram','navette','trottinette','minibus','partag','scooter']): return 'alternatif'
+    if 'autre' in n: return 'alternatif'
+    return None
+
+def trip_cat(v):
+    n=norm(v)
+    if any(k in n for k in ['course','shopping','pharmacie','magasin']): return 'courses'
+    if any(k in n for k in ['rdv','medic','special','traitant','veterinaire','sante']): return 'sante'
+    if any(k in n for k in ['loisir','promener','benevol']): return 'loisirs'
+    if 'famille' in n or 'amis' in n: return 'social'
+    if 'administ' in n or 'demarche' in n: return 'demarches'
+    return 'autres'
+
+def get_deplacements(wb):
+    out={}
+    for when in ('avant','apres'):
+        ws=find_sheet(wb,'modes',when)
+        modes={c:0 for c in MODE_CATS}
+        sorties={}; pairs=[]
+        if ws is not None:
+            for r in range(5,20):
+                b=ws.cell(row=r,column=2).value
+                if not (b and str(b).strip()): continue
+                tcat=trip_cat(str(b))
+                mcats=[]
+                for col in (3,6):                       # mode principal (C) + secondaire (F)
+                    mc=mode_cat(ws.cell(row=r,column=col).value)
+                    if mc: mcats.append(mc); modes[mc]+=1
+                if mcats:
+                    sorties[tcat]=sorties.get(tcat,0)+1
+                    pairs.append([tcat,mcats[0]])       # (type de sortie, mode principal)
+        out[when]={'modes':modes,'sorties':sorties,'pairs':pairs}
+    return out
+
 def build_dataset(bilans_dir=None):
     bilans_dir = bilans_dir or BILANS_DIR
     files=sorted(glob.glob(os.path.join(bilans_dir, 'Bilan_ESM_Ergo_*.xlsx')))
@@ -310,6 +354,7 @@ def build_dataset(bilans_dir=None):
             'ergo':scrub_text(vb['ergo'],real_names),
         }
         rec['sexe']=infer_sexe(rec)
+        rec['deplacements']=get_deplacements(wb)
         # Ressentis (auto) + fusion des saisies manuelles (qui priment)
         rec['ressentis']=get_ressentis(wb)
         mm=manual_ress.get(k.upper())
