@@ -357,11 +357,17 @@ select{font-family:var(--sans)}
             <div class="card-note">Variation de la <b>part</b> de chaque mode, en points de %. On raisonne en part (et non en nombre brut) car les grilles ne sont pas toujours remplies aussi complètement avant qu'après.</div>
           </div>
         </div>
-        <div class="card" style="margin-top:16px">
-          <div class="block-title">Types de sorties &amp; mode utilisé (au début du suivi)</div>
-          <div class="chart-box" style="height:280px"><canvas id="depl-sorties"></canvas></div>
-          <div class="card-note">Pour chaque motif de sortie, la répartition des modes de déplacement. Révèle par ex. les sorties les plus dépendantes de la voiture.</div>
+        <div class="grid g2" style="margin-top:16px">
+          <div class="card">
+            <div class="block-title">Types de sorties × mode — au début du suivi</div>
+            <div class="chart-box" style="height:300px"><canvas id="depl-sorties-av"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="block-title">Types de sorties × mode — à la fin du suivi</div>
+            <div class="chart-box" style="height:300px"><canvas id="depl-sorties-ap"></canvas></div>
+          </div>
         </div>
+        <p class="section-sub" style="margin-top:10px">Pour chaque motif de sortie, la répartition des modes de déplacement (échelles identiques). En comparant début et fin, on voit la conduite autonome (rose) reculer au profit des alternatives.</p>
       </div>
 
       <div id="depl-view-detail" style="display:none">
@@ -778,17 +784,27 @@ function renderDeplOverview(rows){
       scales:{x:{min:-maxAbs,max:maxAbs,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>(v>0?'+':'')+v}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
   });
 
-  // Types de sorties × mode (avant)
-  const matrix={}; TRIP_CATS.forEach(([t])=>matrix[t]=Object.fromEntries(MODE_CATS.map(([k])=>[k,0])));
-  rows.forEach(r=>r.deplacements.avant.pairs.forEach(([t,m])=>{ if(matrix[t]&&matrix[t][m]!==undefined) matrix[t][m]++; }));
+  // Types de sorties × mode — début ET fin, mêmes échelles pour comparer
+  const mAv=sortiesMatrix(rows,'avant'), mAp=sortiesMatrix(rows,'apres');
+  const rowTot=m=>Math.max(1,...Object.values(m).map(o=>Object.values(o).reduce((x,y)=>x+y,0)));
+  const maxX=Math.max(rowTot(mAv),rowTot(mAp));
+  renderSorties('depl-sorties-av',mAv,maxX);
+  renderSorties('depl-sorties-ap',mAp,maxX);
+}
+function sortiesMatrix(rows,when){
+  const m={}; TRIP_CATS.forEach(([t])=>m[t]=Object.fromEntries(MODE_CATS.map(([k])=>[k,0])));
+  rows.forEach(r=>r.deplacements[when].pairs.forEach(([t,mo])=>{ if(m[t]&&m[t][mo]!==undefined) m[t][mo]++; }));
+  return m;
+}
+function renderSorties(id,matrix,maxX){
   const tKeys=TRIP_CATS.filter(([t])=>Object.values(matrix[t]).some(v=>v>0));
-  mkChart('depl-sorties',{type:'bar',
+  mkChart(id,{type:'bar',
     data:{labels:tKeys.map(t=>t[1]),datasets:MODE_CATS.map(([k,lab,col])=>({label:lab,
-      data:tKeys.map(([t])=>matrix[t][k]),backgroundColor:col,stack:'s',borderRadius:3,maxBarThickness:34}))},
+      data:tKeys.map(([t])=>matrix[t][k]),backgroundColor:col,stack:'s',borderRadius:3,maxBarThickness:26}))},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
-      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:9,padding:10,font:{size:10}}},
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:9,padding:8,font:{size:9}}},
         tooltip:{callbacks:{label:c=>` ${c.dataset.label} : ${c.raw}`}}},
-      scales:{x:{stacked:true,grid:{color:C.cream2},border:{display:false},ticks:{precision:0}},y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+      scales:{x:{stacked:true,max:maxX,grid:{color:C.cream2},border:{display:false},ticks:{precision:0}},y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:10}}}}}
   });
 }
 function renderDeplDetail(rows){
