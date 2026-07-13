@@ -27,20 +27,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": 9,
-        "apres": 9
+        "avant": 10.0,
+        "apres": 10.0
       },
       "satisfaction": {
-        "avant": 8,
-        "apres": 8
+        "avant": 10.0,
+        "apres": 10.0
       },
       "confiance": {
         "avant": 10.0,
         "apres": 10.0
       },
       "serenite": {
-        "avant": null,
-        "apres": 5
+        "avant": 6.7,
+        "apres": 3.3
       }
     }
   },
@@ -72,20 +72,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": null,
-        "apres": null
+        "avant": 4.4,
+        "apres": 4.4
       },
       "satisfaction": {
-        "avant": null,
-        "apres": null
+        "avant": 4.4,
+        "apres": 4.4
       },
       "confiance": {
-        "avant": null,
-        "apres": null
+        "avant": 5.6,
+        "apres": 4.4
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 4.4,
+        "apres": 4.4
       }
     }
   },
@@ -342,20 +342,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "satisfaction": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "confiance": {
-        "avant": null,
-        "apres": null
+        "avant": 10.0,
+        "apres": 10.0
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 3.3,
+        "apres": 6.7
       }
     }
   },
@@ -433,19 +433,19 @@
     "ressentis": {
       "aise": {
         "avant": 10.0,
-        "apres": null
+        "apres": 6.7
       },
       "satisfaction": {
         "avant": 4.4,
-        "apres": null
+        "apres": 3.3
       },
       "confiance": {
         "avant": 7.8,
-        "apres": null
+        "apres": 3.3
       },
       "serenite": {
         "avant": 7.8,
-        "apres": null
+        "apres": 3.3
       }
     }
   },
@@ -567,20 +567,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "satisfaction": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "confiance": {
-        "avant": null,
-        "apres": null
+        "avant": 3.3,
+        "apres": 3.3
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 10.0,
+        "apres": 6.7
       }
     }
   },
@@ -612,20 +612,20 @@
     "sexe": "H",
     "ressentis": {
       "aise": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "satisfaction": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "confiance": {
-        "avant": null,
-        "apres": null
+        "avant": 6.7,
+        "apres": 6.7
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 3.3,
+        "apres": 6.7
       }
     }
   }

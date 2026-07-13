@@ -162,6 +162,17 @@ def _ress_bold(c):
     try: return bool(c.font and c.font.bold)
     except: return False
 
+def _ress_fontcolored(c):
+    """Vrai si la police a une couleur RGB explicite (≠ noir/défaut) — certains
+    bilans marquent la réponse choisie en rouge sur l'échelle 1→10."""
+    try:
+        col=c.font.color
+        rgb=getattr(col,'rgb',None) if col is not None else None
+        if isinstance(rgb,str) and rgb not in ('FF000000','00000000','FFFFFFFF'):
+            return True
+    except: pass
+    return False
+
 def _ress_positivity(item,fmt,val):
     """Convertit une réponse en score 0-10 « plus haut = mieux » (confiance = crainte inversée)."""
     if val is None or fmt is None: return None
@@ -192,9 +203,9 @@ def _ress_sheet(ws):
             is_scale=len(nums)>=8
             for c in cells:
                 if isinstance(c.value,(int,float)) and not isinstance(c.value,bool):
-                    if _ress_bold(c): boldnum.append(c.value)
+                    if _ress_bold(c) or (is_scale and _ress_fontcolored(c)): boldnum.append(c.value)
                     elif not is_scale: lone.append(c.value)
-                elif isinstance(c.value,str) and (_ress_marked(c) or _ress_bold(c)):
+                elif isinstance(c.value,str) and (_ress_marked(c) or _ress_fontcolored(c)):
                     hl.append(norm(c.value))
         if boldnum: res[item]=_ress_positivity(item,'scale10',boldnum[0])
         elif hl:
