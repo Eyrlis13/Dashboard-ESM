@@ -1,0 +1,14 @@
+# === Données nominatives — NE JAMAIS versionner (règle de sécurité ESM) ===
+bilans/
+*.xlsx
+*.xls
+
+# Le dataset anonymisé peut être publié, mais on ignore les sorties locales de test
+/tmp_dataset*.json
+
+# Divers
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+venv/
