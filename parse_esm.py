@@ -173,8 +173,25 @@ def build_dataset(bilans_dir=None):
             'beneficiaire':scrub_text(vb['beneficiaire'],real_names),
             'ergo':scrub_text(vb['ergo'],real_names),
         }
+        rec['sexe']=infer_sexe(rec)
         records.append(rec)
     return records
+
+
+def infer_sexe(rec):
+    """Déduit le sexe du bénéficiaire à partir des civilités et accords présents
+    dans les verbatims (les civilités « Mme / M. » ne sont pas anonymisées).
+    Approche « au mieux » : renvoie 'F', 'H' ou None si indéterminé."""
+    vb = rec.get('verbatims') or {}
+    txt = ' '.join(filter(None, [vb.get('beneficiaire') or '', vb.get('ergo') or '']))
+    low = txt.lower()
+    h = 3*len(re.findall(r'\bM\.\s|\bMonsieur\b', txt)) \
+        + 2*len(re.findall(r'\bhomme\b|\bmonsieur\b', low)) \
+        + len(re.findall(r'\bil\b|\blui-même\b', low))
+    f = 3*len(re.findall(r'\bMme\b|\bMadame\b', txt)) \
+        + 2*len(re.findall(r'\bdame\b|\bépouse\b', low)) \
+        + len(re.findall(r'\belle\b|satisfaite|libérée|rassurée|contente|angoiss?ée|âgée|accompagnée|amenée', low))
+    return 'H' if h > f else ('F' if f > h else None)
 
 
 def get_names_from_file(wb):

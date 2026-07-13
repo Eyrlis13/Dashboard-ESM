@@ -2,6 +2,7 @@
   {
     "id": "41-01",
     "departement": "41",
+    "sexe": "F",
     "age": 80,
     "gir": 5,
     "zone": "Rurale",
@@ -29,6 +30,7 @@
   {
     "id": "41-02",
     "departement": "41",
+    "sexe": "F",
     "age": null,
     "gir": null,
     "zone": null,
@@ -56,6 +58,7 @@
   {
     "id": "37-01",
     "departement": "37",
+    "sexe": "F",
     "age": 88,
     "gir": 5,
     "zone": "Péri-urbaine",
@@ -83,6 +86,7 @@
   {
     "id": "41-03",
     "departement": "41",
+    "sexe": "F",
     "age": 75,
     "gir": 4,
     "zone": "Rurale",
@@ -110,6 +114,7 @@
   {
     "id": "41-04",
     "departement": "41",
+    "sexe": "F",
     "age": 90,
     "gir": 5,
     "zone": "Urbaine",
@@ -137,6 +142,7 @@
   {
     "id": "NR-01",
     "departement": "NR",
+    "sexe": "F",
     "age": null,
     "gir": null,
     "zone": null,
@@ -164,6 +170,7 @@
   {
     "id": "94-01",
     "departement": "94",
+    "sexe": "F",
     "age": 78,
     "gir": 4,
     "zone": "Urbaine",
@@ -191,6 +198,7 @@
   {
     "id": "41-05",
     "departement": "41",
+    "sexe": "F",
     "age": 87,
     "gir": 5,
     "zone": "Urbaine",
@@ -218,6 +226,7 @@
   {
     "id": "37-02",
     "departement": "37",
+    "sexe": "F",
     "age": 90,
     "gir": 6,
     "zone": "Urbaine",
@@ -245,6 +254,7 @@
   {
     "id": "41-06",
     "departement": "41",
+    "sexe": "F",
     "age": 78,
     "gir": 6,
     "zone": "Urbaine",
@@ -272,6 +282,7 @@
   {
     "id": "37-03",
     "departement": "37",
+    "sexe": "F",
     "age": 67,
     "gir": 5,
     "zone": "Péri-urbaine",
@@ -299,6 +310,7 @@
   {
     "id": "37-04",
     "departement": "37",
+    "sexe": "F",
     "age": 79,
     "gir": 6,
     "zone": "Péri-urbaine",
@@ -326,6 +338,7 @@
   {
     "id": "41-07",
     "departement": "41",
+    "sexe": "F",
     "age": 82,
     "gir": 5,
     "zone": "Péri-urbaine",
@@ -353,6 +366,7 @@
   {
     "id": "41-08",
     "departement": "41",
+    "sexe": "H",
     "age": 90,
     "gir": 5,
     "zone": "Urbaine",
