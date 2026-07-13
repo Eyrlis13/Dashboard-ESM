@@ -1,5 +1,7 @@
 # === Données nominatives — NE JAMAIS versionner (règle de sécurité ESM) ===
-bilans/
+# On garde le dossier bilans/ (avec sa notice) mais on ignore tout son contenu.
+bilans/*
+!bilans/README.md
 *.xlsx
 *.xls
 

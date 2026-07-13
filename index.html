@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impact des ESM — Tableau de bord</title>
+<style>
+  :root{
+    --ink:#1f2a37; --ink-soft:#5b6b7d; --line:#e4e0d8;
+    --paper:#faf7f2; --card:#ffffff;
+    --clay:#e0663c; --clay-deep:#b8461f; --clay-tint:#fbeee7;
+    --sage:#5f8a6a; --sage-tint:#e9f1ea;
+    --amber:#d99a2b; --amber-tint:#faf0d9;
+    --rose:#c25b6e; --rose-tint:#f8e8ec;
+    --shadow:0 1px 2px rgba(31,42,55,.05),0 8px 28px rgba(31,42,55,.06);
+    --r:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5}
+  h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.01em}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 22px 80px}
+  /* header */
+  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px;justify-content:space-between;
+    padding-bottom:22px;border-bottom:2px solid var(--clay)}
+  .brand{display:flex;align-items:center;gap:13px}
+  .mark{width:44px;height:44px;border-radius:12px;background:var(--clay);position:relative;flex:none;
+    box-shadow:var(--shadow)}
+  .mark::before{content:"";position:absolute;inset:11px 12px;border:2.5px solid #fff;border-radius:2px 2px 0 0;
+    border-bottom:none;height:14px;top:15px}
+  .mark::after{content:"";position:absolute;left:15px;top:12px;width:14px;height:14px;background:#fff;
+    border-radius:50% 50% 50% 2px;transform:rotate(45deg)}
+  .brand h1{font-size:1.28rem}
+  .brand .sub{font-size:.82rem;color:var(--ink-soft);font-weight:600;letter-spacing:.02em}
+  .meta{font-size:.8rem;color:var(--ink-soft);text-align:right}
+  .meta b{color:var(--clay-deep)}
+  /* filter bar */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 6px}
+  .filters .lab{font-size:.78rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;
+    letter-spacing:.08em;margin-right:4px}
+  .chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);
+    padding:7px 15px;border-radius:999px;font-size:.87rem;font-weight:600;cursor:pointer;
+    transition:.15s;font-family:inherit}
+  .chip:hover{border-color:var(--clay);color:var(--clay-deep)}
+  .chip[aria-pressed="true"]{background:var(--clay);border-color:var(--clay);color:#fff;
+    box-shadow:0 4px 12px rgba(224,102,60,.25)}
+  .chip:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  .scope-note{font-size:.82rem;color:var(--ink-soft);margin:2px 0 24px}
+  .scope-note b{color:var(--ink)}
+  /* kpi grid */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:14px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--clay)}
+  .kpi.sage::before{background:var(--sage)} .kpi.amber::before{background:var(--amber)}
+  .kpi.rose::before{background:var(--rose)}
+  .kpi .k-lab{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-soft)}
+  .kpi .k-val{font-size:2.15rem;font-weight:800;line-height:1.05;margin:8px 0 2px;
+    font-variant-numeric:tabular-nums}
+  .kpi .k-val small{font-size:.9rem;font-weight:700;color:var(--ink-soft)}
+  .kpi .k-sub{font-size:.8rem;color:var(--ink-soft)}
+  /* section */
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  .sec-head h2{font-size:1.12rem;color:var(--clay-deep)}
+  .sec-head .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--clay);border:1.5px solid var(--clay-tint);background:var(--clay-tint);
+    padding:3px 9px;border-radius:6px}
+  .sec-sub{font-size:.86rem;color:var(--ink-soft);margin-bottom:18px;max-width:70ch}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+    box-shadow:var(--shadow)}
+  .cols2{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+  /* FES-I dumbbell chart */
+  .dumbbell{display:flex;flex-direction:column;gap:11px;margin-top:4px}
+  .db-row{display:grid;grid-template-columns:64px 1fr 54px;align-items:center;gap:10px}
+  .db-id{font-size:.78rem;font-weight:700;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .db-track{position:relative;height:22px}
+  .db-line{position:absolute;top:50%;height:3px;transform:translateY(-50%);border-radius:2px;background:var(--line)}
+  .db-dot{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;transform:translate(-50%,-50%);
+    border:2.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .db-dot.before{background:var(--ink-soft)}
+  .db-dot.after.up{background:var(--rose)} .db-dot.after.down{background:var(--sage)}
+  .db-dot.after.flat{background:var(--amber)}
+  .db-delta{font-size:.8rem;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+  .up{color:var(--rose)} .down{color:var(--sage)} .flat{color:var(--amber-deep,#b07d16)}
+  .axis{display:grid;grid-template-columns:64px 1fr 54px;gap:10px;margin-top:8px;
+    font-size:.7rem;color:var(--ink-soft)}
+  .axis .scale{display:flex;justify-content:space-between}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:.8rem;color:var(--ink-soft)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  /* interpretation callout */
+  .callout{background:var(--clay-tint);border:1px solid #f0d9cd;border-radius:12px;padding:15px 17px;
+    font-size:.88rem;color:#7a3b22;margin-top:16px}
+  .callout b{color:var(--clay-deep)}
+  /* objectives bar */
+  .obj-bar{display:flex;height:34px;border-radius:9px;overflow:hidden;margin:6px 0 14px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+  .obj-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:.82rem;
+    font-weight:700;min-width:34px}
+  .obj-seg.a{background:var(--sage)} .obj-seg.p{background:var(--amber)} .obj-seg.n{background:var(--ink-soft)}
+  .obj-key{display:flex;gap:16px;font-size:.8rem;color:var(--ink-soft);flex-wrap:wrap}
+  /* modal shift */
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .mstat{border:1px solid var(--line);border-radius:12px;padding:15px}
+  .mstat h4{margin:0 0 10px;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+  .mrow{display:flex;align-items:center;gap:10px;margin:7px 0}
+  .mrow .ba{font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums}
+  .arrow{color:var(--ink-soft);font-size:1.1rem}
+  .trend{font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:6px}
+  .trend.good{background:var(--sage-tint);color:var(--sage)}
+  .trend.bad{background:var(--rose-tint);color:var(--rose)}
+  /* quali */
+  .quali-tabs{display:flex;gap:8px;margin-bottom:16px}
+  .qtab{border:1.5px solid var(--line);background:var(--card);padding:8px 16px;border-radius:10px;
+    font-size:.87rem;font-weight:700;cursor:pointer;color:var(--ink-soft);font-family:inherit}
+  .qtab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .qtab:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  .verbatims{columns:2;column-gap:16px}
+  .vb{break-inside:avoid;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--clay);
+    border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:.9rem;box-shadow:var(--shadow)}
+  .vb .vb-id{font-size:.72rem;font-weight:800;color:var(--clay);letter-spacing:.04em;margin-bottom:6px}
+  .vb p{margin:0;color:#37424f}
+  .vb.ergo{border-left-color:var(--sage)}
+  .vb.ergo .vb-id{color:var(--sage)}
+  .empty{color:var(--ink-soft);font-size:.9rem;font-style:italic}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:.76rem;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .lock{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--sage)}
+  @media(max-width:820px){
+    .kpis{grid-template-columns:repeat(2,1fr)} .cols2{grid-template-columns:1fr}
+    .verbatims{columns:1} .modal-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:no-preference){
+    .kpi,.vb{transition:transform .2s} 
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <h1>Impact des ESM</h1>
+        <div class="sub">Équipe Spécialisée Mobilité — Expérimentation 2025-2026</div>
+      </div>
+    </div>
+    <div class="meta">
+      Cohorte de <b id="m-n">14</b> bénéficiaires accompagnés<br>
+      Bilans avant / après · <span class="lock">🔒 données anonymisées</span>
+    </div>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filtrer par département">
+    <span class="lab">Secteur</span>
+    <div id="chips"></div>
+  </div>
+  <p class="scope-note" id="scope">Vue <b>tous départements</b> — <span id="scope-n"></span> bénéficiaires.</p>
+
+  <div class="kpis" id="kpis"></div>
+
+  <!-- FES-I -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Peur de chuter</span>
+      <h2>FES-I — trajectoires individuelles avant / après</h2>
+    </div>
+    <p class="sec-sub">Le FES-I mesure l'inquiétude face au risque de chute (16 à 64 ; plus le score est bas, mieux c'est). Chaque ligne est un bénéficiaire : point gris = avant, point coloré = après.</p>
+    <div class="panel">
+      <div class="dumbbell" id="dumbbell"></div>
+      <div class="axis"><span></span><div class="scale"><span>16</span><span>32</span><span>48</span><span>64</span></div><span></span></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--ink-soft)"></i> Avant</span>
+        <span><i class="dot" style="background:var(--sage)"></i> Après — peur en baisse</span>
+        <span><i class="dot" style="background:var(--amber)"></i> Stable</span>
+        <span><i class="dot" style="background:var(--rose)"></i> Après — peur en hausse</span>
+      </div>
+      <div class="callout" id="fesi-note"></div>
+    </div>
+  </section>
+
+  <!-- Objectifs + Modal -->
+  <section>
+    <div class="cols2">
+      <div>
+        <div class="sec-head"><span class="eyebrow">Objectifs</span><h2>Atteinte des objectifs</h2></div>
+        <p class="sec-sub">Objectifs personnalisés fixés avec chaque bénéficiaire puis évalués en fin de suivi.</p>
+        <div class="panel">
+          <div class="obj-bar" id="obj-bar"></div>
+          <div class="obj-key">
+            <span><i class="dot" style="background:var(--sage)"></i> Atteints</span>
+            <span><i class="dot" style="background:var(--amber)"></i> Partiellement</span>
+            <span><i class="dot" style="background:var(--ink-soft)"></i> Non atteints</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><span class="eyebrow">Report modal</span><h2>Évolution des déplacements</h2></div>
+        <p class="sec-sub">Recours à la conduite en solo vs. modes alternatifs (transports, marche avec aide, covoiturage…).</p>
+        <div class="panel">
+          <div class="modal-grid" id="modal"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quali -->
+  <section>
+    <div class="sec-head"><span class="eyebrow">Analyse qualitative</span><h2>Ce qu'en disent les personnes accompagnées</h2></div>
+    <p class="sec-sub">Verbatims recueillis en fin de suivi. Toute mention nominative a été retirée.</p>
+    <div class="quali-tabs" role="group" aria-label="Choisir la perspective">
+      <button class="qtab" data-q="beneficiaire" aria-pressed="true">Ressenti bénéficiaire</button>
+      <button class="qtab" data-q="ergo" aria-pressed="false">Synthèse ergothérapeute</button>
+    </div>
+    <div class="verbatims" id="verbatims"></div>
+  </section>
+
+  <footer>
+    <span>Merci Julie · Senioralis — Expérimentation ESM 2025-2026</span>
+    <span class="lock">🔒 Aucune donnée nominative — identifiants au format « département-numéro »</span>
+  </footer>
+</div>
+
+<script>
+let DATA = [];
+let currentDep = "all";
+let currentQ = "beneficiaire";
+
+let DEPS = [];
+const depName = d => d==="NR" ? "Non renseigné" : "Dép. "+d;
+
+function subset(){ return currentDep==="all" ? DATA : DATA.filter(d=>d.departement===currentDep); }
+
+function buildChips(){
+  const box = document.getElementById("chips");
+  const mk = (val,label,count)=>{
+    const b=document.createElement("button");
+    b.className="chip"; b.textContent=`${label} (${count})`;
+    b.setAttribute("aria-pressed", val===currentDep);
+    b.onclick=()=>{currentDep=val; render();};
+    return b;
+  };
+  box.innerHTML="";
+  box.appendChild(mk("all","Tous", DATA.length));
+  DEPS.forEach(d=> box.appendChild(mk(d, depName(d), DATA.filter(x=>x.departement===d).length)));
+}
+
+function mean(arr){ return arr.length? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
+
+function renderKpis(rows){
+  const valid = rows.filter(r=>r.fesi_avant!=null && r.fesi_apres!=null);
+  const dMean = mean(valid.map(r=>r.fesi_delta));
+  const down = valid.filter(r=>r.fesi_delta<0).length;
+  const ages = rows.map(r=>r.age).filter(a=>a!=null);
+  const objTot = rows.reduce((s,r)=>s+r.objectifs.total,0);
+  const objOk = rows.reduce((s,r)=>s+r.objectifs.atteint+r.objectifs.partiel,0);
+  const pctObj = objTot? Math.round(100*objOk/objTot):0;
+  const kpis=[
+    {lab:"Bénéficiaires", val:rows.length, sub:"programmes avant / après", cls:""},
+    {lab:"Âge moyen", val:ages.length?Math.round(mean(ages)):"—", sub:"dispersion faible", cls:"amber", unit:"ans"},
+    {lab:"FES-I — Δ moyen", val:(dMean>=0?"+":"")+dMean.toFixed(1), sub:down+" pers. en amélioration", cls:"rose"},
+    {lab:"Objectifs traités", val:pctObj+"%", sub:objOk+"/"+objTot+" atteints ou partiels", cls:"sage"},
+  ];
+  document.getElementById("kpis").innerHTML = kpis.map(k=>`
+    <div class="kpi ${k.cls}">
+      <div class="k-lab">${k.lab}</div>
+      <div class="k-val">${k.val}${k.unit?` <small>${k.unit}</small>`:""}</div>
+      <div class="k-sub">${k.sub}</div>
+    </div>`).join("");
+}
+
+function renderDumbbell(rows){
+  const valid = rows.filter(r=>r.fesi_avant!=null && r.fesi_apres!=null)
+                    .sort((a,b)=>a.fesi_delta-b.fesi_delta);
+  const min=16,max=64,rng=max-min;
+  const pos=v=>((v-min)/rng*100);
+  const el=document.getElementById("dumbbell");
+  el.innerHTML = valid.map(r=>{
+    const cls = r.fesi_delta<0?"down":(r.fesi_delta>0?"up":"flat");
+    const a=pos(r.fesi_avant), b=pos(r.fesi_apres);
+    const lo=Math.min(a,b), w=Math.abs(a-b);
+    const sign=r.fesi_delta>0?"+":"";
+    return `<div class="db-row">
+      <span class="db-id">${r.id}</span>
+      <div class="db-track">
+        <div class="db-line" style="left:${lo}%;width:${w}%"></div>
+        <div class="db-dot before" style="left:${a}%" title="Avant : ${r.fesi_avant}"></div>
+        <div class="db-dot after ${cls}" style="left:${b}%" title="Après : ${r.fesi_apres}"></div>
+      </div>
+      <span class="db-delta ${cls}">${sign}${r.fesi_delta}</span>
+    </div>`;
+  }).join("");
+
+  const dMean=mean(valid.map(r=>r.fesi_delta));
+  const down=valid.filter(r=>r.fesi_delta<0).length;
+  const up=valid.filter(r=>r.fesi_delta>0).length;
+  const flat=valid.filter(r=>r.fesi_delta===0).length;
+  document.getElementById("fesi-note").innerHTML =
+    `<b>Lecture —</b> sur ${valid.length} bénéficiaires : ${down} voient leur peur de chuter <b>diminuer</b>, ${flat} restent stables, ${up} l'ont vue <b>augmenter</b>. `+
+    `La hausse moyenne (Δ ${dMean>=0?"+":""}${dMean.toFixed(1)}) reflète souvent une reprise d'activité et une vigilance accrue après une chute — un effet attendu et non un échec du programme.`;
+}
+
+function renderObj(rows){
+  const a=rows.reduce((s,r)=>s+r.objectifs.atteint,0);
+  const p=rows.reduce((s,r)=>s+r.objectifs.partiel,0);
+  const n=rows.reduce((s,r)=>s+r.objectifs.non,0);
+  const tot=a+p+n||1;
+  const seg=(v,c)=> v? `<div class="obj-seg ${c}" style="flex:${v}" title="${v}">${v}</div>`:"";
+  document.getElementById("obj-bar").innerHTML = seg(a,"a")+seg(p,"p")+seg(n,"n");
+}
+
+function renderModal(rows){
+  const sumA=k=>rows.reduce((s,r)=>s+(r[k]||0),0);
+  const csA=sumA("conduite_seule_avant"), csP=sumA("conduite_seule_apres");
+  const alA=sumA("alternatives_avant"), alP=sumA("alternatives_apres");
+  const block=(title,before,after,goodIfDown)=>{
+    const diff=after-before;
+    const good = goodIfDown? diff<=0 : diff>=0;
+    const tcls = diff===0?"":(good?"good":"bad");
+    const tlabel = diff===0?"stable":(diff>0?`+${diff}`:`${diff}`);
+    return `<div class="mstat">
+      <h4>${title}</h4>
+      <div class="mrow">
+        <span class="ba">${before}</span><span class="arrow">→</span><span class="ba">${after}</span>
+        ${diff!==0?`<span class="trend ${tcls}">${tlabel}</span>`:`<span class="trend">stable</span>`}
+      </div>
+    </div>`;
+  };
+  document.getElementById("modal").innerHTML =
+    block("Conduite en solo", csA, csP, true) +
+    block("Modes alternatifs", alA, alP, false);
+}
+
+function renderVerbatims(rows){
+  const el=document.getElementById("verbatims");
+  const items=rows.map(r=>({id:r.id, txt:r.verbatims[currentQ]})).filter(x=>x.txt && x.txt.length>10);
+  if(!items.length){ el.innerHTML=`<p class="empty">Aucun verbatim disponible pour cette sélection.</p>`; return; }
+  const cls = currentQ==="ergo"?"ergo":"";
+  el.innerHTML = items.map(x=>`
+    <figure class="vb ${cls}">
+      <div class="vb-id">${x.id}</div>
+      <p>${x.txt.replace(/\n/g," ").slice(0,600)}</p>
+    </figure>`).join("");
+}
+
+function render(){
+  const rows=subset();
+  document.querySelectorAll("#chips .chip").forEach(c=>{
+    c.setAttribute("aria-pressed", (c.textContent.startsWith("Tous")&&currentDep==="all")|| c.textContent.startsWith(depName(currentDep)));
+  });
+  document.getElementById("scope").innerHTML = currentDep==="all"
+    ? `Vue <b>tous départements</b> — ${rows.length} bénéficiaires.`
+    : `Vue <b>${depName(currentDep)}</b> — ${rows.length} bénéficiaire${rows.length>1?"s":""}.`;
+  renderKpis(rows); renderDumbbell(rows); renderObj(rows); renderModal(rows); renderVerbatims(rows);
+}
+
+document.querySelectorAll(".qtab").forEach(t=>{
+  t.onclick=()=>{ currentQ=t.dataset.q;
+    document.querySelectorAll(".qtab").forEach(x=>x.setAttribute("aria-pressed",x===t));
+    renderVerbatims(subset()); };
+});
+
+async function loadData(){
+  try{
+    const res = await fetch('dataset.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    DATA = await res.json();
+  }catch(e){
+    const box = document.createElement('div');
+    box.style.cssText = 'background:#f8e8ec;border:1px solid #c25b6e;color:#7a2233;padding:16px 18px;border-radius:12px;margin:0 0 18px;font-size:.9rem;line-height:1.5';
+    box.innerHTML = '<b>Impossible de charger les donn\u00e9es (dataset.json).</b><br>'+
+      'Ouvre ce tableau de bord via son adresse <b>GitHub Pages</b>, ou lance un serveur local puis rafra\u00eechis\u00a0: '+
+      '<code style="background:#fff;padding:2px 6px;border-radius:5px">python3 -m http.server</code> '+
+      'puis ouvre <code style="background:#fff;padding:2px 6px;border-radius:5px">http://localhost:8000</code>.'+
+      '<br><small>D\u00e9tail\u00a0: '+e.message+'. Le double-clic direct (file://) est bloqu\u00e9 par le navigateur.</small>';
+    const wrap = document.querySelector('.wrap');
+    wrap.insertBefore(box, wrap.firstChild);
+    return false;
+  }
+  DEPS = [...new Set(DATA.map(d=>d.departement))].sort();
+  const mn = document.getElementById('m-n'); if(mn) mn.textContent = DATA.length;
+  return true;
+}
+
+loadData().then(ok=>{ if(ok){ buildChips(); render(); } });
+</script>
+</body>
+</html>

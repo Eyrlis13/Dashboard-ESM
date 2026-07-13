@@ -3,8 +3,15 @@ Parser ESM — lit les bilans ergo Excel, anonymise, et produit un dataset propr
 AUCUN nom / adresse / téléphone / mail n'est conservé.
 Sortie : liste de dicts, ID = 'DEP-NN' (département + index anonyme).
 """
-import openpyxl, glob, os, re, unicodedata, warnings, json
+import openpyxl, glob, os, re, unicodedata, warnings, json, sys
 warnings.filterwarnings('ignore')
+
+# --- Chemins portables (aucun chemin en dur) --------------------------------
+# Par défaut : dossier "bilans/" à côté du script, sortie "dataset.json" idem.
+# Surchargeable via variables d'environnement ou arguments ligne de commande.
+HERE = os.path.dirname(os.path.abspath(__file__))
+BILANS_DIR = os.environ.get('ESM_BILANS_DIR') or os.path.join(HERE, 'bilans')
+OUTPUT_JSON = os.environ.get('ESM_OUTPUT') or os.path.join(HERE, 'dataset.json')
 
 def norm(s):
     if s is None: return ''
@@ -125,8 +132,9 @@ def get_verbatims(wb):
                     if txt and len(str(txt))>15: out['ergo']=str(txt).strip()
     return out
 
-def build_dataset():
-    files=sorted(glob.glob('/mnt/project/Bilan_ESM_Ergo_*.xlsx'))
+def build_dataset(bilans_dir=None):
+    bilans_dir = bilans_dir or BILANS_DIR
+    files=sorted(glob.glob(os.path.join(bilans_dir, 'Bilan_ESM_Ergo_*.xlsx')))
     def bn(f):
         b=os.path.basename(f).replace('Bilan_ESM_Ergo_','').replace('.xlsx','')
         return b.replace('_terminé','').replace('VF_','').replace('bis_V3_','').replace('Mme_','').replace('_1','').strip().upper().replace(' ','')
@@ -193,6 +201,8 @@ def scrub_text(txt, names):
         out=re.sub(rf'\b{re.escape(n.capitalize())}\b','[…]',out)
     # mask "Mme X" / "M. X" / "Mr X" patterns where X is a Capitalized word
     out=re.sub(r'\b(Mme|M\.|Mr|Monsieur|Madame)\s+[A-ZÉÈÀ][a-zéèàêâîôûç]+','\\1 […]',out)
+    # mask soignants/tiers nommés : "Dr X", "Docteur X", "Pr X", "Professeur X"
+    out=re.sub(r'\b(Dr|Docteur|Pr|Professeur)\.?\s+[A-ZÉÈÀ][a-zéèàêâîôûç]+',r'\1 […]',out)
     # mask emails / phones just in case
     out=re.sub(r'\b[\w.+-]+@[\w-]+\.[\w.-]+\b','[email]',out)
     out=re.sub(r'\b0\d(?:[ .]?\d{2}){4}\b','[tél]',out)
@@ -200,16 +210,31 @@ def scrub_text(txt, names):
 
 
 if __name__=='__main__':
-    data=build_dataset()
+    # Usage : python3 parse_esm.py [dossier_bilans] [sortie.json]
+    bilans_dir = sys.argv[1] if len(sys.argv) > 1 else BILANS_DIR
+    out_path   = sys.argv[2] if len(sys.argv) > 2 else OUTPUT_JSON
+
+    if not os.path.isdir(bilans_dir):
+        print(f"⚠  Dossier des bilans introuvable : {bilans_dir}")
+        print(f"   Crée-le et dépose-y les fichiers Bilan_ESM_Ergo_*.xlsx, puis relance.")
+        sys.exit(2)
+
+    data=build_dataset(bilans_dir)
+    if not data:
+        print(f"⚠  Aucun fichier Bilan_ESM_Ergo_*.xlsx trouvé dans : {bilans_dir}")
+        sys.exit(2)
+
     print(f"{len(data)} participants anonymisés\n")
     for r in data:
         print(f"{r['id']:7s} age={str(r['age']):4s} gir={str(r['gir']):3s} zone={str(r['zone'])[:18]:18s} "
               f"FES-I {str(r['fesi_avant']):3s}->{str(r['fesi_apres']):3s} (Δ{r['fesi_delta']}) "
               f"cond.seule {r['conduite_seule_avant']}->{r['conduite_seule_apres']} "
               f"obj {r['objectifs']['atteint']}A/{r['objectifs']['partiel']}P/{r['objectifs']['non']}N")
-    with open('/home/claude/esm/dataset.json','w') as fh:
+
+    os.makedirs(os.path.dirname(out_path) or '.', exist_ok=True)
+    with open(out_path,'w',encoding='utf-8') as fh:
         json.dump(data,fh,ensure_ascii=False,indent=2)
-    print("\n-> dataset.json écrit (anonymisé)")
+    print(f"\n-> {out_path} écrit (anonymisé)")
 
 
 # ---- Passe d'anonymisation du TEXTE LIBRE (verbatims / synthèses) ----
