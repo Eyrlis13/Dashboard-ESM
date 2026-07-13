@@ -174,48 +174,75 @@ def _ress_fontcolored(c):
     return False
 
 def _ress_positivity(item,fmt,val):
-    """Convertit une réponse en score 0-10 « plus haut = mieux » (confiance = crainte inversée)."""
+    """Convertit une réponse en score 0-10 « plus haut = mieux » (confiance = crainte inversée).
+    'pct' = déjà 0-10 (likert positionnel, ancre gauche = pire) ; 'scale10' = position 1-10 ;
+    'num' = nombre 0-10 (confiance inversée)."""
     if val is None or fmt is None: return None
-    if fmt=='scale10':   p=(val-1)/9*10
-    elif fmt=='likert':  p=(val-1)/3*10
-    elif fmt=='num':     p=val if item!='confiance' else 10-val
+    if fmt=='scale10':  p=(val-1)/9*10
+    elif fmt=='pct':    p=val
+    elif fmt=='num':    p=val if item!='confiance' else 10-val
     else: return None
     return round(max(0.0,min(10.0,p)),1)
 
+# Mots des ancres qui identifient LA ligne de réponse propre à chaque item
+RESS_ANCHORWORDS={'aise':['aise'],'satisfaction':['satisf'],
+                  'confiance':['constamment','souvent','quelques fois','jamais'],
+                  'serenite':['serein']}
+
+def _ress_answer_on_row(ws,r,is_scale):
+    """Réponse marquée (gras / couleur police / surlignage) sur la ligne r.
+    Échelle 1-10 → ('scale10', chiffre). 4 niveaux qualitatifs → ('pct', score 0-10)
+    calculé par la POSITION de la case cochée (indépendant du vocabulaire des ancres)."""
+    if is_scale:
+        for c in ws[r]:
+            if not (2<c.column<=12): continue
+            if isinstance(c.value,(int,float)) and not isinstance(c.value,bool):
+                if _ress_bold(c) or _ress_fontcolored(c) or _ress_marked(c):
+                    return ('scale10',c.value)
+        return None
+    # likert : rang de l'ancre marquée parmi les ancres (gauche = pire = 0)
+    anchors=[c for c in ws[r] if 2<c.column<=12 and isinstance(c.value,str) and c.value.strip()]
+    anchors.sort(key=lambda c:c.column)
+    n=len(anchors)
+    if n<2: return None
+    for i,c in enumerate(anchors):
+        if _ress_marked(c) or _ress_fontcolored(c):
+            return ('pct', i/(n-1)*10)
+    return None
+
 def _ress_sheet(ws):
-    qr={}
+    # localiser les 4 questions (colonnes A/B)
+    qrows={}
     for row in ws.iter_rows():
         for c in row:
             if c.column>2 or not isinstance(c.value,str) or len(c.value)<12: continue
             n=norm(c.value)
             for item,kws in RESS_ITEMKW.items():
-                if item not in qr and any(k in n for k in kws):
-                    qr[item]=(c.row,c.column)
-    rows_sorted=sorted(r for r,_ in qr.values())
+                if item not in qrows and any(k in n for k in kws):
+                    qrows[item]=c.row
+    others=set(qrows.values())
     res={}
-    for item,(qrow,qcol) in qr.items():
-        nexts=[r for r in rows_sorted if r>qrow]
-        rmax=(min(nexts)-1) if nexts else qrow+2
-        boldnum=[]; hl=[]; lone=[]
-        for r in range(qrow,min(rmax,ws.max_row)+1):
+    for item,qrow in qrows.items():
+        ans=None; lone=None
+        # la réponse peut être sur la ligne de la question, juste en dessous ou juste au-dessus
+        for r in (qrow,qrow+1,qrow-1,qrow+2):
+            if r<1 or r>ws.max_row: continue
+            if r!=qrow and r in others: continue        # ne pas empiéter sur une autre question
             cells=[c for c in ws[r] if 2<c.column<=12]
             nums=[c for c in cells if isinstance(c.value,(int,float)) and not isinstance(c.value,bool)]
             is_scale=len(nums)>=8
-            for c in cells:
-                if isinstance(c.value,(int,float)) and not isinstance(c.value,bool):
-                    if _ress_bold(c) or (is_scale and _ress_fontcolored(c)): boldnum.append(c.value)
-                    elif not is_scale: lone.append(c.value)
-                elif isinstance(c.value,str) and (_ress_marked(c) or _ress_fontcolored(c)):
-                    hl.append(norm(c.value))
-        if boldnum: res[item]=_ress_positivity(item,'scale10',boldnum[0])
-        elif hl:
-            lvl=None
-            for txt in hl:
-                for k,v in RESS_LIKERT.items():
-                    if k in txt: lvl=v; break
-                if lvl: break
-            res[item]=_ress_positivity(item,'likert',lvl)
-        elif len(lone)==1: res[item]=_ress_positivity(item,'num',lone[0])
+            if is_scale:
+                a=_ress_answer_on_row(ws,r,True)
+                if a: ans=a; break
+            else:
+                txt=' '.join(norm(c.value) for c in cells if isinstance(c.value,str))
+                if any(w in txt for w in RESS_ANCHORWORDS[item]):   # ligne d'ancres de CET item
+                    a=_ress_answer_on_row(ws,r,False)
+                    if a: ans=a; break
+                elif len(nums)==1 and lone is None:
+                    lone=nums[0].value                              # nombre isolé (secours)
+        if ans: res[item]=_ress_positivity(item,*ans)
+        elif lone is not None: res[item]=_ress_positivity(item,'num',lone)
         else: res[item]=None
     return res
 

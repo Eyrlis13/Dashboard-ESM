@@ -24,18 +24,23 @@ l'orientation sur **le texte des ancres**, jamais sur le chiffre brut.
 
 ## Conversions selon le format de saisie rencontré
 
+La **case cochée** peut être marquée de plusieurs façons (**gras**, **couleur de police**
+rouge, ou **surlignage** jaune) et se trouver sur la ligne de la question, **juste au-dessus
+ou juste en dessous**. La bonne ligne de réponse est identifiée par son vocabulaire propre
+(« serein », « satisfait », « constamment/jamais »…) pour éviter toute confusion entre items.
+
 | Format dans l'Excel | Règle de conversion |
 |---|---|
-| **Échelle 1→10, case en gras** | position `v` → `(v−1)/9 × 10` (gauche = pire = 0) |
-| **Nombre isolé 0→10** (ancres qualitatives) | tel quel pour aisance/satisfaction/sérénité ; **confiance = 10 − nombre** (le nombre code la peur) |
-| **4 niveaux qualitatifs, case surlignée** | niveau `L` (1 = pire … 4 = meilleur) → `(L−1)/3 × 10` soit 0 / 3,3 / 6,7 / 10 |
+| **Échelle 1→10** (case cochée) | position `v` → `(v−1)/9 × 10` (gauche = pire = 0) |
+| **4 niveaux qualitatifs** (case cochée) | **position** de la case cochée, `i` de 0 (pire, à gauche) à `n−1` (meilleur) → `i/(n−1) × 10`. Pour 4 niveaux : 0 / 3,3 / 6,7 / 10. *Méthode positionnelle : indépendante du libellé exact (« Assez à l'aise », « Peu serein »…).* |
+| **Nombre isolé 0→10** | tel quel pour aisance/satisfaction/sérénité ; **confiance = 10 − nombre** (le nombre code la peur) |
 | **Fourchette** (« 7-8 ») | milieu de la fourchette |
-| **Adjectif seul** | lexique fixe : pas du tout = 0 · peu = 3,3 · assez = 6,7 · tout à fait = 10 |
+| **Adjectif seul** (texte libre) | ramené à la position équivalente sur l'échelle des niveaux |
 | **Vide / illisible / non marqué** | `null` (« non renseigné ») — **jamais inventé** |
 
-Lexique des niveaux qualitatifs (surlignés) :
-- Aisance / Satisfaction / Sérénité : `pas du tout` = 1 · `peu` = 2 · `assez` = 3 · `à l'aise / satisfait / très serein` = 4
-- Crainte : `constamment` = 1 · `souvent` = 2 · `quelques fois` = 3 · `jamais` = 4 (→ confiance croissante)
+> Pour la **crainte / confiance**, les 4 niveaux vont de « Constamment » (gauche = 0 = peur
+> maximale) à « Jamais » (droite = 10 = pleine confiance) : la méthode positionnelle donne
+> donc directement la **confiance** (plus haut = mieux), sans inversion supplémentaire.
 
 ## Comparaison avant / après
 

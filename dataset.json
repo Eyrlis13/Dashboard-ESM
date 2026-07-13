@@ -117,20 +117,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": 6.7,
-        "apres": 10.0
+        "avant": 3.3,
+        "apres": 3.3
       },
       "satisfaction": {
+        "avant": 3.3,
+        "apres": 6.7
+      },
+      "confiance": {
         "avant": 0.0,
         "apres": 0.0
       },
-      "confiance": {
-        "avant": 6.7,
-        "apres": null
-      },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 3.3,
+        "apres": 6.7
       }
     }
   },
@@ -253,19 +253,19 @@
     "ressentis": {
       "aise": {
         "avant": 3.3,
-        "apres": null
+        "apres": 5.6
       },
       "satisfaction": {
         "avant": 4.4,
-        "apres": null
+        "apres": 7.8
       },
       "confiance": {
         "avant": 1.1,
-        "apres": null
+        "apres": 4.4
       },
       "serenite": {
         "avant": 3.3,
-        "apres": null
+        "apres": 6.7
       }
     }
   },
@@ -392,15 +392,15 @@
       },
       "satisfaction": {
         "avant": 0.0,
-        "apres": 6.7
+        "apres": 3.3
       },
       "confiance": {
-        "avant": 6.7,
-        "apres": null
+        "avant": 0.0,
+        "apres": 6.7
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 3.3,
+        "apres": 6.7
       }
     }
   },
@@ -477,20 +477,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": 6.7,
-        "apres": 10.0
+        "avant": 3.3,
+        "apres": 3.3
       },
       "satisfaction": {
-        "avant": 10.0,
+        "avant": 3.3,
         "apres": 6.7
       },
       "confiance": {
-        "avant": 0.0,
+        "avant": 10.0,
         "apres": 6.7
       },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 0.0,
+        "apres": 3.3
       }
     }
   },
@@ -522,20 +522,20 @@
     "sexe": "F",
     "ressentis": {
       "aise": {
-        "avant": 6.7,
-        "apres": 6.7
-      },
-      "satisfaction": {
-        "avant": 6.7,
-        "apres": 6.7
-      },
-      "confiance": {
         "avant": 0.0,
         "apres": 0.0
       },
+      "satisfaction": {
+        "avant": 3.3,
+        "apres": 3.3
+      },
+      "confiance": {
+        "avant": 6.7,
+        "apres": 6.7
+      },
       "serenite": {
-        "avant": null,
-        "apres": null
+        "avant": 0.0,
+        "apres": 0.0
       }
     }
   },
