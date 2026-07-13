@@ -437,16 +437,16 @@ select{font-family:var(--sans)}
     <!-- ══ AIDES TECHNIQUES ══ -->
     <div id="p-at" class="page">
       <div class="section-title">Aides techniques</div>
-      <p class="section-sub">Aides techniques à la mobilité travaillées pendant l'accompagnement, classées selon qu'elles ont été <b>mises en place</b> (adoptées par le bénéficiaire), simplement <b>essayées</b>, ou <b>préconisées</b> sans aboutir (refus, freins).</p>
+      <p class="section-sub">Aides techniques à la mobilité travaillées pendant l'accompagnement, classées par le <b>stade le plus avancé atteint</b> (chaque AT est comptée une seule fois) : <b>Mise en place</b> = acquise/adoptée · <b>Essayée</b> = testée mais non acquise · <b>Préconisée</b> = proposée mais non essayée (refus avant l'essai).</p>
       <div class="note-provisoire">Classification issue d'une lecture fine des plans d'accompagnement et bilans de fin (texte libre) — <b>à valider</b>. Signale-moi toute correction.</div>
       <div class="grid gauto" id="at-kpis" style="margin:16px 0"></div>
       <div class="card">
         <div class="block-title">Par type d'aide technique</div>
         <div class="chart-box" style="height:300px"><canvas id="at-chart"></canvas></div>
         <div class="legend" style="margin-top:12px">
-          <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Mise en place</span>
-          <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Essayée</span>
-          <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Préconisée (non aboutie)</span>
+          <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Mise en place (acquise)</span>
+          <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Essayée, non acquise</span>
+          <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Préconisée, non essayée</span>
         </div>
       </div>
       <div class="card" style="margin-top:16px;overflow-x:auto">
@@ -967,10 +967,10 @@ function renderAT(rows){
   const cnt=k=>all.filter(a=>a.statut===k).length;
   const equipes=new Set(all.filter(a=>a.statut==='mise_en_place').map(a=>a.id)).size;
   const kpis=[
-    {l:'AT mises en place', v:cnt('mise_en_place'), s:'adoptées par le bénéficiaire', c:C.sage},
-    {l:'Bénéficiaires équipés', v:`${equipes}/${rows.length}`, s:'≥ 1 AT mise en place', c:C.sage},
-    {l:'AT essayées', v:cnt('essayee'), s:'testées, non (encore) adoptées', c:C.gold},
-    {l:'AT préconisées', v:cnt('preconisee'), s:'proposées, non abouties', c:C.light},
+    {l:'AT mises en place', v:cnt('mise_en_place'), s:'acquises / adoptées', c:C.sage},
+    {l:'Bénéficiaires équipés', v:`${equipes}/${rows.length}`, s:'≥ 1 AT acquise', c:C.sage},
+    {l:'AT essayées', v:cnt('essayee'), s:'testées, non acquises', c:C.gold},
+    {l:'AT préconisées', v:cnt('preconisee'), s:'proposées, non essayées', c:C.light},
   ];
   document.getElementById('at-kpis').innerHTML=kpis.map(k=>`
     <div class="kpi"><div class="kpi-accent" style="background:${k.c}"></div>
