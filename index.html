@@ -259,17 +259,53 @@ select{font-family:var(--sans)}
     <div id="p-fesi" class="page">
       <div class="section-title">Peur de chuter — échelle FES-I</div>
       <p class="section-sub">Le FES-I mesure l'inquiétude face au risque de chute (score de 16 à 64 : <b>plus il est bas, mieux c'est</b>). Chaque barre est un bénéficiaire : vers la <b>gauche</b> la peur a diminué (mieux), vers la <b>droite</b> elle a augmenté. La longueur indique l'ampleur du changement.</p>
-      <div class="grid gauto" id="fesi-kpis" style="margin:18px 0 20px"></div>
-      <div class="card">
-        <div class="block-title">Variation du score FES-I par bénéficiaire — classée de la plus forte amélioration à la plus forte aggravation</div>
-        <div class="chart-box" style="height:460px"><canvas id="fesi-bars"></canvas></div>
-        <div class="legend" style="margin-top:14px">
-          <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Peur en baisse (mieux)</span>
-          <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Stable</span>
-          <span class="legend-item"><span class="ld" style="background:var(--rose)"></span>Peur en hausse</span>
-        </div>
-        <div class="callout" id="fesi-note"></div>
+      <div class="grid gauto" id="fesi-kpis" style="margin:18px 0 16px"></div>
+
+      <div class="tabs" style="margin-bottom:18px" role="group" aria-label="Choisir la vue">
+        <button class="tab on" data-view="detail" onclick="setFesiView('detail')">Vue détaillée</button>
+        <button class="tab" data-view="overview" onclick="setFesiView('overview')">Vue d'ensemble</button>
       </div>
+
+      <!-- Vue détaillée : une barre par bénéficiaire -->
+      <div id="fesi-view-detail">
+        <div class="card">
+          <div class="block-title">Variation du score FES-I par bénéficiaire — classée de la plus forte amélioration à la plus forte aggravation</div>
+          <div class="chart-box" style="height:460px"><canvas id="fesi-bars"></canvas></div>
+          <div class="legend" style="margin-top:14px">
+            <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Peur en baisse (mieux)</span>
+            <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Stable</span>
+            <span class="legend-item"><span class="ld" style="background:var(--rose)"></span>Peur en hausse</span>
+          </div>
+          <div class="card-note" style="margin-top:12px">Idéale pour une petite cohorte (un secteur, un sous-groupe). Au-delà de quelques dizaines de bénéficiaires, préférez la « Vue d'ensemble ».</div>
+        </div>
+      </div>
+
+      <!-- Vue d'ensemble : agrégée, scalable -->
+      <div id="fesi-view-overview" style="display:none">
+        <div class="card" style="margin-bottom:16px">
+          <div class="block-title">Synthèse — évolution de la peur de chuter</div>
+          <div class="obj-bar" id="synth-bar" style="height:38px"></div>
+          <div class="legend">
+            <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Peur en baisse</span>
+            <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Stable</span>
+            <span class="legend-item"><span class="ld" style="background:var(--rose)"></span>Peur en hausse</span>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="card">
+            <div class="block-title">Distribution de la variation du score</div>
+            <div class="chart-box" style="height:260px"><canvas id="fesi-hist"></canvas></div>
+            <div class="card-note">Combien de bénéficiaires par ampleur de changement. Vers la gauche = la peur diminue, vers la droite = elle augmente.</div>
+          </div>
+          <div class="card">
+            <div class="block-title">Niveau d'inquiétude : avant → après</div>
+            <div class="chart-box" style="height:260px"><canvas id="fesi-bands"></canvas></div>
+            <div class="card-note">Paliers cliniques du FES-I : faible 16–19 · modérée 20–27 · élevée 28+.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" id="fesi-note" style="margin-top:16px"></div>
     </div>
 
     <!-- ══ DÉPLACEMENTS & OBJECTIFS ══ -->
@@ -480,8 +516,19 @@ function renderProfil(rows){
 }
 
 /* ============ FES-I ============ */
+let currentFesiView = 'detail';
+const fesiBand = s => s<=19 ? 0 : (s<=27 ? 1 : 2);   // 0 faible · 1 modérée · 2 élevée
+
+function setFesiView(v){
+  currentFesiView = v;
+  document.getElementById('fesi-view-detail').style.display   = v==='detail'  ? '' : 'none';
+  document.getElementById('fesi-view-overview').style.display = v==='overview'? '' : 'none';
+  document.querySelectorAll('#p-fesi .tab').forEach(t=>t.classList.toggle('on', t.dataset.view===v));
+  renderFesi(subset());
+}
+
 function renderFesi(rows){
-  const valid = rows.filter(r=>r.fesi_avant!=null && r.fesi_apres!=null).sort((a,b)=>a.fesi_delta-b.fesi_delta);
+  const valid = rows.filter(r=>r.fesi_avant!=null && r.fesi_apres!=null).slice().sort((a,b)=>a.fesi_delta-b.fesi_delta);
   const dMean = mean(valid.map(r=>r.fesi_delta));
   const down = valid.filter(r=>r.fesi_delta<0).length;
   const up = valid.filter(r=>r.fesi_delta>0).length;
@@ -498,37 +545,79 @@ function renderFesi(rows){
       <div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.s}</div>
     </div>`).join('');
 
-  // Barres d'évolution centrées : une barre = un bénéficiaire, triée par variation
-  if(valid.length){
-    const maxAbs = Math.max(3, ...valid.map(r=>Math.abs(r.fesi_delta))) + 1;
-    mkChart('fesi-bars', {
-      type:'bar',
-      data:{ labels: valid.map(r=>'N°'+r.id),
-        datasets:[{ data: valid.map(r=>r.fesi_delta),
-          backgroundColor: valid.map(r=> r.fesi_delta<0?C.sage:(r.fesi_delta>0?C.rose:C.gold)),
-          borderRadius:5, barThickness:18 }] },
-      options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, animation:{duration:500},
-        plugins:{ legend:{display:false},
-          tooltip:{ callbacks:{ title:c=>'Bénéficiaire '+valid[c[0].dataIndex].id,
-            label:c=>{ const r=valid[c.dataIndex];
-              const d=r.fesi_delta;
-              const ev=d===0?'score stable':(d<0?`peur en baisse de ${-d} pts`:`peur en hausse de ${d} pts`);
-              return ` ${r.fesi_avant} → ${r.fesi_apres}  (${ev})`; } } } },
-        scales:{
-          x:{ min:-maxAbs, max:maxAbs, grid:{color:C.cream2}, border:{display:false},
-              ticks:{ callback:v=>v>0?'+'+v:v },
-              title:{ display:true, text:'←  la peur diminue        la peur augmente  →', color:C.mid, font:{size:11} } },
-          y:{ grid:{display:false}, border:{display:false}, ticks:{font:{size:10}} }
-        } }
-    });
-  } else {
-    if(charts['fesi-bars']){ charts['fesi-bars'].destroy(); delete charts['fesi-bars']; }
-  }
+  if(currentFesiView==='detail') renderFesiDetail(valid);
+  else renderFesiOverview(valid, {down,flat,up});
 
   document.getElementById('fesi-note').innerHTML = valid.length ?
     `<b>Lecture —</b> sur ${valid.length} bénéficiaires : ${down} voient leur peur de chuter <b>diminuer</b>, ${flat} restent stables, ${up} l'ont vue <b>augmenter</b>. `+
     `La variation moyenne (Δ ${dMean>=0?'+':''}${dMean.toFixed(1)}) reflète souvent une reprise d'activité et une vigilance accrue après une chute — un effet attendu, pas un échec du programme.`
     : 'Sélectionnez un secteur comportant des évaluations FES-I.';
+}
+
+// Vue détaillée : une barre par bénéficiaire
+function renderFesiDetail(valid){
+  if(!valid.length){ if(charts['fesi-bars']){charts['fesi-bars'].destroy(); delete charts['fesi-bars'];} return; }
+  const maxAbs = Math.max(3, ...valid.map(r=>Math.abs(r.fesi_delta))) + 1;
+  mkChart('fesi-bars', {
+    type:'bar',
+    data:{ labels: valid.map(r=>'N°'+r.id),
+      datasets:[{ data: valid.map(r=>r.fesi_delta),
+        backgroundColor: valid.map(r=> r.fesi_delta<0?C.sage:(r.fesi_delta>0?C.rose:C.gold)),
+        borderRadius:5, barThickness:18 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, animation:{duration:500},
+      plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ title:c=>'Bénéficiaire '+valid[c[0].dataIndex].id,
+          label:c=>{ const r=valid[c.dataIndex]; const d=r.fesi_delta;
+            const ev=d===0?'score stable':(d<0?`peur en baisse de ${-d} pts`:`peur en hausse de ${d} pts`);
+            return ` ${r.fesi_avant} → ${r.fesi_apres}  (${ev})`; } } } },
+      scales:{
+        x:{ min:-maxAbs, max:maxAbs, grid:{color:C.cream2}, border:{display:false},
+            ticks:{ callback:v=>v>0?'+'+v:v },
+            title:{ display:true, text:'←  la peur diminue        la peur augmente  →', color:C.mid, font:{size:11} } },
+        y:{ grid:{display:false}, border:{display:false}, ticks:{font:{size:10}} }
+      } }
+  });
+}
+
+// Vue d'ensemble : agrégée, scalable (synthèse % + distribution + paliers)
+function renderFesiOverview(valid, agg){
+  const {down,flat,up} = agg;
+  const tot = valid.length || 1;
+  const seg=(v,c,lab)=> v? `<div class="obj-seg" style="flex:${v};background:${c}" title="${lab} : ${v}">${Math.round(100*v/tot)}%</div>`:'';
+  document.getElementById('synth-bar').innerHTML = valid.length
+    ? seg(down,C.sage,'Baisse')+seg(flat,C.gold,'Stable')+seg(up,C.rose,'Hausse')
+    : '<div class="obj-seg" style="flex:1;background:var(--light)">Aucune donnée</div>';
+
+  const bins = [
+    {lab:'≤ -5', test:d=>d<=-5, c:C.sage},
+    {lab:'-4 à -1', test:d=>d>=-4 && d<0, c:C.sageL},
+    {lab:'stable (0)', test:d=>d===0, c:C.gold},
+    {lab:'+1 à +4', test:d=>d>0 && d<=4, c:C.coralL},
+    {lab:'≥ +5', test:d=>d>=5, c:C.rose},
+  ];
+  const deltas = valid.map(r=>r.fesi_delta);
+  mkChart('fesi-hist', {
+    type:'bar',
+    data:{ labels:bins.map(b=>b.lab),
+      datasets:[{ data:bins.map(b=>deltas.filter(b.test).length), backgroundColor:bins.map(b=>b.c), borderRadius:6, maxBarThickness:60 }] },
+    options:{ responsive:true, maintainAspectRatio:false, animation:{duration:500},
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.raw} bénéficiaire${c.raw>1?'s':''}`}} },
+      scales:{ x:{grid:{display:false},border:{display:false}}, y:{grid:{color:C.cream2},border:{display:false},ticks:{precision:0}} } }
+  });
+
+  const av=[0,0,0], ap=[0,0,0];
+  valid.forEach(r=>{ av[fesiBand(r.fesi_avant)]++; ap[fesiBand(r.fesi_apres)]++; });
+  mkChart('fesi-bands', {
+    type:'bar',
+    data:{ labels:['Faible (16–19)','Modérée (20–27)','Élevée (28+)'],
+      datasets:[
+        {label:'Avant', data:av, backgroundColor:C.light, borderRadius:5, maxBarThickness:34},
+        {label:'Après', data:ap, backgroundColor:C.sage, borderRadius:5, maxBarThickness:34}] },
+    options:{ responsive:true, maintainAspectRatio:false, animation:{duration:500},
+      plugins:{ legend:{position:'bottom',labels:{boxWidth:10,boxHeight:10,usePointStyle:true,pointStyle:'circle',padding:12}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label} : ${c.raw}`}} },
+      scales:{ x:{grid:{display:false},border:{display:false}}, y:{grid:{color:C.cream2},border:{display:false},ticks:{precision:0}} } }
+  });
 }
 
 /* ============ DÉPLACEMENTS & OBJECTIFS ============ */
