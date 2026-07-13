@@ -155,6 +155,13 @@ select{font-family:var(--sans)}
 .load-error{background:var(--rose-pale);border:1px solid var(--rose);color:#7a2233;padding:16px 18px;border-radius:12px;margin-bottom:18px;font-size:.9rem;line-height:1.5}
 .load-error code{background:#fff;padding:2px 6px;border-radius:5px}
 
+/* Légende des modes (Déplacements) */
+.mode-legend{display:flex;flex-wrap:wrap;gap:7px 18px;align-items:center;font-size:11.5px;color:var(--mid);background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:11px 15px;margin-top:6px;line-height:1.5}
+.mode-legend span{display:inline-flex;align-items:center;gap:6px}
+.mode-legend i.ld{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.mode-legend b{color:var(--charcoal)}
+.mode-legend em{color:var(--mid);font-style:italic}
+
 /* Ressentis */
 .note-provisoire{background:var(--gold-pale);border:1px solid rgba(184,144,58,.3);color:#6b5410;padding:11px 15px;border-radius:10px;font-size:.84rem;line-height:1.5}
 .ress-table{width:100%;border-collapse:collapse;font-size:.86rem}
@@ -337,6 +344,14 @@ select{font-family:var(--sans)}
     <div id="p-deplacements" class="page">
       <div class="section-title">Déplacements</div>
       <p class="section-sub">Comment les personnes se déplacent, et comment leurs modes évoluent au fil de l'accompagnement — l'enjeu étant de <b>reporter la conduite en solo</b> vers des solutions plus sûres et durables.</p>
+      <div class="mode-legend">
+        <b>Modes analysés :</b>
+        <span><i class="ld" style="background:var(--rose)"></i>Conduite autonome</span>
+        <span><i class="ld" style="background:var(--sage)"></i>Marche <em>(avec ou sans aide technique)</em></span>
+        <span><i class="ld" style="background:var(--gold)"></i>Accompagné <em>(proche, covoiturage)</em></span>
+        <span><i class="ld" style="background:var(--sage-l)"></i>Transports / alternatives <em>(bus, transport à la demande, taxi, VSL… — hors marche)</em></span>
+        <span><i class="ld" style="background:var(--plum)"></i>Livraison / à domicile</span>
+      </div>
 
       <div class="tabs" style="margin:16px 0 18px" role="group" aria-label="Choisir la vue">
         <button class="tab on" data-view="overview" onclick="setDeplView('overview')">Vue d'ensemble</button>
@@ -747,17 +762,25 @@ function modeTotals(rows,when){
 function renderDeplOverview(rows){
   const av=modeTotals(rows,'avant'), ap=modeTotals(rows,'apres');
   const totAv=Object.values(av).reduce((x,y)=>x+y,0)||1, totAp=Object.values(ap).reduce((x,y)=>x+y,0)||1;
-  const soloAvPct=Math.round(100*av.auto/totAv), soloApPct=Math.round(100*ap.auto/totAp);
-
+  const pct=(o,k,t)=>Math.round(100*o[k]/t);
+  const soloAvPct=pct(av,'auto',totAv), soloApPct=pct(ap,'auto',totAp);
+  const altAvPct=pct(av,'alternatif',totAv), altApPct=pct(ap,'alternatif',totAp);
+  const marAvPct=pct(av,'marche',totAv), marApPct=pct(ap,'marche',totAp);
+  // bénéficiaires ayant réduit leur part de conduite en solo (analyse trajet par trajet)
+  let reduced=0, eligible=0;
+  rows.forEach(r=>{const a=r.deplacements.avant.modes,b=r.deplacements.apres.modes;
+    const ta=Object.values(a).reduce((x,y)=>x+y,0),tb=Object.values(b).reduce((x,y)=>x+y,0);
+    if(ta>0&&tb>0){eligible++; if(b.auto/tb < a.auto/ta) reduced++;}});
+  const sgn=d=>(d>0?'+':'')+d+' pt'+(Math.abs(d)>1?'s':'');
   const kpis=[
-    {l:'Trajets analysés', v:totAp, s:'motifs de sortie renseignés', c:C.sage},
-    {l:'Conduite solo — avant', v:soloAvPct+'%', s:'des trajets', c:C.rose},
-    {l:'Conduite solo — après', v:soloApPct+'%', s:(soloApPct<soloAvPct?'en baisse ▼':'stable'), c:C.sage},
-    {l:'Alternatives — après', v:ap.alternatif, s:'transports, TAD, covoit…', c:C.gold},
+    {l:'Conduite en solo', v:`${soloAvPct}% → ${soloApPct}%`, s:`part des trajets · ${sgn(soloApPct-soloAvPct)}`, c:C.rose},
+    {l:'Modes alternatifs', v:`${altAvPct}% → ${altApPct}%`, s:`hors marche · ${sgn(altApPct-altAvPct)}`, c:C.sage},
+    {l:'Marche', v:`${marAvPct}% → ${marApPct}%`, s:`1er mode piéton · ${sgn(marApPct-marAvPct)}`, c:C.sageL},
+    {l:'Réduisent la conduite solo', v:`${reduced}/${eligible}`, s:'bénéficiaires (trajet par trajet)', c:C.gold},
   ];
   document.getElementById('depl-kpis').innerHTML=kpis.map(k=>`
     <div class="kpi"><div class="kpi-accent" style="background:${k.c}"></div>
-      <div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`).join('');
+      <div class="kpi-label">${k.l}</div><div class="kpi-value" style="font-size:20px">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`).join('');
 
   // Report modal avant/après (part %)
   mkChart('depl-modes',{type:'bar',
@@ -770,7 +793,7 @@ function renderDeplOverview(rows){
       scales:{x:{min:0,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
   });
   document.getElementById('depl-modes-note').innerHTML=
-    `La conduite autonome passe de <b>${soloAvPct}%</b> à <b>${soloApPct}%</b> des trajets ; les alternatives progressent.`;
+    `<b>Analyse trajet par trajet</b> : pour chaque bénéficiaire, chaque motif de sortie est classé selon son mode, au début et à la fin du suivi. On compare les <b>parts (%)</b> — et non le nombre brut de trajets — car le nombre de motifs renseignés varie d'un bilan à l'autre.`;
 
   // Ce qui augmente / diminue — en POINTS DE % (part), cohérent avec le report modal
   const deltas=MODE_CATS.map(([k])=>Math.round((100*ap[k]/totAp - 100*av[k]/totAv)*10)/10);
