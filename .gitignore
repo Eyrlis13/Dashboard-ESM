@@ -5,6 +5,9 @@ bilans/*
 *.xlsx
 *.xls
 
+# Saisies manuelles de ressentis (référencées par nom de dossier -> non publiées)
+ressentis_manuel.csv
+
 # Le dataset anonymisé peut être publié, mais on ignore les sorties locales de test
 /tmp_dataset*.json
 

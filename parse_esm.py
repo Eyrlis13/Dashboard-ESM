@@ -142,6 +142,93 @@ def get_verbatims(wb):
                     if txt and len(str(txt))>15: out['ergo']=str(txt).strip()
     return out
 
+# ---- Ressentis : 4 échelles avant/après (voir REGLES_RESSENTIS.md) ----
+RESS_ITEMKW={'aise':['aise'],'satisfaction':['satisf'],
+             'confiance':['crain','chuter','tomber','peur'],'serenite':['serein']}
+RESS_LIKERT={'pas du tout':1,'peu':2,'assez':3,"a l'aise":4,'a l aise':4,'satisfait':4,
+             'tres serein':4,'tres a l':4,'constamment':1,'souvent':2,'quelques fois':3,'jamais':4}
+
+def _ress_marked(c):
+    try:
+        f=c.fill
+        if f and f.patternType and f.patternType!='none':
+            rgb=getattr(f.fgColor,'rgb',None)
+            if isinstance(rgb,str) and rgb not in ('FFFFFFFF','00000000'): return True
+            if getattr(f.fgColor,'theme',None) is not None and f.patternType=='solid': return True
+    except: pass
+    return False
+
+def _ress_bold(c):
+    try: return bool(c.font and c.font.bold)
+    except: return False
+
+def _ress_positivity(item,fmt,val):
+    """Convertit une réponse en score 0-10 « plus haut = mieux » (confiance = crainte inversée)."""
+    if val is None or fmt is None: return None
+    if fmt=='scale10':   p=(val-1)/9*10
+    elif fmt=='likert':  p=(val-1)/3*10
+    elif fmt=='num':     p=val if item!='confiance' else 10-val
+    else: return None
+    return round(max(0.0,min(10.0,p)),1)
+
+def _ress_sheet(ws):
+    qr={}
+    for row in ws.iter_rows():
+        for c in row:
+            if c.column>2 or not isinstance(c.value,str) or len(c.value)<12: continue
+            n=norm(c.value)
+            for item,kws in RESS_ITEMKW.items():
+                if item not in qr and any(k in n for k in kws):
+                    qr[item]=(c.row,c.column)
+    rows_sorted=sorted(r for r,_ in qr.values())
+    res={}
+    for item,(qrow,qcol) in qr.items():
+        nexts=[r for r in rows_sorted if r>qrow]
+        rmax=(min(nexts)-1) if nexts else qrow+2
+        boldnum=[]; hl=[]; lone=[]
+        for r in range(qrow,min(rmax,ws.max_row)+1):
+            cells=[c for c in ws[r] if 2<c.column<=12]
+            nums=[c for c in cells if isinstance(c.value,(int,float)) and not isinstance(c.value,bool)]
+            is_scale=len(nums)>=8
+            for c in cells:
+                if isinstance(c.value,(int,float)) and not isinstance(c.value,bool):
+                    if _ress_bold(c): boldnum.append(c.value)
+                    elif not is_scale: lone.append(c.value)
+                elif isinstance(c.value,str) and (_ress_marked(c) or _ress_bold(c)):
+                    hl.append(norm(c.value))
+        if boldnum: res[item]=_ress_positivity(item,'scale10',boldnum[0])
+        elif hl:
+            lvl=None
+            for txt in hl:
+                for k,v in RESS_LIKERT.items():
+                    if k in txt: lvl=v; break
+                if lvl: break
+            res[item]=_ress_positivity(item,'likert',lvl)
+        elif len(lone)==1: res[item]=_ress_positivity(item,'num',lone[0])
+        else: res[item]=None
+    return res
+
+def get_ressentis(wb):
+    out={d:{'avant':None,'apres':None} for d in RESS_ITEMKW}
+    for when in ('avant','apres'):
+        ws=find_sheet(wb,'ressentis',when)
+        if ws is None: continue
+        vals=_ress_sheet(ws)
+        for d in RESS_ITEMKW: out[d][when]=vals.get(d)
+    return out
+
+def load_manual_ressentis():
+    """Saisies manuelles (ressentis_manuel.csv, non versionné). Priment sur l'auto."""
+    import csv
+    path=os.path.join(HERE,'ressentis_manuel.csv')
+    man={}
+    if not os.path.isfile(path): return man
+    with open(path,encoding='utf-8-sig') as fh:
+        for row in csv.DictReader(fh):
+            cle=(row.get('cle') or '').strip().upper()
+            if cle: man[cle]={k:v for k,v in row.items() if k!='cle'}
+    return man
+
 def build_dataset(bilans_dir=None):
     bilans_dir = bilans_dir or BILANS_DIR
     files=sorted(glob.glob(os.path.join(bilans_dir, 'Bilan_ESM_Ergo_*.xlsx')))
@@ -155,6 +242,7 @@ def build_dataset(bilans_dir=None):
 
     records=[]
     seq=0
+    manual_ress=load_manual_ressentis()
     for k,f in sorted(canon.items()):
         wb=openpyxl.load_workbook(f,data_only=True)
         dep=get_department(wb) or 'NR'
@@ -184,6 +272,16 @@ def build_dataset(bilans_dir=None):
             'ergo':scrub_text(vb['ergo'],real_names),
         }
         rec['sexe']=infer_sexe(rec)
+        # Ressentis (auto) + fusion des saisies manuelles (qui priment)
+        rec['ressentis']=get_ressentis(wb)
+        mm=manual_ress.get(k.upper())
+        if mm:
+            for d in RESS_ITEMKW:
+                for when in ('avant','apres'):
+                    v=mm.get(f"{d}_{when}")
+                    if v not in (None,''):
+                        try: rec['ressentis'][d][when]=round(float(str(v).replace(',','.')),1)
+                        except: pass
         records.append(rec)
     return records
 
