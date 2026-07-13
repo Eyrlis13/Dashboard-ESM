@@ -25,13 +25,23 @@ def find_sheet(wb,*kw):
 CITY_DEP=[('blois','41'),('joue les tours','37'),('tours','37'),('vendome','41'),
           ('romorantin','41'),('amboise','37'),('contres','41'),('vineuil','41')]
 
+def scan_right(ws, c, maxoff=5):
+    """Renvoie la 1re valeur non vide à droite du libellé, sur la même ligne.
+    Certains bilans placent la valeur en colonne B, d'autres en C, D ou F :
+    on balaie donc plusieurs colonnes au lieu de ne regarder que la voisine."""
+    for off in range(1, maxoff+1):
+        v = ws.cell(row=c.row, column=c.column+off).value
+        if v not in (None, ''):
+            return v
+    return None
+
 def get_department(wb):
     ws=find_sheet(wb,'infos') or find_sheet(wb,'benef')
     if ws:
         for row in ws.iter_rows(min_row=1,max_row=14):
             for c in row:
                 if c.value and 'adresse' in norm(c.value):
-                    addr=str(ws.cell(row=c.row,column=c.column+1).value or '')
+                    addr=str(scan_right(ws,c) or '')
                     m=re.search(r'\b(\d{5})\b',addr)
                     if m: return m.group(1)[:2]
     blob=''
@@ -60,7 +70,7 @@ def get_infos(wb):
     ws=find_sheet(wb,'infos') or find_sheet(wb,'benef')
     out={'age':None,'gir':None,'zone':None,'type_res':None,'situ_fam':None,'permis':None}
     if ws is None: return out
-    def right(c,off=1): return ws.cell(row=c.row,column=c.column+off).value
+    def right(c): return scan_right(ws,c)
     for row in ws.iter_rows(min_row=1,max_row=27):
         for c in row:
             if not c.value: continue
@@ -144,12 +154,12 @@ def build_dataset(bilans_dir=None):
     canon.pop('GUERAULT',None)
 
     records=[]
-    dep_counter={}
+    seq=0
     for k,f in sorted(canon.items()):
         wb=openpyxl.load_workbook(f,data_only=True)
         dep=get_department(wb) or 'NR'
-        dep_counter[dep]=dep_counter.get(dep,0)+1
-        anon_id=f"{dep}-{dep_counter[dep]:02d}"
+        seq+=1
+        anon_id=str(seq)          # appellation simple : 1, 2, 3 … (aucun nom, aucun code département)
         info=get_infos(wb)
         real_names=get_names_from_file(wb)
         # the participant key (from filename) IS the surname — always scrub it + accented variants
