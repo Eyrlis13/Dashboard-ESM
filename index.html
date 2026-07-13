@@ -352,9 +352,9 @@ select{font-family:var(--sans)}
             <div class="card-note" id="depl-modes-note"></div>
           </div>
           <div class="card">
-            <div class="block-title">Ce qui augmente / diminue</div>
+            <div class="block-title">Ce qui augmente / diminue (part des trajets)</div>
             <div class="chart-box" style="height:300px"><canvas id="depl-delta"></canvas></div>
-            <div class="card-note">Variation du nombre de trajets par type de mode entre le début et la fin du suivi.</div>
+            <div class="card-note">Variation de la <b>part</b> de chaque mode, en points de %. On raisonne en part (et non en nombre brut) car les grilles ne sont pas toujours remplies aussi complètement avant qu'après.</div>
           </div>
         </div>
         <div class="card" style="margin-top:16px">
@@ -766,16 +766,16 @@ function renderDeplOverview(rows){
   document.getElementById('depl-modes-note').innerHTML=
     `La conduite autonome passe de <b>${soloAvPct}%</b> à <b>${soloApPct}%</b> des trajets ; les alternatives progressent.`;
 
-  // Ce qui augmente / diminue
-  const deltas=MODE_CATS.map(([k])=>ap[k]-av[k]);
-  const maxAbs=Math.max(3,...deltas.map(Math.abs))+1;
+  // Ce qui augmente / diminue — en POINTS DE % (part), cohérent avec le report modal
+  const deltas=MODE_CATS.map(([k])=>Math.round((100*ap[k]/totAp - 100*av[k]/totAv)*10)/10);
+  const maxAbs=Math.max(2,...deltas.map(Math.abs))+1;
   mkChart('depl-delta',{type:'bar',
     data:{labels:MODE_CATS.map(m=>m[1]),datasets:[{data:deltas,
       backgroundColor:MODE_CATS.map(([k],i)=>{const d=deltas[i]; if(d===0)return C.gold; const good=(k==='auto')?d<0:d>0; return good?C.sage:C.rose;}),
       borderRadius:5,maxBarThickness:20}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw} trajet(s)`}}},
-      scales:{x:{min:-maxAbs,max:maxAbs,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>v>0?'+'+v:v}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw} pts de %`}}},
+      scales:{x:{min:-maxAbs,max:maxAbs,grid:{color:C.cream2},border:{display:false},ticks:{callback:v=>(v>0?'+':'')+v}},y:{grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
   });
 
   // Types de sorties × mode (avant)
