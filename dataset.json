@@ -145,6 +145,7 @@
         ]
       }
     },
+    "at": [],
     "ressentis": {
       "aise": {
         "avant": 10.0,
@@ -342,6 +343,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "essayee"
+      },
+      {
+        "type": "Vélo tricycle",
+        "statut": "preconisee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 4.4,
@@ -491,6 +502,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "mise_en_place"
+      },
+      {
+        "type": "Compteur de pas",
+        "statut": "mise_en_place"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -652,6 +673,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Scooter électrique",
+        "statut": "essayee"
+      },
+      {
+        "type": "Aide aux transferts (coussin / poignée)",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -805,6 +836,12 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Canne",
+        "statut": "mise_en_place"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -951,6 +988,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "mise_en_place"
+      },
+      {
+        "type": "Scooter électrique",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -1098,6 +1145,7 @@
         ]
       }
     },
+    "at": [],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -1267,6 +1315,12 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Scooter électrique",
+        "statut": "preconisee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -1410,6 +1464,12 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "mise_en_place"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -1573,6 +1633,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Bâtons de marche",
+        "statut": "mise_en_place"
+      },
+      {
+        "type": "Canne-siège / chariot",
+        "statut": "preconisee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 10.0,
@@ -1752,6 +1822,7 @@
         ]
       }
     },
+    "at": [],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -1872,6 +1943,7 @@
         "pairs": []
       }
     },
+    "at": [],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -2051,6 +2123,16 @@
         ]
       }
     },
+    "at": [
+      {
+        "type": "Vélo tricycle",
+        "statut": "preconisee"
+      },
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "preconisee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -2196,6 +2278,7 @@
         ]
       }
     },
+    "at": [],
     "ressentis": {
       "aise": {
         "avant": 6.7,

@@ -255,6 +255,21 @@ def get_ressentis(wb):
         for d in RESS_ITEMKW: out[d][when]=vals.get(d)
     return out
 
+def load_at_curated():
+    """Classification curée des aides techniques (at_curated.csv, non versionné) :
+    statut 'mise_en_place' / 'essayee' / 'preconisee', par dossier."""
+    import csv
+    path=os.path.join(HERE,'at_curated.csv')
+    at={}
+    if not os.path.isfile(path): return at
+    with open(path,encoding='utf-8-sig') as fh:
+        for row in csv.DictReader(fh):
+            cle=(row.get('cle') or '').strip().upper()
+            typ=(row.get('type') or '').strip()
+            st=(row.get('statut') or '').strip()
+            if cle and typ and st: at.setdefault(cle,[]).append({'type':typ,'statut':st})
+    return at
+
 def load_manual_ressentis():
     """Saisies manuelles (ressentis_manuel.csv, non versionné). Priment sur l'auto."""
     import csv
@@ -316,7 +331,9 @@ def build_dataset(bilans_dir=None):
     files=sorted(glob.glob(os.path.join(bilans_dir, 'Bilan_ESM_Ergo_*.xlsx')))
     def bn(f):
         b=os.path.basename(f).replace('Bilan_ESM_Ergo_','').replace('.xlsx','')
-        return b.replace('_terminé','').replace('VF_','').replace('bis_V3_','').replace('Mme_','').replace('_1','').strip().upper().replace(' ','')
+        b=b.replace('VF_','').replace('bis_V3_','').replace('Mme_','').replace('_1','')
+        b=re.sub(r'_?termin[eé]?_?$','',b,flags=re.IGNORECASE)   # suffixe "_termin_"/"terminé"
+        return b.strip().upper().replace(' ','').strip('_')
     groups={}
     for f in files: groups.setdefault(bn(f),[]).append(f)
     canon={k:([x for x in v if 'termin' in x] or v)[0] for k,v in groups.items()}
@@ -325,6 +342,7 @@ def build_dataset(bilans_dir=None):
     records=[]
     seq=0
     manual_ress=load_manual_ressentis()
+    at_curated=load_at_curated()
     for k,f in sorted(canon.items()):
         wb=openpyxl.load_workbook(f,data_only=True)
         dep=get_department(wb) or 'NR'
@@ -355,6 +373,7 @@ def build_dataset(bilans_dir=None):
         }
         rec['sexe']=infer_sexe(rec)
         rec['deplacements']=get_deplacements(wb)
+        rec['at']=at_curated.get(k.upper(), [])
         # Ressentis (auto) + fusion des saisies manuelles (qui priment)
         rec['ressentis']=get_ressentis(wb)
         mm=manual_ress.get(k.upper())
