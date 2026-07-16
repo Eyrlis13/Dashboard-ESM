@@ -62,7 +62,7 @@ def fesi_score(wb,when):
             if c.value and 'score' in norm(c.value):
                 for cc in row:
                     if isinstance(cc.value,(int,float)) and cc.column>c.column:
-                        return cc.value
+                        return cc.value if 0<cc.value<=64 else None   # 0/vide = non rempli
     return None
 
 def get_infos(wb):
@@ -337,7 +337,6 @@ def build_dataset(bilans_dir=None):
     groups={}
     for f in files: groups.setdefault(bn(f),[]).append(f)
     canon={k:([x for x in v if 'termin' in x] or v)[0] for k,v in groups.items()}
-    canon.pop('GUERAULT',None)
 
     records=[]
     seq=0
@@ -354,6 +353,8 @@ def build_dataset(bilans_dir=None):
         real_names.add(k.capitalize()); real_names.add(k)
         real_names.add(k.replace('THEOPHILE','Théophile'))
         fa,fp=fesi_score(wb,'avant'),fesi_score(wb,'apres')
+        # GUERAULT : FES-I après non mesuré -> considéré identique à l'avant (stable), décision métier
+        if k.upper()=='GUERAULT' and fp is None and fa is not None: fp=fa
         mav,map_=get_modes(wb,'avant'),get_modes(wb,'apres')
         sav,aav=count_flags(mav); sap,aap=count_flags(map_)
         rec={

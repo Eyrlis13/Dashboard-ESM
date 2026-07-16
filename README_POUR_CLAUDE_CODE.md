@@ -47,7 +47,9 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
 - 1 participant sans département identifiable → "non renseigné", à compléter à la main.
 
 ## Décisions déjà prises
-- GUERAULT exclu (pas de FES-I après).
+- GUERAULT : réintégré (juillet 2026). Son FES-I après n'a pas été mesuré → considéré
+  identique à l'avant (stable, Δ0), sur décision métier. Un garde-fou rejette désormais
+  tout FES-I ≤ 0 (non rempli).
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.
