@@ -167,6 +167,141 @@
   },
   {
     "id": "2",
+    "departement": "69",
+    "age": 88,
+    "gir": 4,
+    "zone": "Rurale",
+    "type_res": "Maison",
+    "permis": "Oui",
+    "fesi_avant": 9,
+    "fesi_apres": 9,
+    "fesi_delta": 0,
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 3,
+    "alternatives_apres": 5,
+    "objectifs": {
+      "total": 3,
+      "atteint": 1,
+      "partiel": 2,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": "\"C'est une réussite, ça n'a pas posé de difficultés, je suis bien tombée avec la personne qui m'a accompagnée. Vous avez travaillé pour cet accompagnement, fouiller, rappeler pour trouver des solutions. Je vais certainement les rappeler pour la suite car ça m'arrange par rapport à ma solitude quand je vais aux rendez-vous médicaux ça va me rassurer d'être avec quelqu'un car avec OPTIBUS je suis toute seule et je suis inquiète sur les heures d'arrivée et de départ quand ce n'est pas organisé et sur. Je n'ai pas peur d'appeler l'association car je la connaissais déjà et planifier mes sorties. Même si au départ je n'avais pas confiance, aujourd'hui ça va mieux. Aujourd'hui je conseillerai le dispositif je dirai aux gens d'aller voir ces personnes là (ergo ESM) : elles vous trouveront une solution. Moi même, jusqu'à ce jour, je n'avais rien trouvé du tout je restais enfermée des jours et des jours, j'étais abandonnée. Aujourd'hui je ne me sens plus abandonnée.\"",
+      "ergo": "L'accompagnement de Mme […] […] a été concluant. La solution n'a pas été évidente à trouver étant donné que le besoin de Mme ne portait pas sur du matériel mais sur une présence humaine. Il fallait donc tenir compte des moyens financiers de Madame et faire aussi valoir ses droits : notamment en sollicitant l'association Valentin Hauÿ qui s'adresse aux personnes en situation de handicap visuel. Toutefois ce type d'accompagnement dépend des moyens humains (bénévoles), Mme […] […] est consciente des aléas possibles selon la disponibilité des bénévoles et accepte de les respecter. Ce dispositif représente une solution abordable financièrement et adaptée aux besoins d'une personne déficiente visuelle ou non voyante. Le suivi est essentiel pour prendre connaissance de l'investissement de cette solution par Mme […] […] d'une part pour répondre à ses objectifs au niveau de son besoin de sorties extérieures et aussi pour lutter contre la situation d'isolement qu'elle rencontre."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 3,
+          "alternatif": 2,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "domicile"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 1,
+          "alternatif": 4,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "domicile"
+          ]
+        ]
+      }
+    },
+    "at": [
+      {
+        "type": "Canne",
+        "statut": "mise_en_place"
+      },
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "essayee"
+      }
+    ],
+    "ressentis": {
+      "aise": {
+        "avant": 0.0,
+        "apres": 10.0
+      },
+      "satisfaction": {
+        "avant": 0.0,
+        "apres": 10.0
+      },
+      "confiance": {
+        "avant": 0.0,
+        "apres": 0.0
+      },
+      "serenite": {
+        "avant": 10.0,
+        "apres": 10.0
+      }
+    }
+  },
+  {
+    "id": "3",
     "departement": "41",
     "age": 84,
     "gir": 5,
@@ -373,7 +508,7 @@
     }
   },
   {
-    "id": "3",
+    "id": "4",
     "departement": "37",
     "age": 88,
     "gir": 5,
@@ -532,7 +667,7 @@
     }
   },
   {
-    "id": "4",
+    "id": "5",
     "departement": "41",
     "age": 75,
     "gir": 4,
@@ -703,7 +838,7 @@
     }
   },
   {
-    "id": "5",
+    "id": "6",
     "departement": "41",
     "age": 90,
     "gir": 5,
@@ -862,7 +997,7 @@
     }
   },
   {
-    "id": "6",
+    "id": "7",
     "departement": "NR",
     "age": null,
     "gir": null,
@@ -1018,7 +1153,7 @@
     }
   },
   {
-    "id": "7",
+    "id": "8",
     "departement": "94",
     "age": 78,
     "gir": 4,
@@ -1166,7 +1301,7 @@
     }
   },
   {
-    "id": "8",
+    "id": "9",
     "departement": "NR",
     "age": null,
     "gir": null,
@@ -1284,7 +1419,7 @@
     }
   },
   {
-    "id": "9",
+    "id": "10",
     "departement": "41",
     "age": 87,
     "gir": 5,
@@ -1459,7 +1594,7 @@
     }
   },
   {
-    "id": "10",
+    "id": "11",
     "departement": "37",
     "age": 90,
     "gir": 6,
@@ -1608,7 +1743,7 @@
     }
   },
   {
-    "id": "11",
+    "id": "12",
     "departement": "41",
     "age": 78,
     "gir": 6,
@@ -1781,7 +1916,7 @@
     }
   },
   {
-    "id": "12",
+    "id": "13",
     "departement": "37",
     "age": 67,
     "gir": 5,
@@ -1961,7 +2096,7 @@
     }
   },
   {
-    "id": "13",
+    "id": "14",
     "departement": "37",
     "age": 79,
     "gir": 6,
@@ -2082,7 +2217,7 @@
     }
   },
   {
-    "id": "14",
+    "id": "15",
     "departement": "41",
     "age": 82,
     "gir": 5,
@@ -2271,7 +2406,7 @@
     }
   },
   {
-    "id": "15",
+    "id": "16",
     "departement": "41",
     "age": 90,
     "gir": 5,

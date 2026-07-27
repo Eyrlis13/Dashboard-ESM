@@ -200,8 +200,9 @@ def _ress_answer_on_row(ws,r,is_scale):
                 if _ress_bold(c) or _ress_fontcolored(c) or _ress_marked(c):
                     return ('scale10',c.value)
         return None
-    # likert : rang de l'ancre marquée parmi les ancres (gauche = pire = 0)
-    anchors=[c for c in ws[r] if 2<c.column<=12 and isinstance(c.value,str) and c.value.strip()]
+    # likert : les 4 niveaux sont toujours en colonnes C→F (3-6) ; les notes libres
+    # sont en G+ et ne doivent pas être comptées comme des ancres.
+    anchors=[c for c in ws[r] if 3<=c.column<=6 and isinstance(c.value,str) and c.value.strip()]
     anchors.sort(key=lambda c:c.column)
     n=len(anchors)
     if n<2: return None
