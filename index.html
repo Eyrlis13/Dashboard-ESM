@@ -298,12 +298,12 @@ select{font-family:var(--sans)}
       <div class="grid gauto" id="fesi-kpis" style="margin:18px 0 16px"></div>
 
       <div class="tabs" style="margin-bottom:18px" role="group" aria-label="Choisir la vue">
-        <button class="tab on" data-view="detail" onclick="setFesiView('detail')">Vue détaillée</button>
-        <button class="tab" data-view="overview" onclick="setFesiView('overview')">Vue d'ensemble</button>
+        <button class="tab on" data-view="overview" onclick="setFesiView('overview')">Vue d'ensemble</button>
+        <button class="tab" data-view="detail" onclick="setFesiView('detail')">Vue détaillée</button>
       </div>
 
       <!-- Vue détaillée : une barre par bénéficiaire -->
-      <div id="fesi-view-detail">
+      <div id="fesi-view-detail" style="display:none">
         <div class="card">
           <div class="block-title">Variation du score FES-I par bénéficiaire — classée de la plus forte amélioration à la plus forte aggravation</div>
           <div class="chart-box" style="height:460px"><canvas id="fesi-bars"></canvas></div>
@@ -317,7 +317,7 @@ select{font-family:var(--sans)}
       </div>
 
       <!-- Vue d'ensemble : agrégée, scalable -->
-      <div id="fesi-view-overview" style="display:none">
+      <div id="fesi-view-overview">
         <div class="card" style="margin-bottom:16px">
           <div class="block-title">Synthèse — évolution de la peur de chuter</div>
           <div class="obj-bar" id="synth-bar" style="height:38px"></div>
@@ -402,7 +402,6 @@ select{font-family:var(--sans)}
     <div id="p-ressentis" class="page">
       <div class="section-title">Ressentis dans les déplacements</div>
       <p class="section-sub">Quatre ressentis mesurés avant et après l'accompagnement, tous orientés « plus haut = mieux » (la crainte de chuter est présentée en <b>confiance</b>). Scores ramenés sur 10 selon des règles d'arbitrage fixes.</p>
-      <div class="note-provisoire" id="ress-provisoire">Scores extraits automatiquement des 14 bilans (case cochée sur l'échelle 1→10 ou parmi les 4 niveaux) et convertis selon des règles d'arbitrage fixes. Signale-moi toute valeur à corriger.</div>
 
       <div class="tabs" style="margin:16px 0 18px" role="group" aria-label="Choisir la vue">
         <button class="tab on" data-view="overview" onclick="setRessView('overview')">Vue d'ensemble</button>
@@ -438,7 +437,6 @@ select{font-family:var(--sans)}
     <div id="p-at" class="page">
       <div class="section-title">Aides techniques</div>
       <p class="section-sub">Aides techniques à la mobilité travaillées pendant l'accompagnement, classées par le <b>stade le plus avancé atteint</b> (chaque AT est comptée une seule fois) : <b>Mise en place</b> = acquise/adoptée · <b>Essayée</b> = testée mais non acquise · <b>Préconisée</b> = proposée mais non essayée (refus avant l'essai).</p>
-      <div class="note-provisoire">Classification issue d'une lecture fine des plans d'accompagnement et bilans de fin (texte libre) — <b>à valider</b>. Signale-moi toute correction.</div>
       <div class="grid gauto" id="at-kpis" style="margin:16px 0"></div>
       <div class="card">
         <div class="block-title">Par type d'aide technique</div>
@@ -656,7 +654,7 @@ function renderObjectifs(rows){
 }
 
 /* ============ FES-I ============ */
-let currentFesiView = 'detail';
+let currentFesiView = 'overview';
 const fesiBand = s => s<=19 ? 0 : (s<=27 ? 1 : 2);   // 0 faible · 1 modérée · 2 élevée
 
 function setFesiView(v){
