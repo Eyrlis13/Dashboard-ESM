@@ -438,6 +438,39 @@ def scrub_text(txt, names):
     return out
 
 
+def write_flat_csv(data, path):
+    """Export plat, une ligne par bénéficiaire, toutes les colonnes — ouvrable dans Excel.
+    Anonymisé (mêmes données que dataset.json). utf-8-sig pour les accents sous Excel."""
+    import csv
+    MODES=['auto','marche','accompagne','alternatif','domicile']
+    RESS=['aise','satisfaction','confiance','serenite']
+    cols=(['id','departement','sexe','age','gir','zone','type_res','permis',
+           'fesi_avant','fesi_apres','fesi_delta',
+           'objectifs_atteint','objectifs_partiel','objectifs_non','objectifs_total']
+          + [f'ressenti_{d}_{w}' for d in RESS for w in ('avant','apres')]
+          + [f'mode_{m}_{w}' for w in ('avant','apres') for m in MODES]
+          + ['at_mises_en_place','at_essayees','at_preconisees','at_detail',
+             'verbatim_beneficiaire','verbatim_ergo'])
+    with open(path,'w',newline='',encoding='utf-8-sig') as fh:
+        w=csv.writer(fh); w.writerow(cols)
+        for r in data:
+            obj=r['objectifs']; vb=r.get('verbatims') or {}
+            row=[r['id'],r['departement'],r.get('sexe'),r['age'],r['gir'],r['zone'],r['type_res'],r['permis'],
+                 r['fesi_avant'],r['fesi_apres'],r['fesi_delta'],
+                 obj['atteint'],obj['partiel'],obj['non'],obj['total']]
+            for d in RESS:
+                row += [r['ressentis'][d]['avant'], r['ressentis'][d]['apres']]
+            for wn in ('avant','apres'):
+                for m in MODES: row.append(r['deplacements'][wn]['modes'].get(m,0))
+            at=r.get('at',[])
+            row += [sum(1 for a in at if a['statut']=='mise_en_place'),
+                    sum(1 for a in at if a['statut']=='essayee'),
+                    sum(1 for a in at if a['statut']=='preconisee'),
+                    ' ; '.join(f"{a['type']} ({a['statut']})" for a in at),
+                    (vb.get('beneficiaire') or '').replace('\n',' '),
+                    (vb.get('ergo') or '').replace('\n',' ')]
+            w.writerow(row)
+
 if __name__=='__main__':
     # Usage : python3 parse_esm.py [dossier_bilans] [sortie.json]
     bilans_dir = sys.argv[1] if len(sys.argv) > 1 else BILANS_DIR
@@ -464,6 +497,10 @@ if __name__=='__main__':
     with open(out_path,'w',encoding='utf-8') as fh:
         json.dump(data,fh,ensure_ascii=False,indent=2)
     print(f"\n-> {out_path} écrit (anonymisé)")
+
+    csv_path=os.path.join(HERE,'resultats_anonymises.csv')   # toujours dans le dépôt
+    write_flat_csv(data, csv_path)
+    print(f"-> {csv_path} écrit (export plat, ouvrable dans Excel)")
 
 
 # ---- Passe d'anonymisation du TEXTE LIBRE (verbatims / synthèses) ----
