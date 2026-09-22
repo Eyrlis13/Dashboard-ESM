@@ -58,6 +58,14 @@ Ajouter un type au besoin, en restant à ce niveau de granularité.
   *effective* si l'objectif correspondant est coté **Atteint**.
 - **Décidé, démarrage prévu après le bilan** (ex. intervenants attendus le mois suivant)
   → *effective* si le bilan écrit « a été mis en place » — à reconfirmer au suivi 6 mois.
+- **Un « refus » dans une phrase à rallonge** : vérifier **à quoi il se rattache** avant
+  de dégrader un statut. Les commentaires de bilan enchaînent les solutions sans
+  ponctuation (« Service transport à la demande validé covoiturage refus essai tricycle
+  et parking relais ») : ici le refus porte sur le **tricycle**, pas sur le covoiturage.
+  Recouper avec le Plan d'accompagnement, qui écrit la même chose en clair.
+- **Croiser avec la grille « Modes de déplacements après »** : c'est la preuve d'usage la
+  plus fiable. Un mode qui apparaît **après et pas avant**, sur une ligne de trajet
+  précise, vaut *effective* même si le texte libre reste flou.
 - **Solution évoquée « pour plus tard »** (« envisage le taxi dans le futur ») → *présentée*.
 - **Démarches de droits** (dossier APA, MDPH) → **ne pas compter** : ce sont des
   financements, pas des solutions de mobilité.
