@@ -7,9 +7,13 @@
     "zone": "Rurale",
     "type_res": "Maison",
     "permis": "Oui",
-    "fesi_avant": 18,
-    "fesi_apres": 19,
-    "fesi_delta": 1,
+    "fesi_avant": 8,
+    "fesi_apres": 7,
+    "fesi_delta": -1,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 3,
     "conduite_seule_apres": 1,
     "alternatives_avant": 0,
@@ -167,6 +171,247 @@
   },
   {
     "id": "2",
+    "departement": "NR",
+    "age": 69,
+    "gir": 4,
+    "zone": "Péri-urbaine",
+    "type_res": "Maison",
+    "permis": "Oui",
+    "fesi_avant": 14,
+    "fesi_apres": 14,
+    "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
+    "conduite_seule_avant": 3,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 3,
+    "alternatives_apres": 0,
+    "objectifs": {
+      "total": 2,
+      "atteint": 1,
+      "partiel": 1,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": "Les séances l'ont boosté pour refaire plus de choses, se sent beaucoup plus en confiance. Est très contente et satisfaite de l'acquisition du rollator car l'utilise pour ses achats.  quotidiens. Tout à été favorable.",
+      "ergo": "Accompagnement très concluant ou des progrés ont été visibles assez rapidement grâce aux essais et à l'acquisiton de la bonne aide technique au déplacement: rollator. Mme s'en ai saisi très rapidement et cela la sécurise beaucoup lors de ses sorties extérieures. Le fait d'avoir refait certains déplacements qu'elle réalisait auparavant lui a redonné confiance et se sent désormais prête à les faire seule. Elle doit maintenant prendre son courage et se lancer seule."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 3,
+          "marche": 0,
+          "accompagne": 5,
+          "alternatif": 1,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 3,
+          "loisirs": 1,
+          "social": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "domicile"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "autres",
+            "auto"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 0,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {},
+        "pairs": []
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": null,
+        "apres": 6.7
+      },
+      "satisfaction": {
+        "avant": null,
+        "apres": 6.7
+      },
+      "confiance": {
+        "avant": null,
+        "apres": 6.7
+      },
+      "serenite": {
+        "avant": null,
+        "apres": 6.7
+      }
+    }
+  },
+  {
+    "id": "3",
+    "departement": "42",
+    "age": 76,
+    "gir": 4,
+    "zone": "Urbaine-Centre-ville",
+    "type_res": "Apt. étage avec asc",
+    "permis": "Oui",
+    "fesi_avant": 14,
+    "fesi_apres": 11,
+    "fesi_delta": -3,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 2
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 2,
+    "alternatives_apres": 0,
+    "objectifs": {
+      "total": 2,
+      "atteint": 1,
+      "partiel": 1,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": "Se sent plus en confiance lors des sorties extérieures. Aurait aimé trouver une solution efficace pour les déplacements en voiture, est peiné de constater les contraintes en lien avec les services proposés.",
+      "ergo": "Bilan plutôt positif sur le plan moteur car a vu une nette évolution concernant les déplacements de Mme. Par contre Mme est assez exigente concernant les transports adaptés ce qui a conduit à stopper les démarches pour en trouver un."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 3,
+          "accompagne": 5,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "marche"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 0,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ]
+        ]
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": 3.3,
+        "apres": 6.7
+      },
+      "satisfaction": {
+        "avant": 0.0,
+        "apres": 3.3
+      },
+      "confiance": {
+        "avant": 0.0,
+        "apres": 6.7
+      },
+      "serenite": {
+        "avant": 0.0,
+        "apres": 6.7
+      }
+    }
+  },
+  {
+    "id": "4",
     "departement": "69",
     "age": 88,
     "gir": 4,
@@ -176,6 +421,10 @@
     "fesi_avant": 9,
     "fesi_apres": 9,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 1
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 3,
@@ -301,16 +550,118 @@
     }
   },
   {
-    "id": "3",
+    "id": "5",
+    "departement": "42",
+    "age": 80,
+    "gir": 5,
+    "zone": "Rurale",
+    "type_res": "Maison",
+    "permis": "Oui",
+    "fesi_avant": 12,
+    "fesi_apres": 10,
+    "fesi_delta": -2,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 2
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 2,
+    "alternatives_apres": 2,
+    "objectifs": {
+      "total": 1,
+      "atteint": 1,
+      "partiel": 0,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": "Mme est très contente car se sent beaucoup plus à l'aise avec le rollator, est contente d'avoir pu l'essayer chez elle, dans son environnement.",
+      "ergo": "Il a suffit de peu de séances pour redonner la confiance à mme de ressortir de chez elle en toute sécurité et d'aller se promener dans les alentours."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 0,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "sante": 1,
+          "loisirs": 1
+        },
+        "pairs": [
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 0,
+          "alternatif": 2,
+          "domicile": 0
+        },
+        "sorties": {
+          "sante": 1,
+          "loisirs": 1
+        },
+        "pairs": [
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ]
+        ]
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": null,
+        "apres": 3.3
+      },
+      "satisfaction": {
+        "avant": null,
+        "apres": 3.3
+      },
+      "confiance": {
+        "avant": null,
+        "apres": 6.7
+      },
+      "serenite": {
+        "avant": null,
+        "apres": 3.3
+      }
+    }
+  },
+  {
+    "id": "6",
     "departement": "41",
     "age": 84,
     "gir": 5,
     "zone": "Rurale",
     "type_res": null,
     "permis": "Oui",
-    "fesi_avant": 17,
-    "fesi_apres": 22,
-    "fesi_delta": 5,
+    "fesi_avant": 7,
+    "fesi_apres": 10,
+    "fesi_delta": 3,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 11,
     "conduite_seule_apres": 10,
     "alternatives_avant": 1,
@@ -508,16 +859,20 @@
     }
   },
   {
-    "id": "4",
+    "id": "7",
     "departement": "37",
     "age": 88,
     "gir": 5,
     "zone": "Péri-urbaine",
     "type_res": "Maison",
     "permis": "Non",
-    "fesi_avant": 36,
-    "fesi_apres": 36,
+    "fesi_avant": 13,
+    "fesi_apres": 13,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 3,
@@ -667,16 +1022,20 @@
     }
   },
   {
-    "id": "5",
+    "id": "8",
     "departement": "41",
     "age": 75,
     "gir": 4,
     "zone": "Rurale",
     "type_res": "RA",
     "permis": "Oui",
-    "fesi_avant": 29,
-    "fesi_apres": 37,
-    "fesi_delta": 8,
+    "fesi_avant": 13,
+    "fesi_apres": 18,
+    "fesi_delta": 5,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 2
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 1,
     "alternatives_avant": 2,
@@ -838,16 +1197,156 @@
     }
   },
   {
-    "id": "6",
+    "id": "9",
+    "departement": "37",
+    "age": 83,
+    "gir": 5,
+    "zone": "Rurale",
+    "type_res": "Maison",
+    "permis": "Oui",
+    "fesi_avant": 18,
+    "fesi_apres": 19,
+    "fesi_delta": 1,
+    "fesi_sortir": {
+      "avant": 2,
+      "apres": 2
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 1,
+    "alternatives_apres": 1,
+    "objectifs": {
+      "total": 0,
+      "atteint": 0,
+      "partiel": 0,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": null,
+      "ergo": null
+    },
+    "sexe": null,
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 5,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 1,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "accompagne"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 5,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 1,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "accompagne"
+          ],
+          [
+            "demarches",
+            "accompagne"
+          ]
+        ]
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": null,
+        "apres": null
+      },
+      "satisfaction": {
+        "avant": 2.2,
+        "apres": 6.7
+      },
+      "confiance": {
+        "avant": 2.2,
+        "apres": 6.7
+      },
+      "serenite": {
+        "avant": 2.2,
+        "apres": 6.7
+      }
+    }
+  },
+  {
+    "id": "10",
     "departement": "41",
     "age": 90,
     "gir": 5,
     "zone": "Urbaine-Centre-ville",
     "type_res": "RA",
     "permis": "Oui",
-    "fesi_avant": 25,
-    "fesi_apres": 29,
-    "fesi_delta": 4,
+    "fesi_avant": 10,
+    "fesi_apres": 12,
+    "fesi_delta": 2,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 2
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 5,
@@ -997,16 +1496,20 @@
     }
   },
   {
-    "id": "7",
-    "departement": "NR",
-    "age": null,
-    "gir": null,
-    "zone": null,
-    "type_res": null,
-    "permis": null,
-    "fesi_avant": 33,
-    "fesi_apres": 33,
-    "fesi_delta": 0,
+    "id": "11",
+    "departement": "37",
+    "age": 80,
+    "gir": 6,
+    "zone": "Centre Ville",
+    "type_res": "Appartement",
+    "permis": "Oui",
+    "fesi_avant": 15,
+    "fesi_apres": 14,
+    "fesi_delta": -1,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 2
+    },
     "conduite_seule_avant": 3,
     "conduite_seule_apres": 3,
     "alternatives_avant": 5,
@@ -1153,7 +1656,161 @@
     }
   },
   {
-    "id": "8",
+    "id": "12",
+    "departement": "94",
+    "age": 83,
+    "gir": 3,
+    "zone": "Urbaine-Centre-ville",
+    "type_res": "Apt. étage avec asc",
+    "permis": "Non",
+    "fesi_avant": 16,
+    "fesi_apres": 18,
+    "fesi_delta": 2,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 2
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 6,
+    "alternatives_apres": 4,
+    "objectifs": {
+      "total": 3,
+      "atteint": 2,
+      "partiel": 1,
+      "non": 0
+    },
+    "verbatims": {
+      "beneficiaire": "Globalement Mme […] a le sentiment que l'accompagenement l'a aidé. Elle a trouvé l'accompagnement bien veillant et réfléchi (à l'exception de la séance avec […]-Aline qui ne s'est pas bien passée). L'application montrée l'a rassurée pour anticiper au mieux ses déplacements en transports en commun\nElle est heureuse d'avoir pu avoir ces propositions (entre autres dispositifs ou suivis proposés par des professionnels de nos jours) qui lui donnent envie de continuer.",
+      "ergo": "L'objectif principal de l'accompagnement était de présenter à madame des solutions de mobilités qui peuvent lui permettre de poursuivre la réalisation de ses sorties dans un état d'esprit plus serein et en se sentant plus sûre d'elle. \nCet objectif a été partiellement atteint. En effet, Mme […] a, pour commencer, pu découvrir l'application City Mapper que nous avons installé ensemble et qui lui détaille les transports à prendre, le nombre de stations prévu, le temps de trajet, etc. L'intérêt est également \nde pouvoir choisir le type de transport utilisé (favoriser le bus, le tram, le RER, etc.). Madame ayant des difficultés à prendre le métro elle peut ainsi favoriser le bus et limiter le nombre de changements. \nL'autre solution apportée est la canne pliante. J'ai pu présenter à madame le vieillissement normal du corps pour lui faire prendre conscience des difficultés \"normales\" qu'elle pouvait rencontrer pour expliquer que la canne est un outil qui répond à un besoin de vieillissement naturel du corps. \nElle était heureuse d'être sensibilisée sur le sujet. \nJe lui ai ensuite laissé une canne pliante en prêt pendant une durée limitée, que nous avons pu essayer toutes les deux ensemble la première fois. \nMadame s'est bien saisie de la canne mais uniquement en intérieur. Elle m'a fait part de ce que ça lui a apporté : un soulagement des douleurs notamment en cas de douleurs sciatiques, et un appui supplémentaire pour limiter les déséquilibres. Madame reconnait les bienfaits de la canne. \nElle n'est en revanche pas prête à utiliser la canne en extérieur proche de son domicile où elle croise des personnes qu'elle connaît. Elle a tout de même commencé à en parler à ses amis. Elle me dit qu'elle osera plus l'utiliser en hiver quand elle pourra être plus couverte et moins reconnaissable."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 4,
+          "accompagne": 0,
+          "alternatif": 6,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 3,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "social",
+            "alternatif"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 4,
+          "accompagne": 0,
+          "alternatif": 4,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 2,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "social",
+            "alternatif"
+          ]
+        ]
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": 3.3,
+        "apres": null
+      },
+      "satisfaction": {
+        "avant": 6.7,
+        "apres": null
+      },
+      "confiance": {
+        "avant": 0.0,
+        "apres": null
+      },
+      "serenite": {
+        "avant": 3.3,
+        "apres": 3.3
+      }
+    }
+  },
+  {
+    "id": "13",
     "departement": "94",
     "age": 78,
     "gir": 4,
@@ -1163,6 +1820,10 @@
     "fesi_avant": 13,
     "fesi_apres": 13,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 2,
+      "apres": 2
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 0,
@@ -1301,16 +1962,20 @@
     }
   },
   {
-    "id": "9",
-    "departement": "NR",
-    "age": null,
-    "gir": null,
-    "zone": null,
-    "type_res": null,
-    "permis": null,
-    "fesi_avant": 28,
-    "fesi_apres": 28,
+    "id": "14",
+    "departement": "37",
+    "age": 80,
+    "gir": 6,
+    "zone": "Centre Ville",
+    "type_res": "Appartement",
+    "permis": "Non",
+    "fesi_avant": 7,
+    "fesi_apres": 7,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 2,
@@ -1419,16 +2084,20 @@
     }
   },
   {
-    "id": "10",
+    "id": "15",
     "departement": "41",
     "age": 87,
     "gir": 5,
     "zone": "Urbaine-Centre-ville",
     "type_res": "RA",
     "permis": "Oui",
-    "fesi_avant": 23,
-    "fesi_apres": 21,
-    "fesi_delta": -2,
+    "fesi_avant": 11,
+    "fesi_apres": 10,
+    "fesi_delta": -1,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 9,
@@ -1594,16 +2263,20 @@
     }
   },
   {
-    "id": "11",
+    "id": "16",
     "departement": "37",
     "age": 90,
     "gir": 6,
     "zone": "Urbaine-Centre-ville",
     "type_res": "Apt. étage avec asc",
     "permis": "Oui",
-    "fesi_avant": 43,
-    "fesi_apres": 40,
-    "fesi_delta": -3,
+    "fesi_avant": 17,
+    "fesi_apres": 17,
+    "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 3,
+      "apres": 3
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 5,
@@ -1743,16 +2416,257 @@
     }
   },
   {
-    "id": "12",
+    "id": "17",
+    "departement": "NR",
+    "age": null,
+    "gir": null,
+    "zone": null,
+    "type_res": null,
+    "permis": null,
+    "fesi_avant": 17,
+    "fesi_apres": 17,
+    "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 2,
+    "alternatives_apres": 7,
+    "objectifs": {
+      "total": 1,
+      "atteint": 0,
+      "partiel": 0,
+      "non": 1
+    },
+    "verbatims": {
+      "beneficiaire": "Cet accompagnement l'a beaucoup aidé et elle a pris conscience qu'il fallait qu'elle se motive à sortir",
+      "ergo": "À l'issue du parcours, Mme a retrouvé une autonomie significative dans ses déplacements. Elle utilise de nouveau seule les transports en commun (bus et tramway) et a repris une activité qui lui tient particulièrement à cœur : aller seule au marché. En revanche, malgré les recommandations formulées au cours de l'accompagnement, elle a choisi de ne pas utiliser de canne."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 4,
+          "alternatif": 1,
+          "domicile": 0
+        },
+        "sorties": {
+          "sante": 2,
+          "courses": 1,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 1,
+          "accompagne": 2,
+          "alternatif": 6,
+          "domicile": 0
+        },
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 2,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "alternatif"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "demarches",
+            "alternatif"
+          ]
+        ]
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": 1.1,
+        "apres": 5.6
+      },
+      "satisfaction": {
+        "avant": 0.0,
+        "apres": 5.6
+      },
+      "confiance": {
+        "avant": 4.4,
+        "apres": 6.7
+      },
+      "serenite": {
+        "avant": 0.0,
+        "apres": 6.7
+      }
+    }
+  },
+  {
+    "id": "18",
+    "departement": "77",
+    "age": 87,
+    "gir": 4,
+    "zone": "Rurale",
+    "type_res": "Maison",
+    "permis": "Oui",
+    "fesi_avant": 18,
+    "fesi_apres": 19,
+    "fesi_delta": 1,
+    "fesi_sortir": {
+      "avant": 4,
+      "apres": 3
+    },
+    "conduite_seule_avant": 0,
+    "conduite_seule_apres": 0,
+    "alternatives_avant": 0,
+    "alternatives_apres": 0,
+    "objectifs": {
+      "total": 3,
+      "atteint": 2,
+      "partiel": 0,
+      "non": 1
+    },
+    "verbatims": {
+      "beneficiaire": "Madame ne sent pas entre a l'aise pour l'utilisation seul.",
+      "ergo": "Madame présente un niveau de stress important lors de l'utilisation du fauteuil. Elle a toutefois bien intégré les différentes consignes, qu'elle est en mesure de verbaliser spontanément. Seule la pratique régulière lui permettra d'automatiser la conduite du fauteuil. Il est donc indispensable qu'elle l'utilise quotidiennement afin de renforcer ses acquis et de gagner en confiance."
+    },
+    "sexe": "F",
+    "deplacements": {
+      "avant": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 2,
+          "alternatif": 0,
+          "domicile": 1
+        },
+        "sorties": {
+          "courses": 1,
+          "loisirs": 1,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "social",
+            "domicile"
+          ]
+        ]
+      },
+      "apres": {
+        "modes": {
+          "auto": 0,
+          "marche": 0,
+          "accompagne": 0,
+          "alternatif": 0,
+          "domicile": 0
+        },
+        "sorties": {},
+        "pairs": []
+      }
+    },
+    "at": [],
+    "ressentis": {
+      "aise": {
+        "avant": 0.0,
+        "apres": 6.7
+      },
+      "satisfaction": {
+        "avant": 0.0,
+        "apres": 6.7
+      },
+      "confiance": {
+        "avant": 0.0,
+        "apres": 3.3
+      },
+      "serenite": {
+        "avant": 0.0,
+        "apres": 3.3
+      }
+    }
+  },
+  {
+    "id": "19",
     "departement": "41",
     "age": 78,
     "gir": 6,
     "zone": "Urbaine",
     "type_res": "Apt.étage avec asc",
     "permis": "Oui",
-    "fesi_avant": 20,
-    "fesi_apres": 26,
-    "fesi_delta": 6,
+    "fesi_avant": 7,
+    "fesi_apres": 11,
+    "fesi_delta": 4,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 2
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 4,
@@ -1916,16 +2830,20 @@
     }
   },
   {
-    "id": "13",
+    "id": "20",
     "departement": "37",
     "age": 67,
     "gir": 5,
     "zone": "Péri-urbaine",
     "type_res": "Apt. étage avec asc",
     "permis": "Oui",
-    "fesi_avant": 24,
-    "fesi_apres": 24,
+    "fesi_avant": 11,
+    "fesi_apres": 11,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 0,
     "conduite_seule_apres": 0,
     "alternatives_avant": 2,
@@ -2096,16 +3014,20 @@
     }
   },
   {
-    "id": "14",
+    "id": "21",
     "departement": "37",
     "age": 79,
     "gir": 6,
     "zone": "Péri-urbaine",
     "type_res": "Apt. RDC",
     "permis": "Oui",
-    "fesi_avant": 41,
-    "fesi_apres": 41,
+    "fesi_avant": 17,
+    "fesi_apres": 17,
     "fesi_delta": 0,
+    "fesi_sortir": {
+      "avant": 2,
+      "apres": 2
+    },
     "conduite_seule_avant": 8,
     "conduite_seule_apres": 0,
     "alternatives_avant": 0,
@@ -2217,7 +3139,7 @@
     }
   },
   {
-    "id": "15",
+    "id": "22",
     "departement": "41",
     "age": 82,
     "gir": 5,
@@ -2227,6 +3149,10 @@
     "fesi_avant": 10,
     "fesi_apres": 9,
     "fesi_delta": -1,
+    "fesi_sortir": {
+      "avant": 1,
+      "apres": 1
+    },
     "conduite_seule_avant": 8,
     "conduite_seule_apres": 8,
     "alternatives_avant": 6,
@@ -2406,7 +3332,7 @@
     }
   },
   {
-    "id": "16",
+    "id": "23",
     "departement": "41",
     "age": 90,
     "gir": 5,
@@ -2416,6 +3342,10 @@
     "fesi_avant": 14,
     "fesi_apres": 11,
     "fesi_delta": -3,
+    "fesi_sortir": {
+      "avant": 2,
+      "apres": 2
+    },
     "conduite_seule_avant": 1,
     "conduite_seule_apres": 0,
     "alternatives_avant": 4,

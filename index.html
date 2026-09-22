@@ -294,7 +294,7 @@ select{font-family:var(--sans)}
     <!-- ══ FES-I ══ -->
     <div id="p-fesi" class="page">
       <div class="section-title">Peur de chuter — échelle FES-I</div>
-      <p class="section-sub">Le FES-I mesure l'inquiétude face au risque de chute (score de 16 à 64 : <b>plus il est bas, mieux c'est</b>). Chaque barre est un bénéficiaire : vers la <b>gauche</b> la peur a diminué (mieux), vers la <b>droite</b> elle a augmenté. La longueur indique l'ampleur du changement.</p>
+      <p class="section-sub">Le FES-I mesure l'inquiétude face au risque de chute. On retient pour tous la <b>version courte (7 items)</b>, seule commune à l'ensemble des bilans : score de <b>7 à 28</b>, <b>plus il est bas, mieux c'est</b>. Chaque barre est un bénéficiaire : vers la <b>gauche</b> la peur a diminué (mieux), vers la <b>droite</b> elle a augmenté. La longueur indique l'ampleur du changement.</p>
       <div class="grid gauto" id="fesi-kpis" style="margin:18px 0 16px"></div>
 
       <div class="tabs" style="margin-bottom:18px" role="group" aria-label="Choisir la vue">
@@ -336,8 +336,18 @@ select{font-family:var(--sans)}
           <div class="card">
             <div class="block-title">Niveau d'inquiétude : avant → après</div>
             <div class="chart-box" style="height:260px"><canvas id="fesi-bands"></canvas></div>
-            <div class="card-note">Paliers cliniques du FES-I : faible 16–19 · modérée 20–27 · élevée 28+.</div>
+            <div class="card-note">Paliers cliniques de la Short FES-I : faible 7–8 · modérée 9–13 · élevée 14–28.</div>
           </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="eyebrow">Focus</div>
+        <div class="block-title" style="margin-top:5px">« Sortir de chez soi » — l'item au cœur de la mission ESM</div>
+        <p class="section-sub" style="margin:0 0 14px">Parmi les 7 items, celui-ci mesure l'inquiétude à l'idée de <b>sortir</b> (réunion de famille, événement, association). C'est le plus directement lié à l'objectif de l'accompagnement.</p>
+        <div class="grid g2">
+          <div class="chart-box" style="height:250px"><canvas id="fesi-sortir"></canvas></div>
+          <div id="sortir-story"></div>
         </div>
       </div>
 
@@ -615,7 +625,7 @@ function renderProfil(rows){
   const normZone = z=>{ if(!z) return null; const s=String(z).toLowerCase();
     if(s.startsWith('rural')) return 'Rurale';
     if(s.includes('péri')||s.includes('peri')) return 'Péri-urbaine';
-    if(s.startsWith('urbain')) return 'Urbaine';
+    if(s.startsWith('urbain')||s.includes('centre')) return 'Urbaine';
     return String(z); };
   const zm = countBy(rows,'zone', normZone);
   const zoneOrder = ['Rurale','Péri-urbaine','Urbaine'];
@@ -655,7 +665,7 @@ function renderObjectifs(rows){
 
 /* ============ FES-I ============ */
 let currentFesiView = 'overview';
-const fesiBand = s => s<=19 ? 0 : (s<=27 ? 1 : 2);   // 0 faible · 1 modérée · 2 élevée
+const fesiBand = s => s<=8 ? 0 : (s<=13 ? 1 : 2);   // Short FES-I : 0 faible(7-8) · 1 modérée(9-13) · 2 élevée(14-28)
 
 function setFesiView(v){
   currentFesiView = v;
@@ -717,8 +727,37 @@ function renderFesiDetail(valid){
   });
 }
 
+// Focus « Sortir » : niveaux d'inquiétude avant/après sur l'item sortie extérieure
+const SORTIR_LBL=['Pas du tout','Un peu','Assez','Très inquiet'];
+function renderFesiSortir(rows){
+  const pairs=rows.map(r=>r.fesi_sortir).filter(s=>s && s.avant && s.apres).map(s=>[s.avant,s.apres]);
+  const av=[0,0,0,0], ap=[0,0,0,0];
+  pairs.forEach(([a,b])=>{av[a-1]++; ap[b-1]++;});
+  mkChart('fesi-sortir',{type:'bar',
+    data:{labels:SORTIR_LBL,datasets:[
+      {label:'Avant',data:av,backgroundColor:C.light,borderRadius:5,maxBarThickness:34},
+      {label:'Après',data:ap,backgroundColor:C.sage,borderRadius:5,maxBarThickness:34}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:500},
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',boxWidth:10,padding:12}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label} : ${c.raw} bénéficiaire${c.raw>1?'s':''}`}}},
+      scales:{y:{grid:{color:C.cream2},border:{display:false},ticks:{precision:0}},x:{grid:{display:false},border:{display:false}}}}
+  });
+  const inq=pairs.filter(([a])=>a>=2);
+  const mieux=inq.filter(([a,b])=>b<a).length, pire=inq.filter(([a,b])=>b>a).length;
+  const gravAv=pairs.filter(([a])=>a>=3).length, gravAp=pairs.filter(([,b])=>b>=3).length;
+  const box=(v,l,c)=>`<div style="border-left:3px solid ${c};padding:10px 0 10px 14px;margin-bottom:14px">
+      <div style="font-family:var(--serif);font-size:30px;line-height:1;color:${c}">${v}</div>
+      <div style="font-size:12.5px;color:var(--mid);margin-top:6px;line-height:1.5">${l}</div></div>`;
+  document.getElementById('sortir-story').innerHTML = pairs.length ? (
+    box(`${mieux} / ${inq.length}`,`personnes qui <b>appréhendaient</b> de sortir (score ≥ 2) sont <b>moins inquiètes</b> après l'accompagnement`,C.sage)
+    + box(pire,`d'entre elles se sont <b>dégradées</b>`,pire===0?C.sage:C.rose)
+    + box(`${gravAv} → ${gravAp}`,`personnes « <b>assez</b> » ou « <b>très</b> » inquiètes à l'idée de sortir`,C.gold)
+  ) : '<p class="empty">Aucune donnée pour cette sélection.</p>';
+}
+
 // Vue d'ensemble : agrégée, scalable (synthèse % + distribution + paliers)
 function renderFesiOverview(valid, agg){
+  renderFesiSortir(subset());
   const {down,flat,up} = agg;
   const tot = valid.length || 1;
   const seg=(v,c,lab)=> v? `<div class="obj-seg" style="flex:${v};background:${c}" title="${lab} : ${v}">${Math.round(100*v/tot)}%</div>`:'';
@@ -747,7 +786,7 @@ function renderFesiOverview(valid, agg){
   valid.forEach(r=>{ av[fesiBand(r.fesi_avant)]++; ap[fesiBand(r.fesi_apres)]++; });
   mkChart('fesi-bands', {
     type:'bar',
-    data:{ labels:['Faible (16–19)','Modérée (20–27)','Élevée (28+)'],
+    data:{ labels:['Faible (7–8)','Modérée (9–13)','Élevée (14–28)'],
       datasets:[
         {label:'Avant', data:av, backgroundColor:C.light, borderRadius:5, maxBarThickness:34},
         {label:'Après', data:ap, backgroundColor:C.sage, borderRadius:5, maxBarThickness:34}] },

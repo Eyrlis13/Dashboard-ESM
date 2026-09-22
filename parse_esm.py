@@ -10,6 +10,7 @@ warnings.filterwarnings('ignore')
 # Par défaut : dossier "bilans/" à côté du script, sortie "dataset.json" idem.
 # Surchargeable via variables d'environnement ou arguments ligne de commande.
 HERE = os.path.dirname(os.path.abspath(__file__))
+GLOBAL_NAMES = set()   # tous les noms du corpus (rempli par build_dataset, sert au masquage)
 BILANS_DIR = os.environ.get('ESM_BILANS_DIR') or os.path.join(HERE, 'bilans')
 OUTPUT_JSON = os.environ.get('ESM_OUTPUT') or os.path.join(HERE, 'dataset.json')
 
@@ -54,16 +55,52 @@ def get_department(wb):
             return dep
     return None
 
-def fesi_score(wb,when):
+# --- Short FES-I : on ne retient QUE les 7 items de la version courte (Kempen 2008),
+# présents aussi bien dans les bilans 7 items que 16 items -> tout le monde comparable (7-28).
+# Chaque item est coté 1 (pas du tout inquiet) à 4 (très inquiet) : plus bas = mieux.
+SHORT_FESI_ITEMS=[
+    ('habillage', ['habiller']),                 # s'habiller / se déshabiller
+    ('douche',    ['douche','bain']),            # prendre une douche ou un bain
+    ('chaise',    ['chaise']),                   # se lever d'une chaise / s'asseoir
+    ('escaliers', ['escalier']),                 # monter / descendre des escaliers
+    ('atteindre', ['atteindre']),                # atteindre qqch au-dessus de la tête / par terre
+    ('pente',     ['pente']),                    # descendre ou monter une pente
+    ('sortir',    ['religieux']),                # Sortir (service religieux, réunion de famille…)
+]
+
+def _fesi_sheet(wb, when):
+    """Feuille FES-I. Certains bilans nomment l'onglet 'FES-I' tout court pour l'avant
+    (et 'FES-I APRES' pour l'après) -> repli sur la feuille 'fes' qui n'est pas l'après."""
     ws=find_sheet(wb,'fes',when)
-    if ws is None: return None
-    for row in ws.iter_rows():
-        for c in row:
-            if c.value and 'score' in norm(c.value):
-                for cc in row:
-                    if isinstance(cc.value,(int,float)) and cc.column>c.column:
-                        return cc.value if 0<cc.value<=64 else None   # 0/vide = non rempli
+    if ws is not None: return ws
+    if when=='avant':
+        for name in wb.sheetnames:
+            n=norm(name)
+            if 'fes' in n and 'apres' not in n: return wb[name]
     return None
+
+def fesi_items(wb, when):
+    """{clé_item: score 1-4} pour les 7 items de la Short FES-I."""
+    ws=_fesi_sheet(wb,when)
+    out={}
+    if ws is None: return out
+    for row in ws.iter_rows():
+        lab=ws.cell(row=row[0].row,column=2).value
+        if not (isinstance(lab,str) and len(lab)>8): continue
+        n=norm(lab)
+        if 'score' in n: continue
+        sc=[c.value for c in row if c.column>2 and isinstance(c.value,(int,float))
+            and not isinstance(c.value,bool) and 1<=c.value<=4]
+        if not sc: continue
+        for key,kws in SHORT_FESI_ITEMS:
+            if key not in out and any(k in n for k in kws):
+                out[key]=int(sc[0]); break
+    return out
+
+def fesi_score(wb,when):
+    """Score Short FES-I = somme des 7 items (7 à 28). None si les 7 ne sont pas tous cotés."""
+    it=fesi_items(wb,when)
+    return sum(it.values()) if len(it)==len(SHORT_FESI_ITEMS) else None
 
 def get_infos(wb):
     import datetime
@@ -76,11 +113,17 @@ def get_infos(wb):
             if not c.value: continue
             k=norm(c.value)
             if k.startswith('date de naissance'):
-                v=right(c)
-                if isinstance(v,datetime.datetime): out['age']=2026-v.year
-                elif isinstance(v,str):
-                    m=re.search(r'(\d{4})',v)
-                    if m: out['age']=2026-int(m.group(1))
+                # certaines lignes contiennent plusieurs dates (ex. 1900 parasite puis la vraie) :
+                # on retient la 1re qui donne un âge plausible (40-110 ans)
+                for off in range(1,6):
+                    v=ws.cell(row=c.row,column=c.column+off).value
+                    an=None
+                    if isinstance(v,datetime.datetime): an=v.year
+                    elif isinstance(v,str):
+                        m=re.search(r'(19\d{2}|20\d{2})',v)
+                        if m: an=int(m.group(1))
+                    if an and 40 <= 2026-an <= 110:
+                        out['age']=2026-an; break
             elif k=='gir':
                 v=right(c)
                 try: out['gir']=int(float(v))
@@ -343,19 +386,36 @@ def build_dataset(bilans_dir=None):
     seq=0
     manual_ress=load_manual_ressentis()
     at_curated=load_at_curated()
+
+    # 1re passe : rassembler TOUS les noms du corpus. Un nom connu dans un bilan
+    # (bénéficiaire, proche, professionnel) est masqué dans TOUS les bilans.
+    global GLOBAL_NAMES
+    GLOBAL_NAMES=set()
+    for k0,f0 in sorted(canon.items()):
+        try:
+            wb0=openpyxl.load_workbook(f0,data_only=True)
+            GLOBAL_NAMES |= get_names_from_file(wb0)
+            GLOBAL_NAMES.add(k0.capitalize()); GLOBAL_NAMES.add(k0)
+        except Exception: pass
     for k,f in sorted(canon.items()):
         wb=openpyxl.load_workbook(f,data_only=True)
         dep=get_department(wb) or 'NR'
         seq+=1
         anon_id=str(seq)          # appellation simple : 1, 2, 3 … (aucun nom, aucun code département)
         info=get_infos(wb)
-        real_names=get_names_from_file(wb)
+        real_names=set(GLOBAL_NAMES) | get_names_from_file(wb)
         # the participant key (from filename) IS the surname — always scrub it + accented variants
         real_names.add(k.capitalize()); real_names.add(k)
         real_names.add(k.replace('THEOPHILE','Théophile'))
         fa,fp=fesi_score(wb,'avant'),fesi_score(wb,'apres')
+        # Item « Sortir » (sortie extérieure) isolé : 1 = pas du tout inquiet … 4 = très inquiet
+        sortir={'avant':fesi_items(wb,'avant').get('sortir'),
+                'apres':fesi_items(wb,'apres').get('sortir')}
         # GUERAULT : FES-I après non mesuré -> considéré identique à l'avant (stable), décision métier
-        if k.upper()=='GUERAULT' and fp is None and fa is not None: fp=fa
+        if k.upper()=='GUERAULT':
+            if fp is None and fa is not None: fp=fa
+            if sortir['apres'] is None and sortir['avant'] is not None:
+                sortir['apres']=sortir['avant']
         mav,map_=get_modes(wb,'avant'),get_modes(wb,'apres')
         sav,aav=count_flags(mav); sap,aap=count_flags(map_)
         rec={
@@ -364,6 +424,7 @@ def build_dataset(bilans_dir=None):
             'type_res':info['type_res'],'permis':info['permis'],
             'fesi_avant':fa,'fesi_apres':fp,
             'fesi_delta':(fp-fa) if (fa is not None and fp is not None) else None,
+            'fesi_sortir':sortir,
             'conduite_seule_avant':sav,'conduite_seule_apres':sap,
             'alternatives_avant':aav,'alternatives_apres':aap,
             'objectifs':get_objectives(wb),

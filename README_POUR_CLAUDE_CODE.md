@@ -47,6 +47,18 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
 - 1 participant sans département identifiable → "non renseigné", à compléter à la main.
 
 ## Décisions déjà prises
+- **FES-I : on ne retient que les 7 items de la version COURTE** (Short FES-I, Kempen 2008)
+  pour TOUS les bénéficiaires — certains bilans utilisent la version 16 items, d'autres la
+  courte. Les 7 items communs (habillage, douche/bain, chaise, escaliers, atteindre,
+  pente, sortir) donnent un score 7-28 comparable pour tout le monde.
+  Paliers cliniques : faible 7-8 · modérée 9-13 · élevée 14-28.
+- L'item « Sortir » est isolé (`fesi_sortir`) et mis en avant : c'est celui qui colle le
+  mieux à la mission ESM.
+- Le suivi 6 mois vit dans l'onglet « Suivi » de chaque bilan : **non exploité** pour l'instant
+  (le parser ne lit jamais cet onglet).
+- Les bilans nommés « REFUS » sont exclus de la cohorte.
+- Anonymisation : les noms sont masqués **à l'échelle de tout le corpus** (un nom connu dans
+  un bilan est masqué dans tous), ce qui couvre aussi les professionnels cités.
 - GUERAULT : réintégré (juillet 2026). Son FES-I après n'a pas été mesuré → considéré
   identique à l'avant (stable, Δ0), sur décision métier. Un garde-fou rejette désormais
   tout FES-I ≤ 0 (non rempli).

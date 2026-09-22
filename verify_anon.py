@@ -26,6 +26,16 @@ except Exception:
     BILANS_DIR = os.path.join(HERE, 'bilans')
     OUTPUT_JSON = os.path.join(HERE, 'dataset.json')
 
+# Mots courants qui peuvent suivre « Mme. » en début de phrase : ce ne sont pas des noms.
+STOP_APRES_CIVILITE = {
+    'par','elle','elles','il','ils','le','la','les','ce','cet','cette','ces','son','sa','ses',
+    'cependant','lors','lorsque','depuis','apres','après','mais','aucun','aucune','en','au','aux',
+    'du','de','des','pour','sur','dans','durant','suite','toutefois','neanmoins','néanmoins',
+    'enfin','ainsi','puis','quand','un','une','on','nous','vous','je','tout','toute','toutes',
+    'plusieurs','certaines','certains','beaucoup','concernant','malgre','malgré','grace','grâce',
+    'avec','sans','par','bien','tres','très','plus','moins','lui','leur','leurs','pas','ne','a','à',
+}
+
 # --- Motifs de fuite bloquants (aucune source requise) ----------------------
 PATTERNS = [
     ('email',    re.compile(r'\b[\w.+-]+@[\w-]+\.[\w.-]+\b')),
@@ -34,7 +44,7 @@ PATTERNS = [
     # (évite les simples initiales type « Mme L » et les placeholders « […] »)
     ('nom en clair après civilité',
         re.compile(r'\b(?:Mme|M\.|Mr|Monsieur|Madame|Dr|Docteur|Pr|Professeur)\.?\s+'
-                   r'[A-ZÉÈÀ][a-zéèàêâîôûç]{2,}')),
+                   r'([A-ZÉÈÀ][a-zéèàêâîôûç]{2,})')),
 ]
 
 
@@ -80,6 +90,8 @@ def check(dataset_path, bilans_dir):
     for path, txt in iter_strings(data):
         for label, rx in PATTERNS:
             for m in rx.finditer(txt):
+                if label.startswith('nom en clair') and m.group(1).lower() in STOP_APRES_CIVILITE:
+                    continue      # « Mme. Par contre… » : mot courant, pas un nom
                 findings.append((label, path, m.group(0)))
 
     # 2) Recoupement avec les sources (si disponibles)
