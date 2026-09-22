@@ -335,6 +335,9 @@ def load_at_curated():
             cle=(row.get('cle') or '').strip().upper()
             typ=(row.get('type') or '').strip()
             st=(row.get('statut') or '').strip()
+            # statut « aucune » = marqueur de relecture (dossier lu, rien à déclarer) :
+            # il prouve que l'arbitrage a eu lieu, mais n'est pas une donnée à publier.
+            if cle and st.lower()=='aucune': at.setdefault(cle,[]); continue
             if cle and typ and st: at.setdefault(cle,[]).append({'type':typ,'statut':st})
     return at
 
@@ -352,6 +355,7 @@ def load_services_curated():
             cle=(row.get('cle') or '').strip().upper()
             nom=(row.get('service') or '').strip()
             st=(row.get('statut') or '').strip()
+            if cle and st.lower()=='aucune': sv.setdefault(cle,[]); continue   # marqueur de relecture
             if cle and nom and st: sv.setdefault(cle,[]).append({'service':nom,'statut':st})
     return sv
 

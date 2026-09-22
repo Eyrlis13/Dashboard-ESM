@@ -2,6 +2,7 @@
 #
 # maj.sh — Met à jour le dashboard ESM en une seule commande.
 #
+#   0. Signale les dossiers pas encore arbitrés (aides techniques / services).
 #   1. Régénère les données anonymisées depuis les bilans Excel (bilans/).
 #   2. Contrôle « zéro fuite de nom ».
 #   3. Ne remplace dataset.json QUE si le contrôle passe.
@@ -19,6 +20,13 @@ trap 'rm -f "$TMP"' EXIT
 echo "──────────────────────────────────────────────"
 echo "  Mise à jour du dashboard ESM"
 echo "──────────────────────────────────────────────"
+
+echo ""
+echo "▶ 0/2  Dossiers restant à arbitrer"
+# on ne garde que les lignes actionnables (le détail complet :
+#   python3 etat_traitement.py)
+python3 etat_traitement.py "$BILANS_DIR" \
+  | grep -E "À TRAITER|^▶|^✅|^⚠|^   " || true
 
 echo ""
 echo "▶ 1/2  Régénération des données depuis : $BILANS_DIR"

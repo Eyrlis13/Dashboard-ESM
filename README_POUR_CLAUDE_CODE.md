@@ -14,6 +14,7 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
 - `bilans/` — dépôt des `.xlsx` bruts (NON versionné, cf. `.gitignore`).
 - `.github/workflows/pages.yml` — déploiement automatique sur GitHub Pages.
 - `README.md` — mode d'emploi rapide.
+- `etat_traitement.py` — liste les dossiers pas encore arbitrés à la main (AT / services).
 - `README_POUR_CLAUDE_CODE.md` — ce fichier (contexte détaillé).
 
 ## Workflow cible
@@ -80,6 +81,17 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
   « Solution / Alternatives », dont la colonne « Niveau d'acquisition » ne doit PAS
   être comptée comme un objectif. Repli sur l'onglet « Plan d'accompagnement » quand
   il n'y a pas d'onglet « Bilan fin de suivi ».
+- **Idempotence** : tout le calcul automatique est refait de zéro à chaque régénération.
+  On redépose donc TOUS les bilans à chaque lot, sans rien « sauter ». Seuls les deux
+  arbitrages qualitatifs (AT, services) sont mémorisés par dossier dans les CSV curés.
+  Un dossier relu sans rien à déclarer porte le statut **`aucune`** : le parser l'ignore
+  comme donnée, mais `etat_traitement.py` y lit la preuve que l'arbitrage a eu lieu.
+  Sans ce marqueur, « relu, rien trouvé » et « jamais relu » étaient indiscernables.
+- **Fragilité à surveiller** : `at_curated.csv`, `services_curated.csv` et
+  `ressentis_manuel.csv` ne sont PAS versionnés (ils dérivent de données nominatives).
+  Ils ont déjà été perdus une fois lors d'une réinitialisation de l'environnement.
+  Les conserver avec le dossier `bilans/`, hors dépôt Git : sans eux, tous les
+  arbitrages sont à refaire, et rien ne garantit des choix identiques.
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.

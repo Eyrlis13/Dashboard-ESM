@@ -21,6 +21,19 @@ peur de chuter (avant/après), le report modal des déplacements, et les verbati
 | `parse_esm.py`   | Lit les `bilans/*.xlsx`, extrait et **anonymise** → `dataset.json` |
 | `verify_anon.py` | Contrôle « zéro fuite de nom » — **bloque** si un nom passe |
 | `index.html`     | Le dashboard, qui charge `dataset.json` |
+| `etat_traitement.py` | Dit quels dossiers restent à arbitrer à la main (AT / services) |
+
+## Redonner tout le dossier à chaque fois : aucun problème
+
+Tout le calcul automatique (âge, GIR, FES-I, ressentis, déplacements, objectifs) est
+**recalculé de zéro** à chaque régénération. On peut donc redéposer l'intégralité des
+bilans à chaque lot : le résultat est identique, il n'y a rien à « ne pas refaire ».
+
+Seuls les deux arbitrages **qualitatifs** demandent une lecture humaine, et ils sont
+mémorisés par dossier dans `at_curated.csv` et `services_curated.csv` (non versionnés).
+`etat_traitement.py` compare les bilans présents à ces deux fichiers et liste ce qui
+reste à faire. Un dossier relu sans aide technique ni service est noté avec le statut
+**`aucune`** : c'est ce qui distingue « relu, rien à déclarer » de « jamais relu ».
 
 ## Mettre à jour avec de nouveaux bilans
 
