@@ -202,7 +202,7 @@ select{font-family:var(--sans)}
       </button>
       <button class="nav-item" data-page="at" onclick="go('at')">
         <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 005.4-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg>
-        Aides techniques
+        Aides &amp; services
       </button>
       <button class="nav-item" data-page="paroles" onclick="go('paroles')">
         <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -443,23 +443,51 @@ select{font-family:var(--sans)}
       </div>
     </div>
 
-    <!-- ══ AIDES TECHNIQUES ══ -->
+    <!-- ══ AIDES & SERVICES ══ -->
     <div id="p-at" class="page">
-      <div class="section-title">Aides techniques</div>
-      <p class="section-sub">Aides techniques à la mobilité travaillées pendant l'accompagnement, classées par le <b>stade le plus avancé atteint</b> (chaque AT est comptée une seule fois) : <b>Mise en place</b> = acquise/adoptée · <b>Essayée</b> = testée mais non acquise · <b>Préconisée</b> = proposée mais non essayée (refus avant l'essai).</p>
-      <div class="grid gauto" id="at-kpis" style="margin:16px 0"></div>
-      <div class="card">
-        <div class="block-title">Par type d'aide technique</div>
-        <div class="chart-box" style="height:300px"><canvas id="at-chart"></canvas></div>
-        <div class="legend" style="margin-top:12px">
-          <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Mise en place (acquise)</span>
-          <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Essayée, non acquise</span>
-          <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Préconisée, non essayée</span>
+      <div class="section-title">Aides &amp; services</div>
+      <p class="section-sub">Ce que l'accompagnement a concrètement mis en mouvement : le <b>matériel</b> (aides techniques) d'un côté, les <b>services et orientations</b> de mobilité de l'autre. Dans les deux cas, chaque solution est comptée <b>une seule fois</b>, au stade le plus avancé qu'elle a atteint.</p>
+
+      <div class="tabs" style="margin:18px 0" role="group" aria-label="Choisir le type de solution">
+        <button class="tab on" data-atv="materiel" onclick="setAtView('materiel')">Aides techniques</button>
+        <button class="tab" data-atv="services" onclick="setAtView('services')">Services &amp; orientations</button>
+      </div>
+
+      <div id="at-view-materiel">
+        <p class="section-sub" style="margin-top:0"><b>Mise en place</b> = acquise/adoptée · <b>Essayée</b> = testée mais non acquise · <b>Préconisée</b> = proposée mais non essayée (refus avant l'essai).</p>
+        <div class="grid gauto" id="at-kpis" style="margin:16px 0"></div>
+        <div class="card">
+          <div class="block-title">Par type d'aide technique</div>
+          <div class="chart-box" style="height:300px"><canvas id="at-chart"></canvas></div>
+          <div class="legend" style="margin-top:12px">
+            <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Mise en place (acquise)</span>
+            <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Essayée, non acquise</span>
+            <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Préconisée, non essayée</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px;overflow-x:auto">
+          <div class="block-title">Détail par bénéficiaire</div>
+          <table class="ress-table" id="at-table"></table>
         </div>
       </div>
-      <div class="card" style="margin-top:16px;overflow-x:auto">
-        <div class="block-title">Détail par bénéficiaire</div>
-        <table class="ress-table" id="at-table"></table>
+
+      <div id="at-view-services" style="display:none">
+        <p class="section-sub" style="margin-top:0">Orientations vers une solution de mobilité (Sortir Plus, transport à la demande, accompagnement bénévole, applications…). <b>Effective</b> = le service est en place et utilisé · <b>Engagée</b> = démarche entamée (dossier déposé, inscription, essai) mais usage pas encore installé · <b>Présentée</b> = information donnée, sans démarche derrière.</p>
+        <div class="grid gauto" id="sv-kpis" style="margin:16px 0"></div>
+        <div class="card">
+          <div class="block-title">Par type de service</div>
+          <div class="chart-box" style="height:300px"><canvas id="sv-chart"></canvas></div>
+          <div class="legend" style="margin-top:12px">
+            <span class="legend-item"><span class="ld" style="background:var(--sage)"></span>Redirection effective</span>
+            <span class="legend-item"><span class="ld" style="background:var(--gold)"></span>Démarche engagée</span>
+            <span class="legend-item"><span class="ld" style="background:var(--light)"></span>Présentée seulement</span>
+          </div>
+          <div class="card-note">Lecture : l'écart entre « présentée » et « effective » mesure la <b>déperdition</b> entre l'information donnée et la solution qui tient dans la durée — c'est là que se joue l'effet réel de l'accompagnement.</div>
+        </div>
+        <div class="card" style="margin-top:16px;overflow-x:auto">
+          <div class="block-title">Détail par bénéficiaire</div>
+          <table class="ress-table" id="sv-table"></table>
+        </div>
       </div>
     </div>
 
@@ -1029,6 +1057,50 @@ function renderAT(rows){
     ? `<tr><th>Bénéf.</th><th>Aides techniques travaillées</th></tr>` + withAT.map(r=>
         `<tr><td><b>N°${r.id}</b></td><td>${r.at.map(a=>`${a.type} ${badge(a.statut)}`).join('<br>')}</td></tr>`).join('')
     : `<tr><td class="na">Aucune aide technique pour cette sélection.</td></tr>`;
+
+  if(AT_VIEW==='services') renderServices(rows);
+}
+
+/* ============ SERVICES & ORIENTATIONS ============ */
+const SV_STATUS=[['effective','Effective',C.sage],['engagee','Engagée',C.gold],['presentee','Présentée',C.light]];
+let AT_VIEW='materiel';
+function setAtView(v){
+  AT_VIEW=v;
+  document.querySelectorAll('#p-at .tab[data-atv]').forEach(b=>b.classList.toggle('on',b.dataset.atv===v));
+  document.getElementById('at-view-materiel').style.display = v==='materiel' ? '' : 'none';
+  document.getElementById('at-view-services').style.display = v==='services' ? '' : 'none';
+  renderActive();
+}
+function renderServices(rows){
+  const all=[]; rows.forEach(r=>(r.services||[]).forEach(s=>all.push({service:s.service,statut:s.statut,id:r.id})));
+  const cnt=k=>all.filter(s=>s.statut===k).length;
+  const orientes=new Set(all.filter(s=>s.statut==='effective').map(s=>s.id)).size;
+  const kpis=[
+    {l:'Redirections effectives', v:cnt('effective'), s:'service en place et utilisé', c:C.sage},
+    {l:'Bénéficiaires orientés', v:`${orientes}/${rows.length}`, s:'≥ 1 service effectif', c:C.sage},
+    {l:'Démarches engagées', v:cnt('engagee'), s:'entamées, usage non installé', c:C.gold},
+    {l:'Solutions présentées', v:cnt('presentee'), s:'information seule', c:C.light},
+  ];
+  document.getElementById('sv-kpis').innerHTML=kpis.map(k=>`
+    <div class="kpi"><div class="kpi-accent" style="background:${k.c}"></div>
+      <div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.s}</div></div>`).join('');
+
+  const types=[...new Set(all.map(s=>s.service))].sort((a,b)=>all.filter(x=>x.service===b).length-all.filter(x=>x.service===a).length);
+  mkChart('sv-chart',{type:'bar',
+    data:{labels:types,datasets:SV_STATUS.map(([k,lab,col])=>({label:lab,
+      data:types.map(t=>all.filter(s=>s.service===t&&s.statut===k).length),backgroundColor:col,stack:'s',borderRadius:3,maxBarThickness:26}))},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:500},
+      plugins:{legend:{display:false},tooltip:{filter:i=>i.raw>0,callbacks:{label:c=>` ${c.dataset.label} : ${c.raw}`}}},
+      scales:{x:{stacked:true,grid:{color:C.cream2},border:{display:false},ticks:{precision:0}},y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:11}}}}}
+  });
+
+  const withSV=rows.filter(r=>(r.services||[]).length);
+  const badge=st=>{const s=SV_STATUS.find(x=>x[0]===st)||['','?',C.light];
+    return `<span style="display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:${s[2]}22;color:${s[2]}">${s[1]}</span>`;};
+  document.getElementById('sv-table').innerHTML = withSV.length
+    ? `<tr><th>Bénéf.</th><th>Services &amp; orientations travaillés</th></tr>` + withSV.map(r=>
+        `<tr><td><b>N°${r.id}</b></td><td>${r.services.map(s=>`${s.service} ${badge(s.statut)}`).join('<br>')}</td></tr>`).join('')
+    : `<tr><td class="na">Aucun service pour cette sélection.</td></tr>`;
 }
 
 /* ============ CHARGEMENT ============ */

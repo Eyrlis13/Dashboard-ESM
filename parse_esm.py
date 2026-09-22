@@ -314,6 +314,23 @@ def load_at_curated():
             if cle and typ and st: at.setdefault(cle,[]).append({'type':typ,'statut':st})
     return at
 
+def load_services_curated():
+    """Redirections vers les services / solutions de mobilité (services_curated.csv,
+    non versionné) : statut 'effective' / 'engagee' / 'presentee', par dossier.
+    La colonne `source` (phrase du bilan qui justifie l'arbitrage) sert uniquement
+    à la relecture humaine : elle N'EST PAS exportée dans dataset.json."""
+    import csv
+    path=os.path.join(HERE,'services_curated.csv')
+    sv={}
+    if not os.path.isfile(path): return sv
+    with open(path,encoding='utf-8-sig') as fh:
+        for row in csv.DictReader(fh):
+            cle=(row.get('cle') or '').strip().upper()
+            nom=(row.get('service') or '').strip()
+            st=(row.get('statut') or '').strip()
+            if cle and nom and st: sv.setdefault(cle,[]).append({'service':nom,'statut':st})
+    return sv
+
 def load_manual_ressentis():
     """Saisies manuelles (ressentis_manuel.csv, non versionné). Priment sur l'auto."""
     import csv
@@ -386,6 +403,7 @@ def build_dataset(bilans_dir=None):
     seq=0
     manual_ress=load_manual_ressentis()
     at_curated=load_at_curated()
+    sv_curated=load_services_curated()
 
     # 1re passe : rassembler TOUS les noms du corpus. Un nom connu dans un bilan
     # (bénéficiaire, proche, professionnel) est masqué dans TOUS les bilans.
@@ -437,6 +455,7 @@ def build_dataset(bilans_dir=None):
         rec['sexe']=infer_sexe(rec)
         rec['deplacements']=get_deplacements(wb)
         rec['at']=at_curated.get(k.upper(), [])
+        rec['services']=sv_curated.get(k.upper(), [])
         # Ressentis (auto) + fusion des saisies manuelles (qui priment)
         rec['ressentis']=get_ressentis(wb)
         mm=manual_ress.get(k.upper())
@@ -511,6 +530,7 @@ def write_flat_csv(data, path):
           + [f'ressenti_{d}_{w}' for d in RESS for w in ('avant','apres')]
           + [f'mode_{m}_{w}' for w in ('avant','apres') for m in MODES]
           + ['at_mises_en_place','at_essayees','at_preconisees','at_detail',
+             'services_effectifs','services_engages','services_presentes','services_detail',
              'verbatim_beneficiaire','verbatim_ergo'])
     with open(path,'w',newline='',encoding='utf-8-sig') as fh:
         w=csv.writer(fh); w.writerow(cols)
@@ -527,7 +547,12 @@ def write_flat_csv(data, path):
             row += [sum(1 for a in at if a['statut']=='mise_en_place'),
                     sum(1 for a in at if a['statut']=='essayee'),
                     sum(1 for a in at if a['statut']=='preconisee'),
-                    ' ; '.join(f"{a['type']} ({a['statut']})" for a in at),
+                    ' ; '.join(f"{a['type']} ({a['statut']})" for a in at)]
+            sv=r.get('services',[])
+            row += [sum(1 for a in sv if a['statut']=='effective'),
+                    sum(1 for a in sv if a['statut']=='engagee'),
+                    sum(1 for a in sv if a['statut']=='presentee'),
+                    ' ; '.join(f"{a['service']} ({a['statut']})" for a in sv),
                     (vb.get('beneficiaire') or '').replace('\n',' '),
                     (vb.get('ergo') or '').replace('\n',' ')]
             w.writerow(row)

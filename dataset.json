@@ -150,6 +150,20 @@
       }
     },
     "at": [],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "effective"
+      },
+      {
+        "service": "Transport à la demande",
+        "statut": "presentee"
+      },
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 10.0,
@@ -276,6 +290,7 @@
         "statut": "essayee"
       }
     ],
+    "services": [],
     "ressentis": {
       "aise": {
         "avant": null,
@@ -403,6 +418,20 @@
       {
         "type": "Canne-siège / chariot",
         "statut": "essayee"
+      }
+    ],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "engagee"
+      },
+      {
+        "service": "Transport à la demande",
+        "statut": "engagee"
+      },
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "presentee"
       }
     ],
     "ressentis": {
@@ -544,6 +573,12 @@
         "statut": "essayee"
       }
     ],
+    "services": [
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "effective"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -647,6 +682,7 @@
         "statut": "mise_en_place"
       }
     ],
+    "services": [],
     "ressentis": {
       "aise": {
         "avant": null,
@@ -858,6 +894,16 @@
         "statut": "preconisee"
       }
     ],
+    "services": [
+      {
+        "service": "Transport à la demande",
+        "statut": "effective"
+      },
+      {
+        "service": "Covoiturage",
+        "statut": "engagee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 4.4,
@@ -1019,6 +1065,20 @@
       {
         "type": "Compteur de pas",
         "statut": "mise_en_place"
+      }
+    ],
+    "services": [
+      {
+        "service": "Transport à la demande",
+        "statut": "presentee"
+      },
+      {
+        "service": "Covoiturage",
+        "statut": "presentee"
+      },
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "presentee"
       }
     ],
     "ressentis": {
@@ -1196,6 +1256,20 @@
         "statut": "essayee"
       }
     ],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "presentee"
+      },
+      {
+        "service": "Transport à la demande",
+        "statut": "presentee"
+      },
+      {
+        "service": "Covoiturage",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -1335,6 +1409,12 @@
       {
         "type": "Déambulateur / rollator",
         "statut": "essayee"
+      }
+    ],
+    "services": [
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "engagee"
       }
     ],
     "ressentis": {
@@ -1500,6 +1580,16 @@
         "statut": "mise_en_place"
       }
     ],
+    "services": [
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "presentee"
+      },
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -1658,6 +1748,16 @@
       {
         "type": "Scooter électrique",
         "statut": "essayee"
+      }
+    ],
+    "services": [
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "effective"
+      },
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "engagee"
       }
     ],
     "ressentis": {
@@ -1819,6 +1919,12 @@
         "statut": "essayee"
       }
     ],
+    "services": [
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "engagee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -1971,6 +2077,12 @@
       }
     },
     "at": [],
+    "services": [
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "effective"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -2091,6 +2203,12 @@
       {
         "type": "Vélo tricycle",
         "statut": "preconisee"
+      }
+    ],
+    "services": [
+      {
+        "service": "Taxi / VTC",
+        "statut": "presentee"
       }
     ],
     "ressentis": {
@@ -2272,6 +2390,16 @@
         "statut": "preconisee"
       }
     ],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "presentee"
+      },
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -2425,6 +2553,20 @@
         "statut": "mise_en_place"
       }
     ],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "engagee"
+      },
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "engagee"
+      },
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -2576,6 +2718,20 @@
         "statut": "essayee"
       }
     ],
+    "services": [
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "effective"
+      },
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "effective"
+      },
+      {
+        "service": "Sortir Plus",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 1.1,
@@ -2672,6 +2828,7 @@
         "statut": "mise_en_place"
       }
     ],
+    "services": [],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -2847,6 +3004,12 @@
       {
         "type": "Canne-siège / chariot",
         "statut": "preconisee"
+      }
+    ],
+    "services": [
+      {
+        "service": "Covoiturage",
+        "statut": "presentee"
       }
     ],
     "ressentis": {
@@ -3033,6 +3196,24 @@
       }
     },
     "at": [],
+    "services": [
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "effective"
+      },
+      {
+        "service": "Application d'aide au déplacement",
+        "statut": "engagee"
+      },
+      {
+        "service": "Transport à la demande",
+        "statut": "engagee"
+      },
+      {
+        "service": "Covoiturage",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -3158,6 +3339,7 @@
       }
     },
     "at": [],
+    "services": [],
     "ressentis": {
       "aise": {
         "avant": 0.0,
@@ -3351,6 +3533,16 @@
         "statut": "preconisee"
       }
     ],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "effective"
+      },
+      {
+        "service": "Transport à la demande",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,
@@ -3501,6 +3693,20 @@
       }
     },
     "at": [],
+    "services": [
+      {
+        "service": "Sortir Plus",
+        "statut": "presentee"
+      },
+      {
+        "service": "Transports en commun (réassurance)",
+        "statut": "presentee"
+      },
+      {
+        "service": "Accompagnement par un tiers / bénévole",
+        "statut": "presentee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 6.7,

@@ -62,6 +62,12 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
 - GUERAULT : réintégré (juillet 2026). Son FES-I après n'a pas été mesuré → considéré
   identique à l'avant (stable, Δ0), sur décision métier. Un garde-fou rejette désormais
   tout FES-I ≤ 0 (non rempli).
+- **Les redirections vers un service de mobilité sont comptées à part des AT**
+  (`services_curated.csv`, non versionné) avec leur propre entonnoir
+  *présentée → engagée → effective*, repris du vocabulaire des bilans
+  (*Découverte → En cours → Acquis*). Règles figées dans `REGLES_SERVICES.md`.
+  Motif : une AT acquise et une orientation qui aboutit sont deux résultats distincts
+  de l'ESM ; les mélanger rendrait les deux compteurs illisibles.
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.

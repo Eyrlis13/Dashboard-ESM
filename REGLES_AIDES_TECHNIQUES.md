@@ -51,7 +51,8 @@ Ajouter au besoin, en restant cohérent.
 
 > **Ne comptent pas comme AT** : les *services* de mobilité (Sortir Plus, AIMV,
 > taxis, service civique…). Ils relèvent des solutions d'accompagnement, pas du
-> matériel — sinon les compteurs d'AT deviennent ininterprétables.
+> matériel — sinon les compteurs d'AT deviennent ininterprétables. Ils sont comptés
+> à part, avec leur propre entonnoir : voir **`REGLES_SERVICES.md`**.
 
 ## Procédure à chaque nouveau lot de bilans
 

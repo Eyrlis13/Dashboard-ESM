@@ -20,3 +20,4 @@ venv/
 
 # Classification curée des aides techniques (référencée par nom de dossier)
 at_curated.csv
+services_curated.csv
