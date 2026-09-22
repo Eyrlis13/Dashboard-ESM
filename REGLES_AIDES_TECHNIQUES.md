@@ -46,7 +46,12 @@ compte en **« essayée »**.
 
 Types normalisés rencontrés : Déambulateur / rollator · Canne · Canne-siège / chariot
 · Scooter électrique · Vélo tricycle · Bâtons de marche · Compteur de pas ·
-Aide aux transferts (coussin / poignée). Ajouter au besoin, en restant cohérent.
+Aide aux transferts (coussin / poignée) · Fauteuil roulant électrique.
+Ajouter au besoin, en restant cohérent.
+
+> **Ne comptent pas comme AT** : les *services* de mobilité (Sortir Plus, AIMV,
+> taxis, service civique…). Ils relèvent des solutions d'accompagnement, pas du
+> matériel — sinon les compteurs d'AT deviennent ininterprétables.
 
 ## Procédure à chaque nouveau lot de bilans
 
