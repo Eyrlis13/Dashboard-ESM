@@ -266,7 +266,16 @@
         "pairs": []
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "mise_en_place"
+      },
+      {
+        "type": "Aide aux transferts (coussin / poignée)",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": null,
@@ -390,7 +399,12 @@
         ]
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Canne-siège / chariot",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -627,7 +641,12 @@
         ]
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "mise_en_place"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": null,
@@ -1312,7 +1331,12 @@
         ]
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": null,
@@ -1789,7 +1813,12 @@
         ]
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Canne",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 3.3,
@@ -2541,7 +2570,12 @@
         ]
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Déambulateur / rollator",
+        "statut": "essayee"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 1.1,
@@ -2632,7 +2666,12 @@
         "pairs": []
       }
     },
-    "at": [],
+    "at": [
+      {
+        "type": "Fauteuil roulant électrique",
+        "statut": "mise_en_place"
+      }
+    ],
     "ressentis": {
       "aise": {
         "avant": 0.0,
