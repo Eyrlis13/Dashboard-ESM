@@ -270,14 +270,58 @@
       },
       "apres": {
         "modes": {
-          "auto": 0,
+          "auto": 3,
           "marche": 0,
-          "accompagne": 0,
-          "alternatif": 0,
-          "domicile": 0
+          "accompagne": 5,
+          "alternatif": 1,
+          "domicile": 1
         },
-        "sorties": {},
-        "pairs": []
+        "sorties": {
+          "courses": 3,
+          "sante": 3,
+          "loisirs": 1,
+          "social": 1,
+          "autres": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "domicile"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "alternatif"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "autres",
+            "auto"
+          ]
+        ],
+        "reporte_car_inchange": true
       }
     },
     "at": [
@@ -2190,13 +2234,57 @@
       "apres": {
         "modes": {
           "auto": 0,
-          "marche": 0,
-          "accompagne": 0,
-          "alternatif": 0,
+          "marche": 5,
+          "accompagne": 2,
+          "alternatif": 2,
           "domicile": 0
         },
-        "sorties": {},
-        "pairs": []
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 1,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "alternatif"
+          ],
+          [
+            "sante",
+            "marche"
+          ],
+          [
+            "sante",
+            "accompagne"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "alternatif"
+          ],
+          [
+            "demarches",
+            "marche"
+          ]
+        ],
+        "reporte_car_inchange": true
       }
     },
     "at": [
@@ -2814,12 +2902,30 @@
         "modes": {
           "auto": 0,
           "marche": 0,
-          "accompagne": 0,
+          "accompagne": 2,
           "alternatif": 0,
-          "domicile": 0
+          "domicile": 1
         },
-        "sorties": {},
-        "pairs": []
+        "sorties": {
+          "courses": 1,
+          "loisirs": 1,
+          "social": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "accompagne"
+          ],
+          [
+            "loisirs",
+            "accompagne"
+          ],
+          [
+            "social",
+            "domicile"
+          ]
+        ],
+        "reporte_car_inchange": true
       }
     },
     "at": [
@@ -3328,14 +3434,66 @@
       },
       "apres": {
         "modes": {
-          "auto": 0,
-          "marche": 0,
+          "auto": 8,
+          "marche": 3,
           "accompagne": 0,
           "alternatif": 0,
           "domicile": 0
         },
-        "sorties": {},
-        "pairs": []
+        "sorties": {
+          "courses": 4,
+          "sante": 2,
+          "loisirs": 3,
+          "social": 1,
+          "demarches": 1
+        },
+        "pairs": [
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "courses",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "sante",
+            "auto"
+          ],
+          [
+            "courses",
+            "marche"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "auto"
+          ],
+          [
+            "loisirs",
+            "marche"
+          ],
+          [
+            "social",
+            "auto"
+          ],
+          [
+            "demarches",
+            "auto"
+          ]
+        ],
+        "reporte_car_inchange": true
       }
     },
     "at": [],

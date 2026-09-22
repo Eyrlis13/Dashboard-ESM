@@ -403,7 +403,7 @@ select{font-family:var(--sans)}
         <div class="card" style="overflow-x:auto">
           <div class="block-title">Analyse par bénéficiaire — évolution de la conduite en solo</div>
           <table class="ress-table" id="depl-table"></table>
-          <div class="card-note">« Trajets » = motifs de sortie renseignés. « Conduite solo » = part de ces trajets réalisés seul·e au volant. « Modes alt. » = nombre de trajets en transports/alternatives après.</div>
+          <div class="card-note">« Trajets » = motifs de sortie renseignés. « Conduite solo » = part de ces trajets réalisés seul·e au volant. « Modes alt. » = nombre de trajets en transports/alternatives après. Quand la grille « après » n'a pas été re-saisie parce que l'ergothérapeute a noté que rien n'avait changé, la grille « avant » est reportée : le bénéficiaire compte alors comme <b>stable</b>, et non comme non renseigné.</div>
         </div>
       </div>
     </div>
@@ -866,7 +866,8 @@ function renderDeplOverview(rows){
     {l:'Conduite en solo', v:`${soloAvPct}% → ${soloApPct}%`, s:`part des trajets · ${sgn(soloApPct-soloAvPct)}`, c:C.rose},
     {l:'Modes alternatifs', v:`${altAvPct}% → ${altApPct}%`, s:`hors marche · ${sgn(altApPct-altAvPct)}`, c:C.sage},
     {l:'Marche', v:`${marAvPct}% → ${marApPct}%`, s:`1er mode piéton · ${sgn(marApPct-marAvPct)}`, c:C.sageL},
-    {l:'Réduisent la conduite solo', v:`${reduced}/${eligible}`, s:'bénéficiaires (trajet par trajet)', c:C.gold},
+    {l:'Réduisent la conduite solo', v:`${reduced}/${eligible}`, s: eligible===rows.length ? 'bénéficiaires · trajet par trajet'
+         : `sur ${eligible} grilles comparables · ${rows.length-eligible} après non renseigné(s)`, c:C.gold},
   ];
   document.getElementById('depl-kpis').innerHTML=kpis.map(k=>`
     <div class="kpi"><div class="kpi-accent" style="background:${k.c}"></div>

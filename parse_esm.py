@@ -385,7 +385,36 @@ def get_deplacements(wb):
                     sorties[tcat]=sorties.get(tcat,0)+1
                     pairs.append([tcat,mcats[0]])       # (type de sortie, mode principal)
         out[when]={'modes':modes,'sorties':sorties,'pairs':pairs}
+
+    # Grille « après » vide + note explicite « identique / pas de changement » :
+    # l'ergo n'a pas re-saisi la grille parce qu'il n'y avait rien à changer.
+    # On reporte donc l'avant, comme pour le FES-I de GUERAULT. Sans ça, ces
+    # bénéficiaires STABLES sortaient du dénominateur et gonflaient artificiellement
+    # le taux de « réduction de la conduite en solo ».
+    if not out['apres']['pairs'] and out['avant']['pairs'] and _depl_inchange(wb):
+        out['apres']={'modes':dict(out['avant']['modes']),
+                      'sorties':dict(out['avant']['sorties']),
+                      'pairs':[list(p) for p in out['avant']['pairs']],
+                      'reporte_car_inchange':True}
     return out
+
+# Formulations utilisées par les ergos pour dire « rien n'a bougé » (notes de la grille).
+DEPL_INCHANGE=['identique','meme chose','pas de changement','pas evolue',
+               'sans changement','aucun changement','inchange','pas bouge']
+
+def _depl_inchange(wb):
+    """True si une note des grilles de déplacements dit explicitement que les modes
+    n'ont pas changé entre l'avant et l'après (la note peut être sur l'une ou l'autre)."""
+    for when in ('avant','apres'):
+        ws=find_sheet(wb,'modes',when)
+        if ws is None: continue
+        for r in range(20,26):
+            v=ws.cell(row=r,column=2).value
+            # apostrophes retirées : « n'ont pas évolué » doit matcher « pas evolue »
+            nv=re.sub(r"['’]", ' ', norm(v)) if isinstance(v,str) else ''
+            if nv and any(k in nv for k in DEPL_INCHANGE):
+                return True
+    return False
 
 def build_dataset(bilans_dir=None):
     bilans_dir = bilans_dir or BILANS_DIR

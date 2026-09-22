@@ -68,6 +68,11 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
   (*Découverte → En cours → Acquis*). Règles figées dans `REGLES_SERVICES.md`.
   Motif : une AT acquise et une orientation qui aboutit sont deux résultats distincts
   de l'ESM ; les mélanger rendrait les deux compteurs illisibles.
+- **Grille « Modes de déplacements après » vide + note « identique / pas de changement »**
+  → on reporte la grille « avant » (champ `reporte_car_inchange`). L'ergo n'a pas re-saisi
+  parce qu'il n'y avait rien à changer : le bénéficiaire est **stable**, pas « non renseigné ».
+  Sans ce report, ces dossiers sortaient du dénominateur et gonflaient le taux de réduction
+  de la conduite en solo (4/19 au lieu de 4/23). Même logique que le FES-I de GUERAULT.
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.
