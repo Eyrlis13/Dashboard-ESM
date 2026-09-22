@@ -73,6 +73,13 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
   parce qu'il n'y avait rien à changer : le bénéficiaire est **stable**, pas « non renseigné ».
   Sans ce report, ces dossiers sortaient du dénominateur et gonflaient le taux de réduction
   de la conduite en solo (4/19 au lieu de 4/23). Même logique que le FES-I de GUERAULT.
+- **Objectifs** : c'est la colonne « atteinte » (J) qui fait foi, pas le libellé.
+  Certains bilans écrivent l'objectif sans le mot « Objectif » (« Essai du déambulateur »),
+  et cotent tantôt « Atteint/Partiellement/Non atteint », tantôt « Oui/Non ». Les deux
+  sont acceptés. Lecture bornée aux lignes 4-8 : en dessous commencent les blocs
+  « Solution / Alternatives », dont la colonne « Niveau d'acquisition » ne doit PAS
+  être comptée comme un objectif. Repli sur l'onglet « Plan d'accompagnement » quand
+  il n'y a pas d'onglet « Bilan fin de suivi ».
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.

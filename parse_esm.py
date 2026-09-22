@@ -156,19 +156,43 @@ def count_flags(modes):
     alt=sum(1 for m in modes if any(x in m for x in ALTERNATIVES))
     return seule,alt
 
+def _obj_status(att):
+    """Traduit la colonne « atteinte des objectifs ». Les bilans cotent tantôt
+    « Atteint / Partiellement atteint / Non atteint », tantôt simplement « Oui / Non »."""
+    na=norm(att)
+    if not na or 'atteinte des objectifs' in na: return None   # ligne d'en-tête
+    if 'partiel' in na: return 'partiel'
+    if 'non' in na:     return 'non'
+    if 'atteint' in na or na in ('oui','oui.','o'): return 'atteint'
+    return None
+
+def _objectives_from_sheet(ws):
+    """Lit le bloc objectifs d'une feuille : libellé en B, atteinte en J.
+    On ne s'appuie PAS sur le mot « Objectif » dans le libellé : certains bilans
+    écrivent directement l'objectif (« Essai du déambulateur »). C'est la colonne J
+    qui fait foi. Bornes 4-8 : au-delà commencent les blocs « Solution / Alternatives »,
+    dont la colonne J (« Niveau d'acquisition ») ne doit surtout pas être comptée."""
+    res={'total':0,'atteint':0,'partiel':0,'non':0}
+    for r in range(4,9):
+        obj=ws.cell(row=r,column=2).value
+        if not (isinstance(obj,str) and len(norm(obj))>8): continue
+        if norm(obj) in ('objectifs','objectif'): continue           # en-tête
+        st=_obj_status(ws.cell(row=r,column=10).value)
+        if st: res[st]+=1; res['total']+=1
+    return res
+
 def get_objectives(wb):
     ws=find_sheet(wb,'bilan','fin')
-    res={'total':0,'atteint':0,'partiel':0,'non':0}
-    if ws is None: return res
-    for row in ws.iter_rows(min_row=4,max_row=8):
-        obj=ws[f'B{row[0].row}'].value
-        att=ws[f'J{row[0].row}'].value
-        if obj and 'objectif' in norm(obj) and len(norm(obj))>norm('objectif 9 :').__len__():
-            na=norm(att) if att else ''
-            if 'partiel' in na: res['partiel']+=1; res['total']+=1
-            elif 'non' in na: res['non']+=1; res['total']+=1
-            elif 'atteint' in na: res['atteint']+=1; res['total']+=1
-    return res
+    if ws is not None:
+        res=_objectives_from_sheet(ws)
+        if res['total']: return res
+    # Repli : quelques bilans n'ont pas d'onglet « Bilan fin de suivi ».
+    # Les objectifs et leur atteinte vivent alors dans le plan d'accompagnement.
+    for name in wb.sheetnames:
+        if 'plan' in norm(name):
+            res=_objectives_from_sheet(wb[name])
+            if res['total']: return res
+    return {'total':0,'atteint':0,'partiel':0,'non':0}
 
 def get_verbatims(wb):
     out={'beneficiaire':None,'ergo':None}

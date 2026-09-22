@@ -1164,9 +1164,9 @@
     "alternatives_avant": 2,
     "alternatives_apres": 5,
     "objectifs": {
-      "total": 2,
+      "total": 3,
       "atteint": 1,
-      "partiel": 1,
+      "partiel": 2,
       "non": 0
     },
     "verbatims": {
@@ -1353,8 +1353,8 @@
     "alternatives_avant": 1,
     "alternatives_apres": 1,
     "objectifs": {
-      "total": 0,
-      "atteint": 0,
+      "total": 4,
+      "atteint": 4,
       "partiel": 0,
       "non": 0
     },
@@ -1673,8 +1673,8 @@
     "alternatives_avant": 5,
     "alternatives_apres": 6,
     "objectifs": {
-      "total": 0,
-      "atteint": 0,
+      "total": 4,
+      "atteint": 4,
       "partiel": 0,
       "non": 0
     },
@@ -2694,8 +2694,8 @@
     "alternatives_avant": 2,
     "alternatives_apres": 7,
     "objectifs": {
-      "total": 1,
-      "atteint": 0,
+      "total": 4,
+      "atteint": 3,
       "partiel": 0,
       "non": 1
     },
