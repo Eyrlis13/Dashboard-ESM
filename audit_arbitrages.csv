@@ -1,0 +1,77 @@
+﻿id_anonyme,domaine,libelle,statut,phrase_source
+1,Aide technique,(aucune),aucune,
+13,Aide technique,(aucune),aucune,
+20,Aide technique,(aucune),aucune,
+21,Aide technique,(aucune),aucune,
+23,Aide technique,(aucune),aucune,
+2,Aide technique,Aide aux transferts (coussin / poignée),essayee,Plan d'accompagnement — « Essais AT voiture réalisés et essais concluants [...] Mme va acquérir le matériel » (achat non confirmé au bilan de fin)
+8,Aide technique,Aide aux transferts (coussin / poignée),essayee,
+19,Aide technique,Bâtons de marche,mise_en_place,
+4,Aide technique,Canne,mise_en_place,
+10,Aide technique,Canne,mise_en_place,
+12,Aide technique,Canne,essayee,Bilan fin — « a pu faire l'essai de la canne pendant un temps prolongé car laissée en prêt [...] utilisation uniquement en intérieur car n'ose pas être vue dans la rue avec » (non acquise)
+3,Aide technique,Canne-siège / chariot,essayee,Plan d'accompagnement — « Essai de la canne siège mais non concluant »
+19,Aide technique,Canne-siège / chariot,preconisee,
+7,Aide technique,Compteur de pas,mise_en_place,
+2,Aide technique,Déambulateur / rollator,mise_en_place,Plan d'accompagnement — « nous avons été chez le prestataire pour choisir le modèle de rollator. Achat réalisé » ; bilan fin — « satisfaite de l'acquisition du rollator »
+4,Aide technique,Déambulateur / rollator,essayee,
+5,Aide technique,Déambulateur / rollator,mise_en_place,Bilan fin — « Est autonome avec le rollator et se sent en sécurité à l'extérieur » ; le rollator figure dans les AT après et pas avant
+6,Aide technique,Déambulateur / rollator,essayee,
+7,Aide technique,Déambulateur / rollator,mise_en_place,
+9,Aide technique,Déambulateur / rollator,essayee,Plan d'accompagnement — « en cours d'acquisition » ; ressentis après — « non acquisition du rollator pour le moment »
+11,Aide technique,Déambulateur / rollator,mise_en_place,"Bilan fin, objectif « Essai du déambulateur » = Atteint — « va le prendre mais l'utiliser au moment nécessaire »"
+16,Aide technique,Déambulateur / rollator,mise_en_place,
+17,Aide technique,Déambulateur / rollator,essayee,"Plan d'accompagnement — « essai dans le domicile, mais refus de l'essayer à l'extérieur, elle ne se sent pas prête » ; bilan fin — « Refus du déambulateur »"
+22,Aide technique,Déambulateur / rollator,preconisee,
+18,Aide technique,Fauteuil roulant électrique,mise_en_place,Bilan fin — « Solution 1 : fauteuil électrique » = Acquis
+8,Aide technique,Scooter électrique,essayee,
+11,Aide technique,Scooter électrique,essayee,"Bilan fin, « Essai du scooter » = Atteint — « est en réflexion pour en prendre un mais doit se renseigner pour le compteur » (achat non réalisé)"
+15,Aide technique,Scooter électrique,preconisee,
+6,Aide technique,Vélo tricycle,preconisee,Plan d'accompagnement — « refus essai tricycle » (confirmé au bilan de fin)
+14,Aide technique,Vélo tricycle,preconisee,Bilan fin — « elle n'a pas souhaité tester le tricycle » (aucun essai)
+22,Aide technique,Vélo tricycle,preconisee,Bilan fin — « A vu vidéo vélo tricycle mais n'est pas prête car le deuil d'utiliser son propre vélo n'est encore acté » (aucun essai)
+2,Service,(aucun),aucune,relu : aucune orientation vers un service dans le bilan
+5,Service,(aucun),aucune,relu : aucune orientation vers un service dans le bilan
+18,Service,(aucun),aucune,relu : aucune orientation vers un service dans le bilan
+21,Service,(aucun),aucune,relu : aucune orientation vers un service dans le bilan
+3,Service,Accompagnement par un tiers / bénévole,presentee,« Solution 2 : P'Roche de vous » = Découverte
+4,Service,Accompagnement par un tiers / bénévole,effective,« Acquis » (asso Valentin Haüy) — « C'est une réussite… je vais certainement les rappeler pour la suite »
+10,Service,Accompagnement par un tiers / bénévole,presentee,"« Transport accompagné par un tiers (SAD, service résidence, Uniscités) » — présenté"
+15,Service,Accompagnement par un tiers / bénévole,presentee,"idem — SAD présenté, non retenu"
+16,Service,Accompagnement par un tiers / bénévole,presentee,« unicité (mais ne convient pas) »
+17,Service,Accompagnement par un tiers / bénévole,effective,« Le dispositif Unis-Cité (service civique) a été mis en place. Deux jeunes vont intervenir à partir de novembre »
+23,Service,Accompagnement par un tiers / bénévole,presentee,« Réseau de transport solidaire » présenté
+7,Service,Application d'aide au déplacement,presentee,"« découverte Acces +, sncf connect » — information seule"
+11,Service,Application d'aide au déplacement,engagee,"« dépôt dossier mon guide fil blanc » — dossier déposé, usage non constaté"
+12,Service,Application d'aide au déplacement,engagee,« Solution 1 : City Mapper » = En cours ; apprentissage + mise en situation ; « l'application l'a rassurée »
+13,Service,Application d'aide au déplacement,effective,"Objectif 3 Atteint — « Mis en place sur le téléphone de l'époux, de madame et de leur fille » (géolocalisation)"
+16,Service,Application d'aide au déplacement,engagee,Objectif 2 Partiellement atteint — « s'est inscrite au dispositif mais pas encore essayé » (Mon Guide Fil Bleu)
+20,Service,Application d'aide au déplacement,engagee,« application mon guide fil bleu » retenue au bilan de fin
+6,Service,Covoiturage,effective,"« refus essai tricycle » (le refus porte sur le tricycle, pas sur le covoiturage — confirmé par le Plan d'accompagnement) ; grille Modes après : le trajet « Conseil municipal » passe de « Conduit seul » à « Conduite en présence d'un proche / Covoiturage »"
+7,Service,Covoiturage,presentee,"« découverte Acces +, covoiturage, sncf connect »"
+8,Service,Covoiturage,presentee,idem — BlaBlaCar présenté
+19,Service,Covoiturage,presentee,"« Blablacar, covoiturage » — solutions présentées"
+20,Service,Covoiturage,presentee,« covoiturage » présenté en séance
+1,Service,Sortir Plus,effective,"Objectif 1 Atteint — « Arrêt voiture acté, remplacer par sortir plus pour RDV médecin traitant »"
+3,Service,Sortir Plus,engagee,"« J'ai contacté SORTIR PLUS pour créer un dossier » — dossier créé, 1er essai échoué puis refus"
+8,Service,Sortir Plus,presentee,"« Découverte solutions alternatives (transport à la demande, Blablacar, sortir plus, APA) »"
+15,Service,Sortir Plus,presentee,"« Solutions alternatives (sortirplus, SAD…) » ; « ne souhaite pas utiliser de nouveaux modes de déplacement »"
+16,Service,Sortir Plus,engagee,« forfait sortir + pour du transport à la demande » ; bilan fin : « n'a pas encore utilisé sortir + »
+17,Service,Sortir Plus,presentee,"« n'a pas pu être mobilisé, Mme n'ayant pas atteint l'âge requis de 75 ans » — orientation impossible"
+22,Service,Sortir Plus,effective,« Solution 1 : Sortir Plus » = Acquis
+23,Service,Sortir Plus,presentee,« Solution 1 : Sortir Plus » = Découverte
+14,Service,Taxi / VTC,presentee,« recours au taxi comme solution envisageable dans le futur »
+1,Service,Transport à la demande,presentee,"« Transport à la demande, sortir plus, SAD » — solutions présentées en séance"
+3,Service,Transport à la demande,engagee,« AIMV transports à la demande avec financement sortir + » = Essai ; démarches jugées trop compliquées
+6,Service,Transport à la demande,effective,« inscription service transport à la demande réseau agglo car CMI » ; bilan fin : « Service transport à la demande validé »
+7,Service,Transport à la demande,presentee,« travail d'information sur les alternatives (service Fil blanc) … partiellement adaptées »
+8,Service,Transport à la demande,presentee,idem — séance découverte avec le conseiller mobilité
+20,Service,Transport à la demande,engagee,"« resa bus » retenu au bilan de fin, usage non constaté"
+22,Service,Transport à la demande,presentee,"« Solutions sur Mer, réseau REMI »"
+1,Service,Transports en commun (réassurance),presentee,« pas complètement fermé au bus et voir si trajet possible en bus » — non essayé
+9,Service,Transports en commun (réassurance),engagee,« a apprécié de faire le trajet en bus » — mise en situation réalisée ; pas d'onglet Bilan de fin — À CONFIRMER
+10,Service,Transports en commun (réassurance),presentee,Objectif « essai trajet en bus » Non atteint — « Refus essai » ; train : « connaît le dispositif mais ne se sent pas apte »
+11,Service,Transports en commun (réassurance),effective,« Réassurance sur le tram : atteint » ; verbatim « réassurance dans le tram mais aussi pour la voiture »
+17,Service,Transports en commun (réassurance),effective,« Elle utilise de nouveau seule les transports en commun (bus et tramway) »
+20,Service,Transports en commun (réassurance),effective,« accompagnement dans un trajet de bus » ; verbatim « je me suis rendue compte que j'étais capable de prendre le bus »
+23,Service,Transports en commun (réassurance),presentee,« Solution 2 : Transport en commun » = Découverte ; « Refus essai réseau bus »

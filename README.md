@@ -22,6 +22,16 @@ peur de chuter (avant/après), le report modal des déplacements, et les verbati
 | `verify_anon.py` | Contrôle « zéro fuite de nom » — **bloque** si un nom passe |
 | `index.html`     | Le dashboard, qui charge `dataset.json` |
 | `etat_traitement.py` | Dit quels dossiers restent à arbitrer à la main (AT / services) |
+| `journal_audit.py` | Produit la piste d'audit et vérifie dataset == arbitrages |
+| `test_coherence.py` | Non-régression : alerte si un agrégat publié a bougé |
+
+## Vérifier / auditer les chiffres
+
+**`AUDIT.md`** explique comment remonter n'importe quel chiffre du dashboard jusqu'à sa
+source, et liste les limites connues. Les règles d'arbitrage sont figées dans
+`REGLES_RESSENTIS.md`, `REGLES_AIDES_TECHNIQUES.md` et `REGLES_SERVICES.md`.
+`audit_arbitrages.csv` donne, pour chaque aide technique et chaque service compté, le
+statut retenu **et la phrase du bilan qui le justifie**.
 
 ## Redonner tout le dossier à chaque fois : aucun problème
 
@@ -39,15 +49,24 @@ reste à faire. Un dossier relu sans aide technique ni service est noté avec le
 
 1. Déposer les nouveaux bilans terminés dans le dossier `bilans/`
    (fichiers `Bilan_ESM_Ergo_*.xlsx`).
-2. Lancer, depuis la racine du projet :
+2. Restaurer `at_curated.csv` et `services_curated.csv` depuis la sauvegarde conservée
+   avec les bilans (ils ne sont pas versionnés — cf. `AUDIT.md`).
+3. Vérifier ce qui reste à arbitrer à la main :
+   ```bash
+   python3 etat_traitement.py
+   ```
+4. Lancer, depuis la racine du projet :
    ```bash
    ./maj.sh
    ```
+   Il régénère, contrôle l'anonymisation, produit la piste d'audit et vérifie la
+   non-régression des agrégats. **Si une étape échoue, rien n'est publié.**
    Le script régénère `dataset.json`, vérifie l'absence de fuite, et **ne publie
    rien** si un nom a échappé à l'anonymisation.
-3. Publier :
+5. Publier :
    ```bash
-   git add dataset.json && git commit -m "Mise à jour des données ESM" && git push
+   git add dataset.json resultats_anonymises.csv audit_arbitrages.csv
+   git commit -m "Mise à jour des données ESM" && git push
    ```
 
 ## Prévisualiser en local

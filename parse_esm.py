@@ -323,6 +323,26 @@ def get_ressentis(wb):
         for d in RESS_ITEMKW: out[d][when]=vals.get(d)
     return out
 
+def exiger_fichiers_arbitrage(bilans_dir):
+    """Refuse de produire un dataset si les fichiers d'arbitrage manquent alors que des
+    bilans sont présents. Sans ce garde-fou, l'absence de at_curated.csv produisait
+    silencieusement « 0 aide technique » — une erreur invisible dans le dashboard.
+    Contournement explicite et assumé : ESM_SANS_ARBITRAGE=1."""
+    if not glob.glob(os.path.join(bilans_dir,'Bilan_ESM_Ergo_*.xlsx')): return
+    if os.environ.get('ESM_SANS_ARBITRAGE')=='1':
+        print("⚠  ESM_SANS_ARBITRAGE=1 : aides techniques et services seront VIDES.")
+        return
+    absents=[f for f in ('at_curated.csv','services_curated.csv')
+             if not os.path.isfile(os.path.join(HERE,f))]
+    if absents:
+        print("⛔  Fichier(s) d'arbitrage manquant(s) : " + ', '.join(absents))
+        print("    Ils ne sont pas versionnés (ils contiennent des noms de dossiers).")
+        print("    Sans eux, les compteurs d'aides techniques et de services seraient")
+        print("    FAUX (zéro partout) sans que rien ne le signale.")
+        print("    -> les restaurer depuis la sauvegarde conservée avec le dossier bilans/,")
+        print("       ou, en pleine connaissance de cause : ESM_SANS_ARBITRAGE=1 python3 parse_esm.py")
+        sys.exit(3)
+
 def load_at_curated():
     """Classification curée des aides techniques (at_curated.csv, non versionné) :
     statut 'mise_en_place' / 'essayee' / 'preconisee', par dossier."""
@@ -614,6 +634,7 @@ def write_flat_csv(data, path):
                     (vb.get('ergo') or '').replace('\n',' ')]
             w.writerow(row)
 
+
 if __name__=='__main__':
     # Usage : python3 parse_esm.py [dossier_bilans] [sortie.json]
     bilans_dir = sys.argv[1] if len(sys.argv) > 1 else BILANS_DIR
@@ -624,6 +645,7 @@ if __name__=='__main__':
         print(f"   Crée-le et dépose-y les fichiers Bilan_ESM_Ergo_*.xlsx, puis relance.")
         sys.exit(2)
 
+    exiger_fichiers_arbitrage(bilans_dir)
     data=build_dataset(bilans_dir)
     if not data:
         print(f"⚠  Aucun fichier Bilan_ESM_Ergo_*.xlsx trouvé dans : {bilans_dir}")
@@ -644,6 +666,7 @@ if __name__=='__main__':
     csv_path=os.path.join(HERE,'resultats_anonymises.csv')   # toujours dans le dépôt
     write_flat_csv(data, csv_path)
     print(f"-> {csv_path} écrit (export plat, ouvrable dans Excel)")
+
 
 
 # ---- Passe d'anonymisation du TEXTE LIBRE (verbatims / synthèses) ----

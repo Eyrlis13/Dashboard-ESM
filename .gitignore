@@ -18,6 +18,8 @@ __pycache__/
 .venv/
 venv/
 
-# Classification curée des aides techniques (référencée par nom de dossier)
+# Arbitrages qualitatifs curés (référencés par NOM de dossier -> jamais versionnés).
+# Leur contenu est publié sous forme anonymisée dans audit_arbitrages.csv, qui EST
+# versionné. Sauvegarder ces deux fichiers avec le dossier bilans/ — cf. AUDIT.md.
 at_curated.csv
 services_curated.csv

@@ -15,6 +15,11 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
 - `.github/workflows/pages.yml` — déploiement automatique sur GitHub Pages.
 - `README.md` — mode d'emploi rapide.
 - `etat_traitement.py` — liste les dossiers pas encore arbitrés à la main (AT / services).
+- `journal_audit.py` — piste d'audit anonymisée + contrôle dataset == arbitrages.
+- `test_coherence.py` — non-régression des agrégats publiés.
+- `audit_arbitrages.csv` — journal d'arbitrage anonymisé (VERSIONNÉ, publiable).
+- `CLAUDE.md` — procédure à lire avant toute intervention.
+- `AUDIT.md` — comment remonter un chiffre jusqu'à sa source ; limites connues.
 - `README_POUR_CLAUDE_CODE.md` — ce fichier (contexte détaillé).
 
 ## Workflow cible
@@ -92,6 +97,14 @@ Mobilité) en un dashboard web anonymisé, différencié par département.
   Ils ont déjà été perdus une fois lors d'une réinitialisation de l'environnement.
   Les conserver avec le dossier `bilans/`, hors dépôt Git : sans eux, tous les
   arbitrages sont à refaire, et rien ne garantit des choix identiques.
+- **Reproductibilité** : trois contrôles bloquants encadrent toute publication —
+  anonymisation (`verify_anon.py`), cohérence dataset/arbitrages (`journal_audit.py`),
+  non-régression des agrégats (`test_coherence.py`). Un garde-fou dans `parse_esm.py`
+  refuse de produire un dataset si les fichiers d'arbitrage manquent, au lieu d'afficher
+  silencieusement « zéro aide technique ».
+- **Les ressentis n'ont JAMAIS été saisis à la main.** `ressentis_manuel.csv` est un
+  mécanisme de secours prévu mais inutilisé : toutes les valeurs publiées viennent de
+  l'extraction automatique. Ne pas laisser croire le contraire dans la documentation.
 - Les 4 échelles de ressentis (aise/satisfaction/crainte/sérénité) NE sont pas
   exploitables automatiquement dans les fichiers actuels → volontairement mises
   de côté pour l'instant. Ne pas tenter de les inventer.

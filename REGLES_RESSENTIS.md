@@ -53,8 +53,13 @@ ou juste en dessous**. La bonne ligne de réponse est identifiée par son vocabu
 - L'extraction automatique (`parse_esm.py → get_ressentis`) est **best-effort** :
   elle gère les 3 formats ci-dessus mais tous les fichiers ne sont pas lisibles
   (cases non marquées, onglets vides).
-- Les valeurs non lisibles sont complétées à la main via `ressentis_manuel.csv`
-  (non versionné — voir `.gitignore`), fusionné par le parser. Le manuel **prime**
-  sur l'automatique.
+- Un mécanisme de reprise manuelle existe (`ressentis_manuel.csv`, non versionné,
+  fusionné par le parser, le manuel primant sur l'automatique). **À ce jour il n'a
+  jamais été utilisé : aucune valeur de ressenti n'a été saisie à la main.** Toutes
+  les valeurs publiées proviennent de l'extraction automatique, et sont donc
+  vérifiables directement contre les onglets « Ressentis » des bilans.
+- Les cases non marquées restent à `null`. Selon la dimension, cela laisse **19 à 21
+  paires complètes sur 23** : les moyennes d'évolution ne portent donc pas sur 23
+  bénéficiaires, et le dénominateur doit être affiché avec le résultat.
 
 _Dernière mise à jour : juillet 2026._

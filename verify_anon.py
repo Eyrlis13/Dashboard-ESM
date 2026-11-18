@@ -80,9 +80,23 @@ def load_source_names(bilans_dir):
     return {n for n in names if len(n) >= 3}
 
 
+def charger_journal_audit():
+    """audit_arbitrages.csv est publié et contient des PHRASES EXTRAITES DES BILANS :
+    il doit passer le même contrôle de fuite que dataset.json."""
+    import csv
+    path = os.path.join(HERE, 'audit_arbitrages.csv')
+    if not os.path.isfile(path):
+        return None
+    with open(path, encoding='utf-8-sig') as fh:
+        return {'audit_arbitrages.csv': [dict(r) for r in csv.DictReader(fh)]}
+
+
 def check(dataset_path, bilans_dir):
     with open(dataset_path, encoding='utf-8') as fh:
         data = json.load(fh)
+    journal = charger_journal_audit()
+    if journal:
+        data = {'dataset': data, **journal}
 
     findings = []  # (gravité, où, extrait)
 
