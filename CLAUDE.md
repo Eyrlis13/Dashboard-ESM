@@ -29,6 +29,7 @@ chiffre doit pouvoir être remonté jusqu'à sa source.
 | `REGLES_SERVICES.md` | Entonnoir *présentée → engagée → effective*, cas limites |
 | `README_POUR_CLAUDE_CODE.md` | Journal des décisions méthodologiques et leur motif |
 | `AUDIT.md` | Comment un contrôleur externe remonte un chiffre jusqu'à sa source |
+| `METHODE.md` | Cadrage méthodologique : ce qui est mesuré, jugé, et ce qui manque encore |
 
 ## Deux pièges à connaître
 
@@ -68,6 +69,16 @@ python3 test_coherence.py      # 4. non-régression des agrégats
 ```
 
 Puis commit et push. **Si une étape échoue, ne pas publier.**
+
+## Au prochain passage sur les bilans
+
+`METHODE.md` liste trois informations **extractibles des bilans mais pas encore
+remontées** : date du premier entretien et du bilan de fin (période et durée des
+parcours), et nombre de séances réalisées (bloc « PROGRAMME » de l'onglet Plan
+d'accompagnement). Les ajouter au dataset dès que les bilans sont redéposés.
+
+Compléter aussi les **13 phrases sources manquantes** sur les décisions d'aide
+technique du premier lot — `journal_audit.py` les liste à chaque exécution.
 
 ## Ce qui demande une validation humaine
 

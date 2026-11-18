@@ -43,6 +43,27 @@ décision. La grille de décision est dans `REGLES_AIDES_TECHNIQUES.md`.
 ### « Pourquoi cette orientation est-elle comptée comme effective ? »
 Même chose, domaine `Service`, grille dans `REGLES_SERVICES.md`.
 
+### « D'où vient le résultat central, 15 bénéficiaires sur 23 ? »
+`resultats_anonymises.csv` → colonne `solution_mise_en_place` (oui/non). Définition :
+**au moins une aide technique acquise OU au moins un service effectif**. Décomposition
+recalculable depuis les colonnes `at_mises_en_place` et `services_effectifs` :
+9 avec une AT acquise + 8 avec un service effectif − 2 ayant les deux = **15**.
+Le détail nominatif de chaque décision est dans `audit_arbitrages.csv`.
+
+### « D'où vient l'évolution sur les sorties sociales ? »
+`resultats_anonymises.csv` → colonnes `fesi_sortir_avant`, `fesi_sortir_apres`,
+`fesi_sortir_delta`. C'est l'item « Sortir (service religieux, réunion de famille…) »
+de la Short FES-I, coté 1 (pas du tout inquiet) à 4 (très inquiet).
+**Δ négatif = amélioration.** 23 paires complètes.
+
+### « D'où vient le report modal ? »
+`resultats_anonymises.csv` → colonnes `mode_<catégorie>_avant` / `_apres`, plus
+`trajets_avant` / `trajets_apres` pour refaire les pourcentages, et
+`deplacements_apres_reporte` qui signale les 4 grilles « après » non re-saisies
+(reportées depuis l'avant car notées inchangées par l'ergothérapeute).
+Les évolutions s'expriment en **points de pourcentage**, pas en nombre de trajets :
+le total de trajets renseignés n'est pas le même avant et après.
+
 ### « Qui est le bénéficiaire N°7 ? »
 Impossible depuis les fichiers publiés : c'est volontaire. Le rapprochement se fait sur
 place, à partir de `at_curated.csv` / `services_curated.csv`, qui sont indexés par nom
@@ -87,6 +108,13 @@ Un audit honnête commence par ses propres trous. À la date de ce document :
    classement *essayée* a été retenu — à valider par l'ergothérapeute rédactrice.
 7. **Suivi à 6 mois non exploité.** Il existe dans un onglet « Suivi » de chaque bilan,
    jamais lu par le parser.
+8. **Informations de méthode incomplètes.** Période couverte, durée des parcours et
+   nombre de séances ne sont pas encore remontés dans le dataset (extractibles des
+   bilans). L'exhaustivité de la cohorte et l'absence de groupe témoin ne peuvent être
+   renseignées que par l'équipe ESM. Voir **`METHODE.md`**.
+9. **L'atteinte des objectifs est une auto-évaluation** par l'ergothérapeute
+   intervenante, pas une évaluation indépendante. Les scores FES-I, eux, sont des
+   mesures instrumentées. Voir `METHODE.md`.
 
 ## Sauvegarde des fichiers non versionnés
 

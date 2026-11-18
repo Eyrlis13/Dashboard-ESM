@@ -26,6 +26,11 @@ ATTENDU = {
     'at': {'mise_en_place': 10, 'essayee': 10, 'preconisee': 6},
     'services': {'effective': 10, 'engagee': 9, 'presentee': 22},
     'objectifs': {'atteint': 38, 'partiel': 16, 'non': 9},
+    # Résultat central mis en avant : >= 1 AT acquise OU >= 1 service effectif
+    'solution_en_place': {'total': 15, 'at_seule': 7, 'service_seul': 6, 'les_deux': 2},
+    # Item FES-I « Sortir » (sorties sociales) — Δ négatif = amélioration
+    'fesi_sortir': {'paires': 23, 'ameliorations': 6, 'stables': 14, 'degradations': 3,
+                    'inquiets_avant': 7, 'inquiets_apres': 2},
     'deplacements': {'grilles_apres_exploitables': 23},
 }
 
@@ -68,6 +73,27 @@ def main():
 
     for k, n in ATTENDU['objectifs'].items():
         cmp(f'objectifs {k}', n, sum(r['objectifs'][k] for r in d))
+
+    # --- Résultat central ---
+    at_eq = {r['id'] for r in d if any(a['statut'] == 'mise_en_place' for a in (r.get('at') or []))}
+    sv_eq = {r['id'] for r in d if any(x['statut'] == 'effective' for x in (r.get('services') or []))}
+    att = ATTENDU['solution_en_place']
+    cmp('solution en place — total', att['total'], len(at_eq | sv_eq))
+    cmp('solution en place — AT seule', att['at_seule'], len(at_eq - sv_eq))
+    cmp('solution en place — service seul', att['service_seul'], len(sv_eq - at_eq))
+    cmp('solution en place — les deux', att['les_deux'], len(at_eq & sv_eq))
+
+    # --- Item FES-I « Sortir » ---
+    so = [(r['fesi_sortir']['avant'], r['fesi_sortir']['apres']) for r in d
+          if (r.get('fesi_sortir') or {}).get('avant') is not None
+          and (r.get('fesi_sortir') or {}).get('apres') is not None]
+    att = ATTENDU['fesi_sortir']
+    cmp('FES-I Sortir — paires', att['paires'], len(so))
+    cmp('FES-I Sortir — améliorations', att['ameliorations'], sum(1 for a, b in so if b < a))
+    cmp('FES-I Sortir — stables', att['stables'], sum(1 for a, b in so if b == a))
+    cmp('FES-I Sortir — dégradations', att['degradations'], sum(1 for a, b in so if b > a))
+    cmp('FES-I Sortir — inquiets avant', att['inquiets_avant'], sum(1 for a, _ in so if a >= 3))
+    cmp('FES-I Sortir — inquiets après', att['inquiets_apres'], sum(1 for _, b in so if b >= 3))
 
     exploitables = sum(1 for r in d if sum(r['deplacements']['apres']['modes'].values()) > 0)
     cmp('grilles de déplacements « après » exploitables',

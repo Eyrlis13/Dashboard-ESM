@@ -28,7 +28,8 @@ peur de chuter (avant/après), le report modal des déplacements, et les verbati
 ## Vérifier / auditer les chiffres
 
 **`AUDIT.md`** explique comment remonter n'importe quel chiffre du dashboard jusqu'à sa
-source, et liste les limites connues. Les règles d'arbitrage sont figées dans
+source, et liste les limites connues. **`METHODE.md`** donne le cadrage méthodologique :
+ce qui est mesuré, ce qui est jugé, et ce qui manque encore. Les règles d'arbitrage sont figées dans
 `REGLES_RESSENTIS.md`, `REGLES_AIDES_TECHNIQUES.md` et `REGLES_SERVICES.md`.
 `audit_arbitrages.csv` donne, pour chaque aide technique et chaque service compté, le
 statut retenu **et la phrase du bilan qui le justifie**.

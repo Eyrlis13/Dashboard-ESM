@@ -605,9 +605,12 @@ def write_flat_csv(data, path):
            'fesi_avant','fesi_apres','fesi_delta',
            'objectifs_atteint','objectifs_partiel','objectifs_non','objectifs_total']
           + [f'ressenti_{d}_{w}' for d in RESS for w in ('avant','apres')]
+          + ['fesi_sortir_avant','fesi_sortir_apres','fesi_sortir_delta']
           + [f'mode_{m}_{w}' for w in ('avant','apres') for m in MODES]
+          + ['trajets_avant','trajets_apres','deplacements_apres_reporte']
           + ['at_mises_en_place','at_essayees','at_preconisees','at_detail',
              'services_effectifs','services_engages','services_presentes','services_detail',
+             'solution_mise_en_place',
              'verbatim_beneficiaire','verbatim_ergo'])
     with open(path,'w',newline='',encoding='utf-8-sig') as fh:
         w=csv.writer(fh); w.writerow(cols)
@@ -618,8 +621,19 @@ def write_flat_csv(data, path):
                  obj['atteint'],obj['partiel'],obj['non'],obj['total']]
             for d in RESS:
                 row += [r['ressentis'][d]['avant'], r['ressentis'][d]['apres']]
+            # Item « Sortir » du FES-I (sorties sociales) : 1 = pas du tout inquiet
+            # … 4 = très inquiet. Delta NÉGATIF = amélioration, comme le score global.
+            so=r.get('fesi_sortir') or {}
+            sa,sp=so.get('avant'),so.get('apres')
+            row += [sa, sp, (sp-sa) if (sa is not None and sp is not None) else None]
             for wn in ('avant','apres'):
                 for m in MODES: row.append(r['deplacements'][wn]['modes'].get(m,0))
+            # Totaux de trajets : indispensables pour refaire les pourcentages de
+            # report modal. `deplacements_apres_reporte` signale les grilles « après »
+            # non re-saisies, reportées depuis l'avant car notées inchangées.
+            row += [sum(r['deplacements']['avant']['modes'].values()),
+                    sum(r['deplacements']['apres']['modes'].values()),
+                    'oui' if r['deplacements']['apres'].get('reporte_car_inchange') else 'non']
             at=r.get('at',[])
             row += [sum(1 for a in at if a['statut']=='mise_en_place'),
                     sum(1 for a in at if a['statut']=='essayee'),
@@ -630,6 +644,10 @@ def write_flat_csv(data, path):
                     sum(1 for a in sv if a['statut']=='engagee'),
                     sum(1 for a in sv if a['statut']=='presentee'),
                     ' ; '.join(f"{a['service']} ({a['statut']})" for a in sv),
+                    # Résultat central : le bénéficiaire repart-il avec AU MOINS UNE
+                    # solution réellement en place ? (>=1 AT acquise OU >=1 service effectif)
+                    'oui' if (any(a['statut']=='mise_en_place' for a in at)
+                              or any(x['statut']=='effective' for x in sv)) else 'non',
                     (vb.get('beneficiaire') or '').replace('\n',' '),
                     (vb.get('ergo') or '').replace('\n',' ')]
             w.writerow(row)
